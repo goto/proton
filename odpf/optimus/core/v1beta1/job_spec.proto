@@ -140,7 +140,8 @@ message JobInspectResponse {
   repeated string sources = 2;
   string destination = 3;
   repeated Log log = 4;
-  
+  repeated JobSpecification upstream_jobs = 5;
+  repeated JobSpecification downstream_jobs = 6;
 }
 
 message CreateJobSpecificationRequest {
