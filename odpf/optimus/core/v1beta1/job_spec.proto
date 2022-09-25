@@ -135,12 +135,11 @@ message JobInspectRequest {
 }
 
 message OptimusDependency {
-  string Name = 1;
+  string JobName = 1;
   string Host = 2;
   string ProjectName = 3;
   string NamespaceName = 4;
-  string JobName = 5;
-  string TaskName = 6;
+  string TaskName = 5;
   map<string, string> Headers = 7;
 }
 
