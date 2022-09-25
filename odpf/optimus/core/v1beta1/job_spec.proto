@@ -134,14 +134,7 @@ message JobInspectRequest {
   JobSpecification spec = 4;
 }
 
-message HTTPDependency {
-  string Name = 1;
-  string URL = 2;
-  map<string, string> RequestParams = 3;
-  map<string, string> Headers = 4;
-}
-
-message ExternalOptimusDependency {
+message OptimusDependency {
   string Name = 1;
   string Host = 2;
   string ProjectName = 3;
@@ -151,16 +144,22 @@ message ExternalOptimusDependency {
   map<string, string> Headers = 7;
 }
 
+message UnknownDependencies {
+  string JobName = 1;
+  string ProjectName = 2;
+}
+
 message JobInspectResponse {
   JobSpecification spec = 1;
   repeated string sources = 2;
   string destination = 3;
   repeated Log log = 4;
 
-  repeated JobSpecification upstream_jobs = 5;
-  repeated JobSpecification downstream_jobs = 6;
-  repeated ExternalOptimusDependency external_dependency = 7;
-  repeated HTTPDependency http_dependency = 8;
+  repeated OptimusDependency upstream_jobs = 5;
+  repeated OptimusDependency downstream_jobs = 6;
+  repeated OptimusDependency external_dependency = 7;
+  repeated HttpDependency http_dependency = 8;
+  repeated UnknownDependencies unknown_dependencies = 9;
 }
 
 message CreateJobSpecificationRequest {
