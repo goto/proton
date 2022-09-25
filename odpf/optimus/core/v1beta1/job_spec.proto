@@ -135,7 +135,7 @@ message JobInspectRequest {
 }
 
 message OptimusDependency {
-  string JobName = 1;
+  string Name = 1;
   string Host = 2;
   string ProjectName = 3;
   string NamespaceName = 4;
