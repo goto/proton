@@ -160,13 +160,13 @@ message JobInspectResponse {
   repeated string sources = 2;
   string destination = 3;
   repeated Log log = 4;
-  
+
   repeated OptimusDependency upstream_jobs = 5;
   repeated OptimusDependency downstream_jobs = 6;
   repeated OptimusDependency external_dependency = 7;
   repeated HttpDependency http_dependency = 8;
   repeated UnknownDependencies unknown_dependencies = 9;
-  UpstreamRuns upstreamRuns = 10;
+  repeated UpstreamRuns upstreamRuns = 10;
 }
 
 message CreateJobSpecificationRequest {
