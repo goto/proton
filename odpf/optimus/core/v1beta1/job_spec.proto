@@ -150,23 +150,30 @@ message UnknownDependencies {
   string ProjectName = 2;
 }
 
-message UpstreamRuns {
-  string JobIdentifier = 1;
-  repeated google.protobuf.Timestamp runs = 2;
+message BasicInfoSection {
+  JobSpecification job =1;
+  repeated string source =2;
+  string destination =3;
+  repeated Log notice =4;
+}
+
+message UpstreamSection {
+  repeated OptimusDependency external_dependency = 1;
+  repeated OptimusDependency internal_dependency = 2;
+  repeated HttpDependency http_dependency = 3;
+  repeated UnknownDependencies unknown_dependencies = 4;
+  repeated Log notice = 5;
+}
+
+message DownstreamSection {
+  repeated OptimusDependency downstream_jobs = 1;
+  repeated Log notice = 2;
 }
 
 message JobInspectResponse {
-  JobSpecification spec = 1;
-  repeated string sources = 2;
-  string destination = 3;
-  repeated Log log = 4;
-
-  repeated OptimusDependency upstream_jobs = 5;
-  repeated OptimusDependency downstream_jobs = 6;
-  repeated OptimusDependency external_dependency = 7;
-  repeated HttpDependency http_dependency = 8;
-  repeated UnknownDependencies unknown_dependencies = 9;
-  repeated UpstreamRuns upstreamRuns = 10;
+  BasicInfoSection basicInfo = 1;
+  UpstreamSection upstreams = 2;
+  DownstreamSection downstreams = 3;
 }
 
 message CreateJobSpecificationRequest {
