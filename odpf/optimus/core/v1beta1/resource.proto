@@ -127,6 +127,6 @@ message ResourceSpecification {
   string type = 4;
 
   google.protobuf.Struct spec = 5;
-  map<string, string> assets = 6;
+  map<string, string> assets = 6 [deprecated=true];
   map<string, string> labels = 7;
 }
