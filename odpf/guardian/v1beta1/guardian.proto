@@ -173,6 +173,13 @@ service GuardianService {
     };
   }
 
+  rpc UpdateApprovalViaSlack(UpdateApprovalViaSlackRequest) returns (UpdateApprovalViaSlackResponse){
+    option (google.api.http) = {
+      post: "/v1beta1/appeals/slack"
+      body: "*"
+    };
+  }
+
   rpc AddApprover(AddApproverRequest) returns (AddApproverResponse) {
     option (google.api.http) = {
       post: "/v1beta1/appeals/{appeal_id}/approvals/{approval_id}/approvers"
@@ -272,14 +279,14 @@ message DeleteProviderRequest {
 message DeleteProviderResponse {}
 
 message ImportGrantsFromProviderRequest {
-    string provider_id = 1;
-    repeated string resource_ids = 2;
-    repeated string resource_types = 3;
-    repeated string resource_urns = 4;
+  string provider_id = 1;
+  repeated string resource_ids = 2;
+  repeated string resource_types = 3;
+  repeated string resource_urns = 4;
 }
 
 message ImportGrantsFromProviderResponse {
-    repeated Grant grants = 1;
+  repeated Grant grants = 1;
 }
 
 message ListRolesRequest {
@@ -655,7 +662,7 @@ message PolicyAppealConfig {
     string value = 2;
   }
   repeated DurationOptions duration_options = 1;
-  bool allow_on_behalf = 2;  
+  bool allow_on_behalf = 2;
   bool allow_permanent_access = 3;
   string allow_active_access_extension_in = 4;
   message Question {
@@ -815,4 +822,26 @@ message Grant {
   string source = 19;
   string status_in_provider = 20;
   string owner = 21;
+}
+
+message SlackUser {
+  string  id = 1;
+  string  username = 2;
+  string  name = 3;
+}
+
+message SlackAction {
+  string  type = 1;
+  string  block_id = 2;
+  string  action_id = 3;
+  string  value = 4;
+}
+
+message UpdateApprovalViaSlackRequest {
+  SlackUser user = 1;
+  repeated SlackAction actions = 2;
+}
+
+message UpdateApprovalViaSlackResponse{
+
 }
