@@ -17,7 +17,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   info: {
     title: "Compass";
     description: "Documentation of our Compass API with gRPC and gRPC-Gateway.";
-    version: "0.2.1";
+    version: "0.3.0";
     license: {
       name: "Apache License 2.0";
       url: "https://github.com/odpf/compass/blob/main/LICENSE";
@@ -260,7 +260,7 @@ service CompassService {
 
   rpc GetAllAssets(GetAllAssetsRequest) returns (GetAllAssetsResponse) {
     option (google.api.http) = {
-      get: "/v1beta1/assets"
+      get: "/v1beta1/namespaces/{namespace_urn}/assets"
     };
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -274,7 +274,7 @@ service CompassService {
 
   rpc GetAssetByID(GetAssetByIDRequest) returns (GetAssetByIDResponse) {
     option (google.api.http) = {
-      get: "/v1beta1/assets/{id}"
+      get: "/v1beta1/namespaces/{namespace_urn}/assets/{id}"
     };
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -288,7 +288,7 @@ service CompassService {
 
   rpc UpsertAsset(UpsertAssetRequest) returns (UpsertAssetResponse) {
     option (google.api.http) = {
-      put: "/v1beta1/assets"
+      put: "/v1beta1/namespaces/{namespace_urn}/assets"
       body: "*"
     };
 
@@ -303,7 +303,7 @@ service CompassService {
 
   rpc UpsertPatchAsset(UpsertPatchAssetRequest) returns (UpsertPatchAssetResponse) {
     option (google.api.http) = {
-      patch: "/v1beta1/assets"
+      patch: "/v1beta1/namespaces/{namespace_urn}/assets"
       body: "*"
     };
 
@@ -318,7 +318,7 @@ service CompassService {
 
   rpc DeleteAsset(DeleteAssetRequest) returns (DeleteAssetResponse) {
     option (google.api.http) = {
-      delete: "/v1beta1/assets/{id}"
+      delete: "/v1beta1/namespaces/{namespace_urn}/assets/{id}"
     };
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -332,7 +332,7 @@ service CompassService {
 
   rpc GetAssetStargazers(GetAssetStargazersRequest) returns (GetAssetStargazersResponse) {
     option (google.api.http) = {
-      get: "/v1beta1/assets/{id}/stargazers"
+      get: "/v1beta1/namespaces/{namespace_urn}/assets/{id}/stargazers"
     };
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -346,7 +346,7 @@ service CompassService {
 
   rpc GetAssetVersionHistory(GetAssetVersionHistoryRequest) returns (GetAssetVersionHistoryResponse) {
     option (google.api.http) = {
-      get: "/v1beta1/assets/{id}/versions"
+      get: "/v1beta1/namespaces/{namespace_urn}/assets/{id}/versions"
     };
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -360,7 +360,7 @@ service CompassService {
 
   rpc GetAssetByVersion(GetAssetByVersionRequest) returns (GetAssetByVersionResponse) {
     option (google.api.http) = {
-      get: "/v1beta1/assets/{id}/versions/{version}"
+      get: "/v1beta1/namespaces/{namespace_urn}/assets/{id}/versions/{version}"
     };
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -374,7 +374,7 @@ service CompassService {
 
   rpc CreateAssetProbe(CreateAssetProbeRequest) returns (CreateAssetProbeResponse) {
     option (google.api.http) = {
-      post: "/v1beta1/assets/{asset_urn}/probes";
+      post: "/v1beta1/namespaces/{namespace_urn}/assets/{asset_urn}/probes";
       body: "probe";
     };
 
@@ -622,6 +622,61 @@ service CompassService {
       ];
     };
   }
+
+  // Domain: Namespace
+  rpc CreateNamespace(CreateNamespaceRequest) returns (CreateNamespaceResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/namespaces"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Create a namespace";
+      description: "Create a new namespace, throws error if already exists";
+      tags: [
+        "Namespace"
+      ];
+    };
+  }
+
+  rpc GetNamespace(GetNamespaceRequest) returns (GetNamespaceResponse) {
+    option (google.api.http) = {
+      get: "/v1beta1/namespaces/{urn}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Get namespace";
+      description: "Fetch a namespace details, throws error if doesn't exists. Use id or name as urn.";
+      tags: [
+        "Namespace"
+      ];
+    };
+  }
+
+  rpc UpdateNamespace(UpdateNamespaceRequest) returns (UpdateNamespaceResponse) {
+    option (google.api.http) = {
+      put: "/v1beta1/namespaces/{urn}"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Update namespace";
+      description: "Update an existing namespace, throws error if doesn't exists. Use id or name as urn.";
+      tags: [
+        "Namespace"
+      ];
+    };
+  }
+
+  rpc ListNamespaces(ListNamespacesRequest) returns (ListNamespacesResponse) {
+    option (google.api.http) = {
+      get: "/v1beta1/namespaces"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "List namespace";
+      description: "List all created namespaces";
+      tags: [
+        "Namespace"
+      ];
+    };
+  }
 }
 
 message GetAllDiscussionsRequest {
@@ -810,6 +865,8 @@ message SearchAssetsRequest {
       description: "offset parameter defines the offset from the first result you want to fetch"
     }
   ];
+
+  string namespace_urn = 8;
 }
 
 message SearchAssetsResponse {
@@ -823,6 +880,7 @@ message SuggestAssetsRequest {
       description: "text to search for suggestions"
     }
   ];
+  string namespace_urn = 2;
 }
 
 message SuggestAssetsResponse {
@@ -952,6 +1010,7 @@ message GetAllAssetsRequest {
   bool with_total = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "if set include total field in response"
   }];
+  string namespace_urn = 11;
 }
 
 message GetAllAssetsResponse {
@@ -961,6 +1020,7 @@ message GetAllAssetsResponse {
 
 message GetAssetByIDRequest {
   string id = 1;
+  string namespace_urn = 2;
 }
 
 message GetAssetByIDResponse {
@@ -988,6 +1048,7 @@ message UpsertAssetRequest {
   Asset asset = 1;
   repeated LineageNode upstreams = 2;
   repeated LineageNode downstreams = 3;
+  string namespace_urn = 4;
 }
 
 message UpsertAssetResponse {
@@ -1031,6 +1092,8 @@ message UpsertPatchAssetRequest {
   // Currently, it is only applicable when both upstreams and downstreams are
   // empty/not specified.
   bool overwrite_lineage = 4;
+
+  string namespace_urn = 5;
 }
 
 message UpsertPatchAssetResponse {
@@ -1039,6 +1102,7 @@ message UpsertPatchAssetResponse {
 
 message DeleteAssetRequest {
   string id = 1;
+  string namespace_urn = 2;
 }
 
 message DeleteAssetResponse {}
@@ -1053,6 +1117,7 @@ message GetAssetStargazersRequest {
     gte: 0,
     ignore_empty: true
   }];
+  string namespace_urn = 4;
 }
 
 message GetAssetStargazersResponse {
@@ -1069,6 +1134,7 @@ message GetAssetVersionHistoryRequest {
     gte: 0,
     ignore_empty: true
   }];
+  string namespace_urn = 4;
 }
 
 message GetAssetVersionHistoryResponse {
@@ -1078,6 +1144,7 @@ message GetAssetVersionHistoryResponse {
 message GetAssetByVersionRequest {
   string id = 1;
   string version = 2;
+  string namespace_urn = 3;
 }
 
 message GetAssetByVersionResponse {
@@ -1104,6 +1171,7 @@ message CreateAssetProbeRequest {
     min_len: 1,
   }];
   Probe probe = 2;
+  string namespace_urn = 3;
 }
 
 message CreateAssetProbeResponse {
@@ -1326,6 +1394,45 @@ message DeleteTagTemplateRequest {
 
 message DeleteTagTemplateResponse {}
 
+message CreateNamespaceRequest {
+  string name = 1 [(validate.rules).string.min_len = 3];
+  string state = 2;
+  google.protobuf.Struct metadata = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "key value pairs as metadata for the namespace"
+  }];
+}
+
+message CreateNamespaceResponse {
+  string id = 1;
+}
+
+message GetNamespaceRequest {
+  // set either id or name
+  string urn = 1;
+}
+
+message GetNamespaceResponse {
+  Namespace namespace = 1;
+}
+
+message UpdateNamespaceRequest {
+  // set either id or name
+  string urn = 1;
+
+  string state = 2;
+  google.protobuf.Struct metadata = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "key value pairs as metadata for the namespace"
+  }];
+}
+
+message UpdateNamespaceResponse {}
+
+message ListNamespacesRequest {}
+
+message ListNamespacesResponse {
+  repeated Namespace namespaces = 1;
+}
+
 // Entities
 
 message User {
@@ -1526,4 +1633,13 @@ message TagTemplateField {
 message Type {
   string name = 1;
   uint32 count = 2;
+}
+
+message Namespace {
+  string id = 1;
+  string name = 2 [(validate.rules).string.min_len = 3];
+  string state = 3;
+  google.protobuf.Struct metadata = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "key value pairs as metadata for the namespace"
+  }];
 }
