@@ -524,6 +524,14 @@ message ListUserApprovalsRequest {
   repeated string statuses = 2;
   repeated string order_by = 3;
   string account_id = 4;
+  uint32 size = 5 [(validate.rules).uint32 = {
+    gte: 0,
+    ignore_empty: true
+  }];
+  uint32 offset = 6 [(validate.rules).uint32 = {
+    gte: 0,
+    ignore_empty: true
+  }];
 }
 
 message ListUserApprovalsResponse {
