@@ -6,6 +6,7 @@ import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
+import "validate/validate.proto";
 
 option go_package = "github.com/goto/proton/guardian/v1beta1;guardianv1beta1";
 // These annotations are used when generating the OpenAPI file.
