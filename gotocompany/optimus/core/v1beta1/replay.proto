@@ -30,6 +30,28 @@ service ReplayService {
       body: "*"
     };
   }
+  rpc ListReplay(ListReplayRequest) returns (ListReplayResponse) {
+    option (google.api.http) = {
+      get: "/v1beta1/project/{project_name}/replay"
+    };
+  }
+}
+
+message ListReplayRequest {
+  string project_name = 1;
+}
+
+message ListReplayResponse {
+  repeated ReplaySpecification replays = 1;
+}
+
+message ReplaySpecification {
+  string id = 1;
+  string job_name = 2;
+  google.protobuf.Timestamp start_time = 3;
+  google.protobuf.Timestamp end_time = 4; 
+  string description = 5;
+  string status = 6;
 }
 
 message ReplayRequest {
