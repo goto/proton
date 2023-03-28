@@ -811,8 +811,19 @@ message SearchAssetsRequest {
     }
   ];
 
-  map<string, bool> flags = 8 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    description: "add flags based on which query parameters can be changed. ex: if you want to search for column name instead of table name, you could set \"flags[is_column_search]\" true."
+  SearchFlags flags = 8 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "add flags based on which query parameters can be changed."
+  }];
+}
+
+message SearchFlags {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "SearchFlags"
+    }
+  };
+  bool is_column_search = 1 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "search column names instead of table urn or name."
   }];
 }
 
