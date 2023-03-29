@@ -812,7 +812,7 @@ message SearchAssetsRequest {
   ];
 
   SearchFlags flags = 8 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    description: "add flags based on which query parameters can be changed."
+    description: "flags to control the search behavior (e.g. column level search, disable fuzzy, etc)"
   }];
 }
 
