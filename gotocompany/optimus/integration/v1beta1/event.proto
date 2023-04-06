@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package gotocompany.optimus.core.v1beta1;
+
+import "gotocompany/optimus/core/v1beta1/resource.proto";
+import "gotocompany/optimus/core/v1beta1/job_spec.proto";
+
+option go_package = "github.com/goto/proton/optimus";
+option java_multiple_files = true;
+option java_outer_classname = "Event";
+option java_package = "com.gotocompany.proton.optimus";
+
+message ResourceChangePayload {
+  string datastore_name = 1;
+  ResourceSpecification resource = 2;
+}
+
+message JobChangePayload {
+  string job_name = 1;
+  JobSpecification jobSpec = 2;
+}
+
+message JobRunPayload {
+  string job_name = 1;
+  string scheduled_at = 2;
+  string job_run_id = 3;
+}
+
+message OptimusChangeEvent {
+  string project_name = 1;
+  string namespace_name = 2;
+  string event_type = 3; 
+
+  oneof payload {
+    JobChangePayload job_change = 4;
+    ResourceChangePayload resource_change = 5;
+    JobRunPayload job_run = 6;
+  }
+}
+   
