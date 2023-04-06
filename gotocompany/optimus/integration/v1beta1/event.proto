@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package gotocompany.optimus.core.v1beta1;
 
+import "google/protobuf/timestamp.proto";
 import "gotocompany/optimus/core/v1beta1/resource.proto";
 import "gotocompany/optimus/core/v1beta1/job_spec.proto";
 
@@ -41,15 +42,18 @@ message OptimusChangeEvent {
     JOB_SUCCESS = 7;
     JOB_FAILURE = 8;
   }
+  
+  string event_id = 1;
+  google.protobuf.Timestamp occurred_at = 2;
 
-  string project_name = 1;
-  string namespace_name = 2;
-  EventType event_type = 3; 
+  string project_name = 3;
+  string namespace_name = 4;
+  EventType event_type = 5;
 
   oneof payload {
-    JobChangePayload job_change = 4;
-    ResourceChangePayload resource_change = 5;
-    JobRunPayload job_run = 6;
+    JobChangePayload job_change = 6;
+    ResourceChangePayload resource_change = 7;
+    JobRunPayload job_run = 8;
   }
 }
    
