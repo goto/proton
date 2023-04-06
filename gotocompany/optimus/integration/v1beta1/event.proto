@@ -27,9 +27,24 @@ message JobRunPayload {
 }
 
 message OptimusChangeEvent {
+  enum EventType {
+    TYPE_UNSPECIFIED = 0;
+
+    RESOURCE_CREATE = 1;
+    RESOURCE_UPDATE = 2;
+
+    JOB_CREATE = 3;
+    JOB_UPDATE = 4;
+    JOB_DELETE = 5;
+    
+    JOB_START = 6;
+    JOB_SUCCESS = 7;
+    JOB_FAILURE = 8;
+  }
+
   string project_name = 1;
   string namespace_name = 2;
-  string event_type = 3; 
+  EventType event_type = 3; 
 
   oneof payload {
     JobChangePayload job_change = 4;
