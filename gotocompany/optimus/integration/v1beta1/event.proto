@@ -38,9 +38,10 @@ message OptimusChangeEvent {
     JOB_UPDATE = 4;
     JOB_DELETE = 5;
     
-    JOB_START = 6;
-    JOB_SUCCESS = 7;
-    JOB_FAILURE = 8;
+    JOB_WAIT_UPSTREAM = 6;
+    JOB_IN_PROGRESS = 7;
+    JOB_SUCCESS = 8;
+    JOB_FAILURE = 9;
   }
   
   string event_id = 1;
