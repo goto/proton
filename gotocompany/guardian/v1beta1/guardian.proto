@@ -533,6 +533,7 @@ message ListUserApprovalsRequest {
     gte: 0,
     ignore_empty: true
   }];
+  repeated string appeal_statuses = 7;
 }
 
 message ListUserApprovalsResponse {
