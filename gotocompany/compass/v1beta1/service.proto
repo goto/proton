@@ -869,8 +869,13 @@ message GroupAssetsResponse {
 }
 
 message GroupAssetInfo {
-  string group_key = 1;
+  repeated GroupFieldInfo group_field_info = 1;
   repeated Asset data = 2;
+}
+
+message GroupFieldInfo {
+  string group_key = 1;
+  string group_value = 2;
 }
 
 message SearchFlags {
