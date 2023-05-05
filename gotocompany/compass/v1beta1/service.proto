@@ -222,7 +222,7 @@ service CompassService {
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       summary: "Group api for assets";
-      description: "API for grouping documents. 'groupby' the field provided here is used for grouping. You can provide multiple fields as well. If it is a nested fields, you can provide the path to the field. You can specify additional criteria using 'filter[.*]' to only group those documents. You can specify each filter multiple times to specify a set of values for those filters. For instance, to specify two landscape 'vn' and 'th', the query could be `/groupassets/?groupby=<groupby>&filter[environment]=integration&filter[landscape]=vn&filter[landscape]=th`. 'include_fields' is used to send only these fields in response. this helps in restricting the response. Eg:/groupassets/?groupby=field1&groupby=field2&&filter[environment]&include_fields=data.attributes.dataset&include_fields=data.attributes.project ";
+      description: "API for grouping documents. 'groupby' the field provided here is used for grouping. You can provide multiple fields as well. If it is a nested fields, you can provide the path to the field. You can specify additional criteria using 'filter[.*]' to only group those documents. You can specify each filter multiple times to specify a set of values for those filters. For instance, to specify two landscape 'vn' and 'th', the query could be `/groupassets/?groupby=<groupby>&filter[environment]=integration&filter[landscape]=vn&filter[landscape]=th`. 'include_fields' is used to send only these fields in response. this helps in restricting the response. Eg:/groupassets/?groupby=field1,field2&filter[environment]&include_fields=data.attributes.dataset,data.attributes.project Fields in group by will always be part of response, no need to add them in include-fields.";
       tags: [
         "Group",
         "Asset"
@@ -835,9 +835,8 @@ message SearchAssetsRequest {
 
 message GroupAssetsRequest {
 
-  repeated string groupby = 1 [
-    (validate.rules).repeated = {
-      unique: true,
+  string groupby = 1 [
+    (validate.rules).string = {
       ignore_empty: false,
     },
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
@@ -849,8 +848,7 @@ message GroupAssetsRequest {
     description: "filter result based on a (nested) field of the asset. the nested field is written with period separated field name. eg, \"filter[data.landscape]\""
   }];
 
-  repeated string include_fields = 3 [(validate.rules).repeated = {
-    unique: true,
+  string include_fields = 3 [(validate.rules).string = {
     ignore_empty: true
   }];
 
