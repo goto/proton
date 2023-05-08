@@ -869,11 +869,11 @@ message GroupAssetsResponse {
 }
 
 message AssetGroup {
-  repeated GroupFieldInfo group_field_info = 1;
+  repeated GroupFields group_fields = 1;
   repeated Asset assets = 2;
 }
 
-message GroupFieldInfo {
+message GroupFields {
   string group_key = 1;
   string group_value = 2;
 }
