@@ -206,7 +206,7 @@ service CompassService {
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       summary: "Search for an asset";
-      description: "API for querying documents. 'text' is fuzzy matched against all the available datasets, and matched results are returned. You can specify additional match criteria using 'filter[.*]' query parameters. You can specify each filter multiple times to specify a set of values for those filters. For instance, to specify two landscape 'vn' and 'th', the query could be `/search/?text=<text>&filter[environment]=integration&filter[landscape]=vn&filter[landscape]=th`. As an alternative, this API also supports fuzzy filter match with 'query' query params. For instance, searching assets that has 'bigqu' term in its description `/search/?text=<text>&query[description]=bigqu`";
+      description: "API for querying documents. 'text' is fuzzy matched against all the available datasets, and matched results are returned. You can specify additional match criteria using 'filter[.*]' query parameters. You can specify each filter multiple times to specify a set of values for those filters. For instance, to specify two landscape 'vn' and 'th', the query could be `/search/?text=<text>&filter[environment]=integration&filter[landscape]=vn,th`. As an alternative, this API also supports fuzzy filter match with 'query' query params. For instance, searching assets that has 'bigqu' term in its description `/search/?text=<text>&query[description]=bigqu`";
       tags: [
         "Search",
         "Asset"
@@ -835,8 +835,9 @@ message SearchAssetsRequest {
 
 message GroupAssetsRequest {
 
-  string groupby = 1 [
-    (validate.rules).string = {
+  repeated string groupby = 1 [
+    (validate.rules).repeated = {
+      unique: true,
       ignore_empty: false,
     },
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
@@ -848,7 +849,8 @@ message GroupAssetsRequest {
     description: "filter result based on a (nested) field of the asset. the nested field is written with period separated field name. eg, \"filter[data.landscape]\""
   }];
 
-  string include_fields = 3 [(validate.rules).string = {
+  repeated string include_fields = 3 [(validate.rules).repeated = {
+    unique: true,
     ignore_empty: true
   }];
 
@@ -869,11 +871,11 @@ message GroupAssetsResponse {
 }
 
 message AssetGroup {
-  repeated GroupFields group_fields = 1;
+  repeated GroupField group_fields = 1;
   repeated Asset assets = 2;
 }
 
-message GroupFields {
+message GroupField {
   string group_key = 1;
   string group_value = 2;
 }
