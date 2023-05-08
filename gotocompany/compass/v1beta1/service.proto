@@ -865,12 +865,12 @@ message GroupAssetsRequest {
 }
 
 message GroupAssetsResponse {
-  repeated GroupAssetInfo group_asset_info = 1;
+  repeated AssetGroup asset_groups = 1;
 }
 
-message GroupAssetInfo {
+message AssetGroup {
   repeated GroupFieldInfo group_field_info = 1;
-  repeated Asset data = 2;
+  repeated Asset assets = 2;
 }
 
 message GroupFieldInfo {
