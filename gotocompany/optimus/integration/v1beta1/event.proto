@@ -13,12 +13,12 @@ option java_package = "com.gotocompany.proton.optimus";
 
 message ResourceChangePayload {
   string datastore_name = 1;
-  ResourceSpecification resource = 2;
+  gotocompany.optimus.core.v1beta1.ResourceSpecification resource = 2;
 }
 
 message JobChangePayload {
   string job_name = 1;
-  JobSpecification jobSpec = 2;
+  gotocompany.optimus.core.v1beta1.JobSpecification jobSpec = 2;
 }
 
 message JobRunPayload {
