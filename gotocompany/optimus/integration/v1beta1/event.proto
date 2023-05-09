@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package gotocompany.optimus.core.v1beta1;
+package gotocompany.optimus.integration.v1beta1;
 
 import "google/protobuf/timestamp.proto";
 import "gotocompany/optimus/core/v1beta1/resource.proto";
