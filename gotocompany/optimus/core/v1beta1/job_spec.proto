@@ -452,8 +452,11 @@ message JobSpecificationResponse {
 
 message ReplaceAllJobSpecificationsRequest {
   string project_name = 1;
-  string namespace_name = 2;
-  repeated JobSpecification jobs = 3;
+  reserved 2 to 3;
+  message jobList {
+    repeated JobSpecification jobs =1;
+  }
+  map<string, jobList> namespaceJobMap = 4;
 }
 
 message ReplaceAllJobSpecificationsResponse {
