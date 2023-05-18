@@ -87,6 +87,13 @@ service JobSpecificationService {
     };
   }
 
+  // ChangeJobNamespace move a job spec from one namespace to another
+  rpc ChangeJobNamespace(ChangeJobNamespaceRequest) returns (ChangeJobNamespaceResponse) {
+    option (google.api.http) = {
+      put: "/v1beta1/project/{project_name}/namespace/{namespace_name}/job/{job_name}"
+    };
+  }
+
   // ListJobSpecification returns list of jobs created in a project
   rpc ListJobSpecification(ListJobSpecificationRequest) returns (ListJobSpecificationResponse) {
     option (google.api.http) = {
@@ -248,6 +255,17 @@ message DeleteJobSpecificationRequest {
 message DeleteJobSpecificationResponse {
   bool success = 1;
   string message = 2;
+}
+
+message ChangeJobNamespaceRequest {
+  string project_name = 1;
+  string namespace_name = 2;
+  string job_name = 3;
+  string target_namespace_name = 4;
+}
+
+message ChangeJobNamespaceResponse {
+  string message = 1;
 }
 
 message ListJobSpecificationRequest {
