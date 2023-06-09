@@ -91,6 +91,7 @@ service JobSpecificationService {
   rpc ChangeJobNamespace(ChangeJobNamespaceRequest) returns (ChangeJobNamespaceResponse) {
     option (google.api.http) = {
       post: "/v1beta1/project/{project_name}/change-job-namespace"
+      body: "*"
     };
   }
 

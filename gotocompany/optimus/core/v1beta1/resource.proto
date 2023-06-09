@@ -61,6 +61,7 @@ service ResourceService {
   rpc ChangeResourceNamespace(ChangeResourceNamespaceRequest) returns (ChangeResourceNamespaceResponse) {
     option (google.api.http) = {
       post: "/v1beta1/project/{project_name}/change-resource-namespace"
+      body: "*"
     };
   }
 }
