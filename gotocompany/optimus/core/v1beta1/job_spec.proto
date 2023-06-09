@@ -90,7 +90,7 @@ service JobSpecificationService {
   // ChangeJobNamespace move a job spec from one namespace to another
   rpc ChangeJobNamespace(ChangeJobNamespaceRequest) returns (ChangeJobNamespaceResponse) {
     option (google.api.http) = {
-      put: "/v1beta1/project/{project_name}/namespace/{namespace_name}/job/{job_name}"
+      post: "/v1beta1/project/{project_name}/change-job-namespace"
     };
   }
 

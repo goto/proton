@@ -60,7 +60,7 @@ service ResourceService {
   // ChangeJobNamespace move a job spec from one namespace to another
   rpc ChangeResourceNamespace(ChangeResourceNamespaceRequest) returns (ChangeResourceNamespaceResponse) {
     option (google.api.http) = {
-      put: "/v1beta1/project/{project_name}/namespace/{namespace_name}/datastore/{datastore_name}/resource/{resource_name}"
+      post: "/v1beta1/project/{project_name}/change-resource-namespace"
     };
   }
 }
