@@ -136,6 +136,14 @@ service JobSpecificationService {
       get: "/v1beta1/window"
     };
   }
+
+  // UpdateJobState enable / disable job on scheuler
+  rpc UpdateJobState(UpdateJobStateRequest) returns (UpdateJobStateResponse) {
+    option (google.api.http) = {
+      patch: "/v1beta1/project/{project_name}/namespace/{namespace_name}/job/{job_name}/{state}"
+      body: "*"
+    };
+  }
 }
 
 message DeployJobSpecificationRequest {
@@ -517,4 +525,19 @@ message GetWindowRequest {
 message GetWindowResponse {
   google.protobuf.Timestamp start = 1;
   google.protobuf.Timestamp end = 2;
+}
+
+enum JobState {
+  enable = 0;
+  disable = 1;
+}
+message UpdateJobStateRequest {
+  string project_name = 1;
+  string namespace_name = 2;
+  string job_name = 3;
+  JobState state = 4;
+  string remark = 5;
+}
+
+message UpdateJobStateResponse {
 }
