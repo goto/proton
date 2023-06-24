@@ -140,7 +140,7 @@ service JobSpecificationService {
   // UpdateJobState enable / disable job on scheuler
   rpc UpdateJobState(UpdateJobStateRequest) returns (UpdateJobStateResponse) {
     option (google.api.http) = {
-      patch: "/v1beta1/project/{project_name}/namespace/{namespace_name}/job/{job_name}/{state}"
+      patch: "/v1beta1/project/{project_name}/namespace/{namespace_name}/job/{job_name}/change-state"
       body: "*"
     };
   }
@@ -528,8 +528,9 @@ message GetWindowResponse {
 }
 
 enum JobState {
-  enable = 0;
-  disable = 1;
+  JOB_STATE_UNSPECIFIED = 0;
+  JOB_STATE_ENABLED = 1;
+  JOB_STATE_DISABLED = 2;
 }
 message UpdateJobStateRequest {
   string project_name = 1;
