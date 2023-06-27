@@ -30,6 +30,7 @@ service ReplayService {
       body: "*"
     };
   }
+  rpc ReplayDryRun(ReplayRequest) returns (ReplayDryRunResponse) {}
   rpc ListReplay(ListReplayRequest) returns (ListReplayResponse) {
     option (google.api.http) = {
       get: "/v1beta1/project/{project_name}/replay"
@@ -74,6 +75,10 @@ message ReplayConfig {
 message ReplayRun {
   google.protobuf.Timestamp scheduled_at = 1;
   string status = 2;
+}
+
+message ReplayDryRunResponse {
+  repeated ReplayRun replay_runs = 1;
 }
 
 message ReplayRequest {
