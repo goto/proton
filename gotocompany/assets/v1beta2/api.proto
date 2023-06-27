@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package gotocompany.assets.v1beta2;
+
+import "google/protobuf/struct.proto";
+
+option go_package = "github.com/goto/proton/assets/v1beta2;assetsv1beta2";
+option java_outer_classname = "APIProto";
+option java_package = "com.gotocompany.assets";
+
+// API is resource that represents a logical group of protocol interfaces like http, grpc etc
+message API {
+
+  // The data format like json, proto etc.
+  string data_format = 1;
+
+  // The server where api is hosted.
+  string host = 2;
+
+  // The calling function like GET/PUT etc for http or the method name for grpc.
+  string function = 3;
+
+  // The port where api is hosted.
+  string port = 4;
+
+  // List of attributes the model has.
+  google.protobuf.Struct attributes = 5;
+}
