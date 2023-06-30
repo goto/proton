@@ -541,7 +541,7 @@ message UpdateJobsStateRequest {
     JobState state = 4;
     string remark = 5;
   }
-  repeated UpdateRequest updateRequest = 1;
+  repeated UpdateRequest update_request = 1;
 }
 
 message UpdateJobsStateResponse {
