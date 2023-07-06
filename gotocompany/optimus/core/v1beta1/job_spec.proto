@@ -144,6 +144,14 @@ service JobSpecificationService {
       body: "*"
     };
   }
+  
+  // SyncJobsState enable / disable job on scheuler
+  rpc SyncJobsState(SyncJobsStateRequest) returns (SyncJobsStateResponse) {
+    option (google.api.http) = {
+      patch: "/v1beta1/project/{project_name}/namespace/{namespace_name}/sync-job-state"
+      body: "*"
+    };
+  }
 }
 
 message DeployJobSpecificationRequest {
@@ -534,7 +542,6 @@ enum SetState {
 }
 
 message UpdateJobsStateRequest {
-
   string project_name = 1;
   string namespace_name = 2;
   string remark = 3;
@@ -543,5 +550,20 @@ message UpdateJobsStateRequest {
 }
 
 message UpdateJobsStateResponse {
+
+}
+
+message SyncJobsStateRequest {
+  string project_name = 1;
+  string namespace_name = 2;
+  message JobState {
+    string job_name = 1;
+    SetState state = 2;
+  }
+  repeated JobState job_states = 3;
+}
+
+
+message SyncJobsStateResponse {
 
 }
