@@ -550,7 +550,6 @@ message UpdateJobsStateRequest {
 }
 
 message UpdateJobsStateResponse {
-
 }
 
 message SyncJobsStateRequest {
@@ -563,7 +562,5 @@ message SyncJobsStateRequest {
   repeated JobStatePair job_states = 3;
 }
 
-
 message SyncJobsStateResponse {
-
 }
