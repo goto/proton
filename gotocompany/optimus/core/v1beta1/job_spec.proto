@@ -556,11 +556,11 @@ message UpdateJobsStateResponse {
 message SyncJobsStateRequest {
   string project_name = 1;
   string namespace_name = 2;
-  message JobStates {
+  message JobStatePair {
     string job_name = 1;
     JobState state = 2;
   }
-  repeated JobStates job_states = 3;
+  repeated JobStatePair job_states = 3;
 }
 
 
