@@ -648,6 +648,7 @@ message CreateReceiverRequest {
   string type = 2;
   map<string, string> labels = 3;
   google.protobuf.Struct configurations = 4;
+  uint64 parent_id = 5;
 }
 
 message CreateReceiverResponse {
@@ -667,6 +668,7 @@ message UpdateReceiverRequest {
   string name = 2 [(validate.rules).string.pattern = "^[A-Za-z0-9_.-]+$"];
   map<string, string> labels = 3;
   google.protobuf.Struct configurations = 4;
+  uint64 parent_id = 5;
 }
 
 message UpdateReceiverResponse {
