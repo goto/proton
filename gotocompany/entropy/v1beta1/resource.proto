@@ -119,9 +119,11 @@ message Resource {
   map<string, string> labels = 5;
   google.protobuf.Timestamp created_at = 6;
   google.protobuf.Timestamp updated_at = 7;
+  string created_by = 8;
+  string updated_by = 9;
 
-  ResourceSpec spec = 8;
-  ResourceState state = 9;
+  ResourceSpec spec = 10;
+  ResourceState state = 11;
 }
 
 message ListResourcesRequest {
