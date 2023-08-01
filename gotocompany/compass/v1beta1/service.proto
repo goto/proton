@@ -1039,6 +1039,15 @@ message GetAllAssetsRequest {
   bool with_total = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "if set include total field in response"
   }];
+
+  repeated string include_fields = 11 [(validate.rules).repeated = {
+    unique: true,
+    ignore_empty: true
+  }];
+
+  bool include_user_info = 12 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+   description: "if true user information will be added in the response else not"
+  }];
 }
 
 message GetAllAssetsResponse {
