@@ -331,6 +331,7 @@ message JobSpecification {
   string window_size = 11;
   string window_offset = 12;
   string window_truncate_to = 13;
+  string window_preset = 23;
 
   repeated JobDependency dependencies = 14; // static dependencies
   map<string, string> assets = 15;
