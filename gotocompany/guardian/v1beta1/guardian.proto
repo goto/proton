@@ -447,10 +447,13 @@ message ListUserAppealsRequest {
     gte: 0,
     ignore_empty: true
   }];
+  string q = 10;
+  repeated string account_types = 11;
 }
 
 message ListUserAppealsResponse {
   repeated Appeal appeals = 1;
+  int32 total = 2;
 }
 
 message ListAppealsRequest {
@@ -471,10 +474,13 @@ message ListAppealsRequest {
     gte: 0,
     ignore_empty: true
   }];
+  string q = 12;
+  repeated string account_types = 13;
 }
 
 message ListAppealsResponse {
   repeated Appeal appeals = 1;
+  int32 total = 2;
 }
 
 message GetAppealRequest {
@@ -640,10 +646,12 @@ message ListGrantsRequest {
     gte: 0,
     ignore_empty: true
   }];
+  string q = 15;
 }
 
 message ListGrantsResponse {
   repeated Grant grants = 1;
+  int32 total = 2;
 }
 
 message ListUserGrantsRequest {
@@ -665,10 +673,12 @@ message ListUserGrantsRequest {
     gte: 0,
     ignore_empty: true
   }];
+  string q = 13;
 }
 
 message ListUserGrantsResponse {
   repeated Grant grants = 1;
+  int32 total = 2;
 }
 
 message GetGrantRequest {
