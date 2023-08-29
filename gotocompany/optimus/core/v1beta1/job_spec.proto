@@ -129,13 +129,6 @@ service JobSpecificationService {
     };
   }
 
-  // GetInterval gets interval on specific job given reference time.
-  rpc GetInterval(GetIntervalRequest) returns (GetIntervalResponse) {
-    option (google.api.http) = {
-      get: "/v1beta1/interval"
-    };
-  }
-
   // GetWindow provides the start and end dates provided a scheduled date
   // of the execution window
   rpc GetWindow(GetWindowRequest) returns (GetWindowResponse) {
@@ -528,17 +521,6 @@ message JobTask {
     string dependency = 1;
   }
   repeated Dependency dependencies = 5;
-}
-
-message GetIntervalRequest {
-  google.protobuf.Timestamp reference_time = 1;
-  string project_name = 2;
-  string job_name = 3;
-}
-
-message GetIntervalResponse {
-  google.protobuf.Timestamp start_time = 1;
-  google.protobuf.Timestamp end_time = 2;
 }
 
 message GetWindowRequest {
