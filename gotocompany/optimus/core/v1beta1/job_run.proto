@@ -58,7 +58,7 @@ service JobRunService {
   // GetInterval gets interval on specific job given reference time.
   rpc GetInterval(GetIntervalRequest) returns (GetIntervalResponse) {
     option (google.api.http) = {
-      get: "/v1beta1/interval"
+      get: "/v1beta1/project/{project_name}/job/{job_name}/interval"
     };
   }
 }
