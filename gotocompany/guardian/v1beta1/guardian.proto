@@ -420,6 +420,7 @@ message ListResourcesRequest {
 
 message ListResourcesResponse {
   repeated Resource resources = 1;
+  uint32 total = 2;
 }
 
 message GetResourceRequest {
