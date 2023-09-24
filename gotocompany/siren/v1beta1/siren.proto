@@ -727,7 +727,7 @@ message ListAlertsResponse {
 
 message CreateAlertsRequest {
   string provider_type= 1;
-  uint64 provider_id = 2;
+  string provider_id = 2;
   google.protobuf.Struct body = 3;
 }
 
@@ -737,9 +737,9 @@ message CreateAlertsResponse {
 
 message CreateAlertsWithNamespaceRequest {
   string provider_type= 1;
-  uint64 provider_id = 2;
+  string provider_id = 2;
   google.protobuf.Struct body = 3;
-  uint64 namespace_id = 4;
+  string namespace_id = 4;
 }
 
 message CreateAlertsWithNamespaceResponse {
