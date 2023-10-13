@@ -137,7 +137,7 @@ message ListResourcesRequest {
 
   // this toggle if set, will return spec configs as well.
   // it's default value is false.
-  bool with_spec_configs = 3;
+  bool with_spec_configs = 4;
 }
 
 message ListResourcesResponse {
