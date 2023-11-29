@@ -405,7 +405,8 @@ service CompassService {
 
   rpc SyncAssets(SyncAssetsRequest) returns (SyncAssetsResponse) {
     option (google.api.http) = {
-      get: "/v1beta1/assets/sync"
+      post: "/v1beta1/assets/sync"
+      body: "*"
     };
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -1212,11 +1213,13 @@ message CreateAssetProbeResponse {
   string id = 1;
 }
 
-message SyncAssetsRequest {}
-
-message SyncAssetsResponse {
-  uint32 num_affected = 1;
+message SyncAssetsRequest {
+  repeated string services = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "filter by multiple services"
+  }];
 }
+
+message SyncAssetsResponse {}
 
 message GetUserStarredAssetsRequest {
   string user_id = 1;
