@@ -5,7 +5,7 @@ package gotocompany.raccoon.v1beta1;
 
 option go_package = "github.com/goto/proton/raccoon/v1;raccoonv1";
 option java_multiple_files = true;
-option java_outer_classname = "EventProto";
+option java_outer_classname = "PingProto";
 option java_package = "com.gotocompany.proton.raccoon";
 
 service PingService {
