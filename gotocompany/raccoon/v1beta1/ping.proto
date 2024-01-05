@@ -8,20 +8,25 @@ option java_multiple_files = true;
 option java_outer_classname = "EventProto";
 option java_package = "com.gotocompany.proton.raccoon";
 
-service Ping {
-  rpc Ping (Request) returns (Response) {}
+service PingService {
+  rpc Ping (PingRequest) returns (PingResponse) {}
 }
 /*
- `Request` defines the contract to do the health check on the grpc service
+ `PingRequest` defines the contract to do the health check on the grpc service
 
- An `Request` allows a client to sent ping request
+ An `PingRequest` allows a client to sent ping request
 */
-message Request {}
+message PingRequest {}
 /*
- `Response` defines the contract to send the health check heartbeat from the raccoon grpc server side
+ `PingResponse` defines the contract to send the health check heartbeat from the raccoon grpc server side
 
- An `Response` allows raccoon grpc server to send ping response
+ An `PingResponse` allows raccoon grpc server to send ping response
 */
-message Response {
+message PingResponse {
+  /*
+ `message` defines the content sent as part of ping response
+
+ An `message` allows raccoon grpc server to respond with success each ping request receive from the client
+*/
   string message = 1;
 }
