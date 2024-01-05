@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package gotocompany.raccoon.v1beta1;
+
+
+option go_package = "github.com/goto/proton/raccoon/v1;raccoonv1";
+option java_multiple_files = true;
+option java_outer_classname = "EventProto";
+option java_package = "com.gotocompany.proton.raccoon";
+
+service Ping {
+  rpc Ping (Request) returns (Response) {}
+}
+/*
+ `Request` defines the contract to do the health check on the grpc service
+
+ An `Request` allows a client to sent ping request
+*/
+message Request {}
+/*
+ `Response` defines the contract to send the health check heartbeat from the raccoon grpc server side
+
+ An `Response` allows raccoon grpc server to send ping response
+*/
+message Response {
+  string message = 1;
+}
