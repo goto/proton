@@ -72,6 +72,7 @@ message GetReplayResponse {
   string status = 3;
   ReplayConfig replay_config = 4;
   repeated ReplayRun replay_runs = 5;
+  string message = 6;
 }
 
 message ReplayConfig {
