@@ -69,4 +69,17 @@ message ProjectSpecification {
     string value = 2;
   }
   repeated ProjectSecret secrets = 3;
+  message ProjectPreset {
+    string name = 1;
+    string description = 2;
+
+    string truncate_to = 3;
+    string offset = 4 [deprecated = true];
+    string size = 5;
+    string delay = 6;
+    string location = 7;
+  }
+  map<string, ProjectPreset> presets = 4;
+
+
 }
