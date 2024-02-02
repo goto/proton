@@ -5,18 +5,14 @@ package gotocompany.optimus.core.v1beta1;
 import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
-option go_package = "github.com/goto/proton/optimus";
+option go_package = "github.com/gotocompany/proton/optimus";
 option java_multiple_files = true;
 option java_outer_classname = "ProjectServiceManager";
-option java_package = "com.gotocompany.proton.optimus";
+option java_package = "org.gotocompany.proton.optimus";
 // These annotations are used when generating the OpenAPI file.
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
-  info: {
-    version: "0.1";
-  };
-  external_docs: {
-    description: "Optimus Project Service";
-  }
+  info: {version: "0.1"};
+  external_docs: {description: "Optimus Project Service"}
   schemes: HTTP;
   host: "127.0.0.1:9100";
   base_path: "/api";
@@ -32,15 +28,11 @@ service ProjectService {
   }
   // ListProjects returns list of registered projects and configurations
   rpc ListProjects(ListProjectsRequest) returns (ListProjectsResponse) {
-    option (google.api.http) = {
-      get: "/v1beta1/project"
-    };
+    option (google.api.http) = {get: "/v1beta1/project"};
   }
   // GetProject returns project details based on project_name
   rpc GetProject(GetProjectRequest) returns (GetProjectResponse) {
-    option (google.api.http) = {
-      get: "/v1beta1/project/{project_name}"
-    };
+    option (google.api.http) = {get: "/v1beta1/project/{project_name}"};
   }
 }
 
@@ -50,7 +42,8 @@ message RegisterProjectRequest {
 }
 
 message RegisterProjectResponse {
-  reserved 1, 2;
+  bool success = 1;
+  string message = 2;
 }
 
 message ListProjectsRequest {}
@@ -68,20 +61,12 @@ message GetProjectResponse {
 }
 
 message ProjectSpecification {
-  reserved 3;
-
   string name = 1;
   map<string, string> config = 2;
 
-  message ProjectPreset {
+  message ProjectSecret {
     string name = 1;
-    string description = 2;
-
-    string truncate_to = 3;
-    string offset = 4 [deprecated = true];
-    string size = 5;
-    string delay = 6;
-    string location = 7;
+    string value = 2;
   }
-  map<string, ProjectPreset> presets = 4;
+  repeated ProjectSecret secrets = 3;
 }
