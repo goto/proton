@@ -5,10 +5,10 @@ package gotocompany.optimus.plugins.v1beta1;
 import "google/protobuf/timestamp.proto";
 
 option deprecated = true;
-option go_package = "github.com/gotocompany/proton/optimus";
+option go_package = "github.com/goto/proton/optimus";
 option java_multiple_files = true;
 option java_outer_classname = "DependencyResolverModProto";
-option java_package = "org.gotocompany.proton.optimus.plugins";
+option java_package = "com.gotocompany.proton.optimus.plugins";
 
 // DependencyResolverModService must be implemented by all plugins want to support automatic
 // dependency resolution
