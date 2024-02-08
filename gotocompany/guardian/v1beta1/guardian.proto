@@ -408,11 +408,12 @@ message ListResourcesRequest {
   string urn = 5;
   string name = 6;
   repeated string details = 7;
-  uint32 size = 8 [(validate.rules).uint32 = {
+  repeated string order_by = 8;
+  uint32 size = 9 [(validate.rules).uint32 = {
     gte: 0,
     ignore_empty: true
   }];
-  uint32 offset = 9 [(validate.rules).uint32 = {
+  uint32 offset = 10 [(validate.rules).uint32 = {
     gte: 0,
     ignore_empty: true
   }];
