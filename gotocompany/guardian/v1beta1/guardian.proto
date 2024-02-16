@@ -263,6 +263,13 @@ service GuardianService {
     };
   }
 
+  rpc RestoreGrant(RestoreGrantRequest) returns (RestoreGrantResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/grants/{id}/restore"
+      body: "*"
+    };
+  }
+
   rpc RevokeGrants(RevokeGrantsRequest) returns (RevokeGrantsResponse) {
     option (google.api.http) = {
       put: "/v1beta1/grants/revoke"
@@ -773,6 +780,14 @@ message RevokeGrantRequest {
 }
 
 message RevokeGrantResponse {
+  Grant grant = 1;
+}
+
+message RestoreGrantRequest {
+  string id = 1;
+}
+
+message RestoreGrantResponse {
   Grant grant = 1;
 }
 
