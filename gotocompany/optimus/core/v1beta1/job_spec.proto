@@ -370,11 +370,11 @@ message JobSpecification {
 
     message Webhook {
       JobEvent.Type on = 1;
-      message webhookEndpoint {
+      message WebhookEndpoint {
         string url = 1;
         map<string, string> headers = 2;
       }
-      repeated webhookEndpoint endpoints = 2;
+      repeated WebhookEndpoint endpoints = 2;
     }
     repeated Webhook webhook = 3;
   }
