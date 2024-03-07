@@ -355,6 +355,7 @@ message SchemaChangedEvent {
   repeated string updated_schemas = 5;
   map<string,ImpactedFields> updated_fields = 6;
   map<string,ImpactedSchemas> impacted_schemas = 7;
+  int32 version = 8;
 }
 
 message ImpactedFields{
