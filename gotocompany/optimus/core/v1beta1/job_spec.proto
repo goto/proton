@@ -104,12 +104,16 @@ service JobSpecificationService {
 
   // CheckJobSpecification checks if a job specification is valid
   rpc CheckJobSpecification(CheckJobSpecificationRequest) returns (CheckJobSpecificationResponse) {
+    option deprecated = true;
+
     option (google.api.http) = {
       post: "/v1beta1/project/{project_name}/job/check"
     };
   }
   // CheckJobSpecifications checks if the job specifications are valid
-  rpc CheckJobSpecifications(CheckJobSpecificationsRequest) returns (stream CheckJobSpecificationsResponse) {}
+  rpc CheckJobSpecifications(CheckJobSpecificationsRequest) returns (stream CheckJobSpecificationsResponse) {
+    option deprecated = true;
+  }
 
   // RefreshJobs do redeployment using the current persisted state.
   // It will returns a stream of messages which can be used to track the progress.
