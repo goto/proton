@@ -302,22 +302,26 @@ message ListJobSpecificationResponse {
 }
 
 message CheckJobSpecificationRequest {
+  option deprecated = true;
   string project_name = 1;
   JobSpecification job = 2;
   string namespace_name = 3;
 }
 
 message CheckJobSpecificationResponse {
+  option deprecated = true;
   bool success = 1;
 }
 
 message CheckJobSpecificationsRequest {
+  option deprecated = true;
   string project_name = 1;
   repeated JobSpecification jobs = 2;
   string namespace_name = 3;
 }
 
 message CheckJobSpecificationsResponse {
+  option deprecated = true;
   reserved 1 to 4;
   Log log_status = 5;
 }
