@@ -116,11 +116,7 @@ service JobSpecificationService {
   }
 
   // Validate validates whether the job specifications are valid
-  rpc Validate(ValidateRequest) returns (ValidateResponse) {
-    option (google.api.http) = {
-      post: "/v1beta1/project/{project_name}/job/validate"
-    };
-  }
+  rpc Validate(ValidateRequest) returns (ValidateResponse) {}
 
   // RefreshJobs do redeployment using the current persisted state.
   // It will returns a stream of messages which can be used to track the progress.
