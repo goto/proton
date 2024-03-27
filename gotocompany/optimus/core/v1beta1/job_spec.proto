@@ -115,6 +115,13 @@ service JobSpecificationService {
     option deprecated = true;
   }
 
+  // Validate validates whether the job specifications are valid
+  rpc Validate(ValidateRequest) returns (ValidateResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/project/{project_name}/job/validate"
+    };
+  }
+
   // RefreshJobs do redeployment using the current persisted state.
   // It will returns a stream of messages which can be used to track the progress.
   rpc RefreshJobs(RefreshJobsRequest) returns (stream RefreshJobsResponse) {}
@@ -317,6 +324,36 @@ message CheckJobSpecificationsRequest {
 message CheckJobSpecificationsResponse {
   reserved 1 to 4;
   Log log_status = 5;
+}
+
+message ValidateRequest {
+  message FromServer {
+    string project_name = 1;
+    string job_name = 2;
+  }
+
+  message FromOutside {
+    repeated JobSpecification jobs = 1;
+  }
+  
+  oneof payload {
+    FromServer from_server = 1;
+    FromOutside from_outside = 2;
+  }
+}
+
+message ValidateResponse {
+  message Result {
+    string name = 1;
+    repeated string messages = 2;
+    bool success = 3;
+  }
+
+  message ResultList {
+    repeated Result results = 1;
+  }
+
+  map<string, ResultList> results_by_job_name = 1;
 }
 
 message JobSpecification {
