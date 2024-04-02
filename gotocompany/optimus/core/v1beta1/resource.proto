@@ -186,6 +186,7 @@ message DeleteResourceRequest {
   string namespace_name = 2;
   string datastore_name = 3;
   string resource_name = 4;
+  bool force = 5;
 }
 
 message DeleteResourceResponse {
