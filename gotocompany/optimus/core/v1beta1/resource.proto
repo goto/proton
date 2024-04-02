@@ -190,7 +190,5 @@ message DeleteResourceRequest {
 }
 
 message DeleteResourceResponse {
-  bool is_deleted = 1;
-  repeated string DownstreamJobs = 2;
-  string failed_reason = 3;
+  repeated string DownstreamJobs = 1;
 }
