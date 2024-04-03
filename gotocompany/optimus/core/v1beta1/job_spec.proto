@@ -328,7 +328,7 @@ message CheckJobSpecificationsResponse {
 
 message ValidateRequest {
   message FromServer {
-    string job_name = 1;
+    repeated string job_names = 1;
     bool deletion_mode = 2;
   }
   
