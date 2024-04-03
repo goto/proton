@@ -328,17 +328,20 @@ message CheckJobSpecificationsResponse {
 
 message ValidateRequest {
   message FromServer {
-    string project_name = 1;
-    string job_name = 2;
+    string job_name = 1;
+    bool deletion_mode = 2;
   }
-
+  
   message FromOutside {
     repeated JobSpecification jobs = 1;
   }
+
+  string project_name = 1;
+  string namespace_name = 2;
   
   oneof payload {
-    FromServer from_server = 1;
-    FromOutside from_outside = 2;
+    FromServer from_server = 3;
+    FromOutside from_outside = 4;
   }
 }
 
