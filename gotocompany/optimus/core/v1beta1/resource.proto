@@ -190,5 +190,5 @@ message DeleteResourceRequest {
 }
 
 message DeleteResourceResponse {
-  repeated string DownstreamJobs = 1;
+  repeated string downstream_jobs = 1;
 }
