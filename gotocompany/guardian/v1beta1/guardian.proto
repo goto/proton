@@ -579,7 +579,7 @@ message ListAppealCommentsRequest {
 }
 
 message ListAppealCommentsResponse {
-  repeated Comment comments = 1;
+  repeated AppealComment comments = 1;
 }
 
 message CreateAppealCommentRequest {
@@ -588,7 +588,7 @@ message CreateAppealCommentRequest {
 }
 
 message CreateAppealCommentResponse {
-  Comment comment = 1;
+  AppealComment comment = 1;
 }
 
 message ListUserApprovalsRequest {
@@ -972,7 +972,7 @@ message Approval {
   string reason = 12;
 }
 
-message Comment {
+message AppealComment {
   string id = 1;
   string appeal_id = 2;
   string created_by = 3;
