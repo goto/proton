@@ -303,7 +303,9 @@ message ChangeJobNamespaceRequest {
   string new_namespace_name = 4;
 }
 
-message ChangeJobNamespaceResponse {}
+message ChangeJobNamespaceResponse {
+  bool success = 1;
+}
 
 message ListJobSpecificationRequest {
   string project_name = 1;

@@ -162,7 +162,9 @@ message ChangeResourceNamespaceRequest {
   string new_namespace_name = 5;
 }
 
-message ChangeResourceNamespaceResponse {}
+message ChangeResourceNamespaceResponse {
+  bool success = 1;
+}
 
 message ApplyResourcesRequest {
   string project_name = 1;
