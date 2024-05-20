@@ -575,6 +575,24 @@ message CreateAppealRequest {
   string description = 4;
 }
 
+message UpdateAppealRequest {
+  string account_id = 1;
+
+  message Resource {
+    string id = 1;
+    string role = 2;
+    google.protobuf.Struct options = 3;
+    google.protobuf.Struct details = 4;
+  }
+  Resource resource = 2;
+  string account_type = 3;
+  string description = 4;
+}
+
+message UpdateAppealResponse {
+  Appeal appeal = 1;
+}
+
 message CreateAppealResponse {
   repeated Appeal appeals = 1;
 }
