@@ -995,6 +995,7 @@ message Appeal {
   repeated string permissions = 21;
   Grant grant = 22;
   string description = 23;
+  uint32 revision = 24;
 }
 
 // Approval is an approval item that generated in an appeal based on the selected policy
@@ -1011,6 +1012,8 @@ message Approval {
   google.protobuf.Timestamp created_at = 10;
   google.protobuf.Timestamp updated_at = 11;
   string reason = 12;
+  bool is_stale = 13;
+  uint32 appeal_revision = 14;
 }
 
 message AppealComment {
