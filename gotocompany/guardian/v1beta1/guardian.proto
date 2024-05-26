@@ -647,6 +647,7 @@ message ListUserApprovalsRequest {
   string q = 8;
   repeated string account_types = 9;
   repeated string resource_types = 10;
+  bool stale = 11;
 }
 
 message ListUserApprovalsResponse {
@@ -671,6 +672,7 @@ message ListApprovalsRequest {
   string q = 8;
   repeated string account_types = 9;
   repeated string resource_types = 10;
+  bool stale = 11;
 }
 
 message ListApprovalsResponse {
