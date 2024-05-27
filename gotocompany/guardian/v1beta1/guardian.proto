@@ -1070,9 +1070,10 @@ message Grant {
   string source = 19;
   string status_in_provider = 20;
   string owner = 21;
-  string restore_reason = 22;
-  string restored_by = 23;
-  google.protobuf.Timestamp restored_at = 24;
+  string expiration_date_reason = 22;
+  string restore_reason = 23;
+  string restored_by = 24;
+  google.protobuf.Timestamp restored_at = 25;
 }
 
 message ProviderActivity {
