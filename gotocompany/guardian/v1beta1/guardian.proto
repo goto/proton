@@ -786,7 +786,6 @@ message RevokeGrantResponse {
 message RestoreGrantRequest {
   string id = 1;
   string reason = 2;
-  string duration = 3;
 }
 
 message RestoreGrantResponse {
