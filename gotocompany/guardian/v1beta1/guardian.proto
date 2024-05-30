@@ -585,16 +585,12 @@ message CreateAppealRequest {
 message PatchAppealRequest {
   string id = 1;
   string account_id = 2;
-
-  message Resource {
-    string id = 1;
-    string role = 2;
-    google.protobuf.Struct options = 3;
-    google.protobuf.Struct details = 4;
-  }
-  Resource resource = 3;
-  string account_type = 4;
-  string description = 5;
+  string resource_id = 3;
+  string role = 4;
+  google.protobuf.Struct options = 5;
+  google.protobuf.Struct details = 6;
+  string account_type = 7;
+  string description = 8;
 }
 
 message PatchAppealResponse {
