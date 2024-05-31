@@ -75,24 +75,23 @@ message CreateServiceDataKeyResponse {
 
 message UpsertServiceDataRequestBody {
   string project = 1;
-  map<string, string> data = 2 [(validate.rules).map = {min_pairs: 1, max_pairs: 1}];
+  map<string, string> data = 2;
 }
   
 message UpsertUserServiceDataRequest {
-  string id = 1;
+  string user_id = 1;
   UpsertServiceDataRequestBody body = 2;
 }
 
 message UpsertGroupServiceDataRequest {
-  string id = 1;
+  string group_id = 1;
   UpsertServiceDataRequestBody body = 2;
 }
 
 message UpsertUserServiceDataResponse {
-  string urn = 1;
+  map<string, string> data = 1;
 }
 
 message UpsertGroupServiceDataResponse {
-  string urn = 1;
+  map<string, string> data = 1;
 }
-
