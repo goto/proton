@@ -33,7 +33,7 @@ service ServiceDataService {
 
   rpc UpsertUserServiceData(UpsertUserServiceDataRequest) returns (UpsertUserServiceDataResponse) {
     option (google.api.http) = {
-      put: "/v1beta1/users/{id}/servicedata",
+      put: "/v1beta1/users/{user_id}/servicedata",
       body: "body"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -44,7 +44,7 @@ service ServiceDataService {
     
   rpc UpsertGroupServiceData(UpsertGroupServiceDataRequest) returns (UpsertGroupServiceDataResponse) {
     option (google.api.http) = {
-      put: "/v1beta1/groups/{id}/servicedata",
+      put: "/v1beta1/groups/{group_id}/servicedata",
       body: "body"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
