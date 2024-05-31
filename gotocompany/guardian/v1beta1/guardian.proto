@@ -265,7 +265,7 @@ service GuardianService {
 
   rpc RestoreGrant(RestoreGrantRequest) returns (RestoreGrantResponse) {
     option (google.api.http) = {
-      post: "/v1beta1/grants/{id}/restore"
+      put: "/v1beta1/grants/{id}/restore"
       body: "*"
     };
   }
