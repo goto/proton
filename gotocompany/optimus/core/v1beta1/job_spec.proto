@@ -83,7 +83,7 @@ service JobSpecificationService {
   // GetJobChangelog get all the changes done on a job
   rpc GetJobChangelog(GetJobChangelogRequest) returns (GetJobChangelogResponse) {
     option (google.api.http) = {
-      get: "/v1beta1/job/changelog/{project_name}/{job_name}"
+      get: "/v1beta1/project/{project_name}/job/{job_name}/changelog"
     };
   }
 
