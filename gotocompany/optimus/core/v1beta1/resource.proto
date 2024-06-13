@@ -56,6 +56,9 @@ service ResourceService {
       body: "*"
     };
   }
+  // UpsertResource updates/inserts a resource specification of a datastore in project
+  rpc UpsertResource(UpsertResourceRequest) returns (UpsertResourceResponse) {}
+
   // DeleteResource soft delete a specific resource
   rpc DeleteResource(DeleteResourceRequest) returns (DeleteResourceResponse) {
     option (google.api.http) = {
@@ -136,6 +139,18 @@ message UpdateResourceRequest {
 }
 
 message UpdateResourceResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message UpsertResourceRequest {
+  string project_name = 1;
+  string datastore_name = 2;
+  ResourceSpecification resource = 3;
+  string namespace_name = 4;
+}
+
+message UpsertResourceResponse {
   bool success = 1;
   string message = 2;
 }
