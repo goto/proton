@@ -356,6 +356,7 @@ message SchemaChangedEvent {
   map<string,ImpactedFields> updated_fields = 6;
   map<string,ImpactedSchemas> impacted_schemas = 7;
   int32 version = 8;
+  Metadata metadata = 9;
 }
 
 message ImpactedFields{
@@ -366,3 +367,7 @@ message ImpactedSchemas{
   repeated string schema_names=1;
 }
 
+message Metadata {
+  string source_url=1;
+  String commit_sha=2;
+}
