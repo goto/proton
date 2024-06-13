@@ -30,7 +30,7 @@ message Metric {
   bool is_verified = 5;
 
   // List of attributes the model has.
-  google.protobuf.Struct attributes = 5;
+  google.protobuf.Struct attributes = 10;
 
   // The timestamp of the metric's creation.
   google.protobuf.Timestamp create_time = 101;
