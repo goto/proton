@@ -11,27 +11,25 @@ option java_package = "com.gotocompany.assets";
 
 // A metric is a timeseries aggregation over a table that supports zero or more dimensions.
 message Metric {
-  // Namespace of the metric. Something like `{project}-{model}` for dbt and
-  // `schema` for Cube.
-  string namespace = 1;
+  // Metric's definition. Can be in a text describing the metrics or a formula.
+  string definition = 1;
 
-  // The field being used to calculate a metric.
-  string field_name = 2;
+  // A query on how to calculate and generate the metric.
+  // Metric is not defined by where it is stored, but instead on how it is generated.
+  string query = 2;
 
-  // Type of the evaluated metric. ex: count_distinct, average etc.
-  string measure_type = 3;
+  // Team owning the metric's definition.
+  string team = 3;
 
-  // Optional: The query, possibly in SQL representation, with filters and aggregations.
-  string query = 4;
+  // Optional: This field can be utilised to group multiple metrics.
+  // We can utilise this field to group the following two different metrics "GMV Product A" and "GMV Product B".
+  // In the example above, this "group" field can be "GMV" for both metrics.
+  string group = 4;
 
-  // Optional: List of attributes the metric has. This could include the
-  // following:
-  // - time_grains[repeated string]: One or more "grains" at which the metric
-  //   can be evaluated. Ex: [day, week, month].
-  // - dimensions[repeated string]: A list of dimensions to group or filter the
-  //   metric by. Ex: [plan, country].
-  // - filters[repeated map<string, string>]: Predicates for the metric. Ex:
-  //   [{"field": "is_paying", "operator": "is", "value": "true"}].
+  // Optional: This field can be used as a flag for metric verification
+  bool is_verified = 5;
+
+  // List of attributes the model has.
   google.protobuf.Struct attributes = 5;
 
   // The timestamp of the metric's creation.
