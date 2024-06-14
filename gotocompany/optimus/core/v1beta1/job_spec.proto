@@ -67,7 +67,12 @@ service JobSpecificationService {
   }
 
   // UpsertJobSpecifications update or add jobs for a namespace which belongs to the given project
-  rpc UpsertJobSpecifications(UpsertJobSpecificationsRequest) returns (UpsertJobSpecificationsResponse) {}
+  rpc UpsertJobSpecifications(UpsertJobSpecificationsRequest) returns (UpsertJobSpecificationsResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/project/{project_name}/namespace/{namespace_name}/jobs-upsert"
+      body: "*"
+    };
+  }
 
   // GetJobSpecification reads a provided job spec of a namespace
   rpc GetJobSpecification(GetJobSpecificationRequest) returns (GetJobSpecificationResponse) {
