@@ -110,11 +110,11 @@ message UpsertGroupServiceDataRequest {
 }
 
 message UpsertUserServiceDataResponse {
-  google.protobuf.Struct data = 1;
+  map<string, string> data = 1;
 }
 
 message UpsertGroupServiceDataResponse {
-  google.protobuf.Struct data = 1;
+  map<string, string> data = 1;
 }
 
 message GetUserServiceDataRequest {
