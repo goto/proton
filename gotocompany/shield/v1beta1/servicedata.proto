@@ -110,11 +110,11 @@ message UpsertGroupServiceDataRequest {
 }
 
 message UpsertUserServiceDataResponse {
-  map<string, string> data = 1;
+  map<string, any> data = 1;
 }
 
 message UpsertGroupServiceDataResponse {
-  map<string, string> data = 1;
+  map<string, any> data = 1;
 }
 
 message GetUserServiceDataRequest {
