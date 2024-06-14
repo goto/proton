@@ -153,6 +153,12 @@ message UpsertResourceRequest {
 message UpsertResourceResponse {
   bool success = 1;
   string message = 2;
+  repeated ResourceStatus results = 3;
+}
+
+message ResourceStatus {
+  string resource_name = 1;
+  string status = 2;
 }
 
 // ResourceSpecification are datastore specification representation of a resource
