@@ -57,7 +57,12 @@ service ResourceService {
     };
   }
   // UpsertResource updates/inserts a resource specification of a datastore in project
-  rpc UpsertResource(UpsertResourceRequest) returns (UpsertResourceResponse) {}
+  rpc UpsertResource(UpsertResourceRequest) returns (UpsertResourceResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/project/{project_name}/namespace/{namespace_name}/datastore/{datastore_name}/resources-upsert"
+      body: "*"
+    };
+  }
 
   // DeleteResource soft delete a specific resource
   rpc DeleteResource(DeleteResourceRequest) returns (DeleteResourceResponse) {
