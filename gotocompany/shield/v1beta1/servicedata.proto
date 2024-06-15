@@ -12,67 +12,77 @@ option java_outer_classname = "ServiceData";
 option java_package = "com.gotocompany.proton.shield.v1beta1";
 // These annotations are used when generating the OpenAPI file.
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
-  info: {
-    title: "Service Data",
-    version: "0.1.0";
-  };
-  schemes: HTTP;
-};
+  info : {title : "Service Data", version : "0.1.0";
+}
+;
+schemes : HTTP;
+}
+;
 
 service ServiceDataService {
-   // Service Data
-   rpc CreateServiceDataKey(CreateServiceDataKeyRequest) returns (CreateServiceDataKeyResponse) {
+  // Service Data
+  rpc CreateServiceDataKey(CreateServiceDataKeyRequest)
+      returns (CreateServiceDataKeyResponse) {
     option (google.api.http) = {
-      post: "/v1beta1/servicedata",
-      body: "body"
+      post : "/v1beta1/servicedata",
+      body : "body"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: "Service Data";
-      summary: "Create Service Data Key";
-    };
-  }
+      tags : "Service Data";
+  summary:
+    "Create Service Data Key";
+  };
+}
 
-  rpc UpsertUserServiceData(UpsertUserServiceDataRequest) returns (UpsertUserServiceDataResponse) {
-    option (google.api.http) = {
-      put: "/v1beta1/users/{user_id}/servicedata",
-      body: "body"
-    };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: "Service Data";
-      summary: "Upsert User Service Data";
-    };
-  }
-    
-  rpc UpsertGroupServiceData(UpsertGroupServiceDataRequest) returns (UpsertGroupServiceDataResponse) {
-    option (google.api.http) = {
-      put: "/v1beta1/groups/{group_id}/servicedata",
-      body: "body"
-    };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: "Service Data";
-      summary: "Upsert Group Service Data";
-    };
-  }
+rpc UpsertUserServiceData(UpsertUserServiceDataRequest)
+    returns (UpsertUserServiceDataResponse) {
+  option (google.api.http) = {
+    put : "/v1beta1/users/{user_id}/servicedata",
+    body : "body"
+  };
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    tags : "Service Data";
+summary:
+  "Upsert User Service Data";
+};
+}
 
-  rpc GetUserServiceData(GetUserServiceDataRequest) returns (GetUserServiceDataResponse) {
-    option (google.api.http) = {
-      get: "/v1beta1/users/{user_id}/servicedata"
-    };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: "Service Data";
-      summary: "Get User Service Data Key";
-    };
-  }
+rpc UpsertGroupServiceData(UpsertGroupServiceDataRequest)
+    returns (UpsertGroupServiceDataResponse) {
+  option (google.api.http) = {
+    put : "/v1beta1/groups/{group_id}/servicedata",
+    body : "body"
+  };
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    tags : "Service Data";
+summary:
+  "Upsert Group Service Data";
+};
+}
 
-  rpc GetGroupServiceData(GetGroupServiceDataRequest) returns (GetGroupServiceDataResponse) {
-    option (google.api.http) = {
-      get: "/v1beta1/groups/{group_id}/servicedata"
-    };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: "Service Data";
-      summary: "Get Group Service Data Key";
-    };
-  }
+rpc GetUserServiceData(GetUserServiceDataRequest)
+    returns (GetUserServiceDataResponse) {
+  option (google.api.http) = {
+    get : "/v1beta1/users/{user_id}/servicedata"
+  };
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    tags : "Service Data";
+summary:
+  "Get User Service Data Key";
+};
+}
+
+rpc GetGroupServiceData(GetGroupServiceDataRequest)
+    returns (GetGroupServiceDataResponse) {
+  option (google.api.http) = {
+    get : "/v1beta1/groups/{group_id}/servicedata"
+  };
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    tags : "Service Data";
+summary:
+  "Get Group Service Data Key";
+};
+}
 }
 
 message ServiceDataKeyRequestBody {
@@ -86,19 +96,15 @@ message ServiceDataKey {
   string id = 2;
 }
 
-message CreateServiceDataKeyRequest {
-  ServiceDataKeyRequestBody body = 1;
-}
+message CreateServiceDataKeyRequest { ServiceDataKeyRequestBody body = 1; }
 
-message CreateServiceDataKeyResponse {
-  ServiceDataKey service_data_key = 1;
-}
+message CreateServiceDataKeyResponse { ServiceDataKey service_data_key = 1; }
 
 message UpsertServiceDataRequestBody {
   string project = 1;
-  map<string, string> data = 2;
+  google.protobuf.Struct data = 2;
 }
-  
+
 message UpsertUserServiceDataRequest {
   string user_id = 1;
   UpsertServiceDataRequestBody body = 2;
@@ -109,17 +115,14 @@ message UpsertGroupServiceDataRequest {
   UpsertServiceDataRequestBody body = 2;
 }
 
-message UpsertUserServiceDataResponse {
-  map<string, string> data = 1;
-}
+message UpsertUserServiceDataResponse { google.protobuf.Struct data = 1; }
 
-message UpsertGroupServiceDataResponse {
-  map<string, string> data = 1;
-}
+message UpsertGroupServiceDataResponse { google.protobuf.Struct data = 1; }
 
 message GetUserServiceDataRequest {
   string user_id = 1;
-  repeated string entity = 2 [(validate.rules).repeated.items.string = {in: "user", in: "group"}];
+  repeated string entity = 2
+      [ (validate.rules).repeated .items.string = {in : "user", in : "group"} ];
   string project = 3;
 }
 
@@ -128,10 +131,6 @@ message GetGroupServiceDataRequest {
   string project = 2;
 }
 
-message GetUserServiceDataResponse {
-  google.protobuf.Struct data = 1;
-}
+message GetUserServiceDataResponse { google.protobuf.Struct data = 1; }
 
-message GetGroupServiceDataResponse {
-  google.protobuf.Struct data = 1;
-}
+message GetGroupServiceDataResponse { google.protobuf.Struct data = 1; }
