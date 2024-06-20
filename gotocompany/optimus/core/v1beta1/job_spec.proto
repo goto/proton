@@ -224,7 +224,12 @@ message UpsertJobSpecificationsRequest {
 }
 message UpsertJobSpecificationsResponse {
   string log = 1;
-  repeated string successful_job_names = 2;
+  repeated UpsertJobStatus results = 2;
+}
+
+message UpsertJobStatus {
+  string job_name = 1;
+  string status = 2;
 }
 
 message JobInspectRequest {
