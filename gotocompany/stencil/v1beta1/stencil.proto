@@ -239,11 +239,7 @@ message CreateSchemaRequest {
   Schema.Format format = 4;
   Schema.Compatibility compatibility = 5;
   string source_url = 6;
-  Metadata metadata = 7;
-}
-
-message metadata{
-  string commit_sha = 1;
+  string commit_sha = 7;
 }
 
 message CreateSchemaResponse {
