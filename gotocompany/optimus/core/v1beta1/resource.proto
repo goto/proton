@@ -159,6 +159,7 @@ message UpsertResourceResponse {
   bool success = 1;
   string message = 2;
   repeated ResourceStatus results = 3;
+  repeated string successful_resource_names = 4;
 }
 
 message ResourceStatus {
