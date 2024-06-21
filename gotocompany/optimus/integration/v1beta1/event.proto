@@ -44,6 +44,15 @@ enum ChangeImpact {
   CHANGE_IMPACT_TYPE_BEHAVIOUR = 2;
 }
 
+message CreateSubscription {
+  string owner = 1;
+  repeated string event_types = 2;
+  string group_slug = 3;
+  string project_slug = 4;
+  string resource_id = 5;
+  string resource_type = 6;
+}
+
 message OptimusChangeEvent {
   enum EventType {
     EVENT_TYPE_TYPE_UNSPECIFIED = 0;
@@ -62,6 +71,7 @@ message OptimusChangeEvent {
     EVENT_TYPE_JOB_FAILURE = 9;
 
     EVENT_TYPE_JOB_STATE_CHANGE = 10;
+    EVENT_TYPE_CREATE_SUBSCRIPTION = 12;
   }
 
   string event_id = 1;
@@ -76,6 +86,7 @@ message OptimusChangeEvent {
     ResourceChangePayload resource_change = 7;
     JobRunPayload job_run = 8;
     JobStateChangePayload job_state_change = 9;
+    CreateSubscription createSubscription = 12;
   }
 
   string job_name = 10;
