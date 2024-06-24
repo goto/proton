@@ -86,7 +86,7 @@ message OptimusChangeEvent {
     ResourceChangePayload resource_change = 7;
     JobRunPayload job_run = 8;
     JobStateChangePayload job_state_change = 9;
-    CreateSubscription createSubscription = 12;
+    CreateSubscription create_subscription = 12;
   }
 
   string job_name = 10;
