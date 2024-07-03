@@ -241,7 +241,7 @@ message ResourceChange {
 message ResourceChangelog {
   string event_type = 1;
   string timestamp = 2;
-  repeated JobChange change = 3;
+  repeated ResourceChange change = 3;
 }
 
 message GetResourceChangelogsResponse {
