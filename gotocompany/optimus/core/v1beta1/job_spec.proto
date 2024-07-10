@@ -186,7 +186,6 @@ service JobSpecificationService {
   rpc BulkDeleteJobs(BulkDeleteJobsRequest) returns (BulkDeleteJobsResponse) {
     option (google.api.http) = {
       delete: "/v1beta1/project/{project_name}/job/bulk-delete"
-      body: "*"
     };
   }
 }
