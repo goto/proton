@@ -701,7 +701,6 @@ message BulkDeleteJobsRequest {
   message JobToDelete {
     string namespace_name = 1;
     string job_name = 2;
-    bool clean_history = 3;
   }
 
   string project_name = 1;
