@@ -941,7 +941,7 @@ message GetGraphRequest {
       ""
     ]
   }];
-  bool with_attributes = 4;
+  optional bool with_attributes = 4;
 }
 
 message GetGraphResponse {
