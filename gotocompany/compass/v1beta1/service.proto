@@ -856,7 +856,7 @@ message SearchAssetsRequest {
     }
   ];
 
-  SearchFlags flags = 8 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  SearchFlags flags = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "flags to control the search behavior (e.g. column level search, disable fuzzy, etc)"
   }];
 }
@@ -915,15 +915,15 @@ message SearchFlags {
       title: "SearchFlags"
     }
   };
-  bool is_column_search = 1 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  bool is_column_search = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "search column names instead of table urn or name."
   }];
 
-  bool disable_fuzzy = 2 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  bool disable_fuzzy = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "disable fuzzy search."
   }];
 
-  bool enable_highlight = 3 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  bool enable_highlight = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "enable highlight in search response."
   }];
 }
@@ -1069,16 +1069,22 @@ message GetAllAssetsRequest {
   bool with_total = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "if set include total field in response"
   }];
-  string duration_before_current = 11 [
+  string duration_for_upper_threshold = 11 [
     (validate.rules).string.ignore_empty = true,
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "filter by refreshed_at field < now - duration_before_current"
+      description: "filter by time field (e.g. refreshed_at, updated_at) < now - duration_for_upper_threshold"
     }
   ];
-  string duration_after_current = 12 [
+  string duration_for_lower_threshold = 12 [
     (validate.rules).string.ignore_empty = true,
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "filter by refreshed_at field > now - duration_before_current"
+      description: "filter by time field (e.g. refreshed_at, updated_at) > now - duration_for_lower_threshold"
+    }
+  ];
+  string duration_comparison_by = 13 [
+    (validate.rules).string.ignore_empty = true,
+    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      description: "comparison field for duration_for_upper_threshold and duration_for_lower_threshold, e.g. refreshed_at, updated_at"
     }
   ];
 }
@@ -1200,21 +1206,29 @@ message DeleteAssetsRequest {
   map<string, string> data = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "query result based on a (nested) field of the data asset. the nested field is written with period separated field name. eg, \"data[name.entity]\""
   }];
-  string duration_before_current = 6 [
+  string duration_for_upper_threshold = 6 [
     (validate.rules).string.min_len = 1,
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "filter by refreshed_at field < now - duration_before_current"
+      description: "filter by time field (e.g. refreshed_at, updated_at) < now - duration_for_upper_threshold"
     }
   ];
-  string duration_after_current = 7 [
+  string duration_for_lower_threshold = 7 [
     (validate.rules).string.ignore_empty = true,
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "filter by refreshed_at field > now - duration_before_current"
+      description: "filter by time field (e.g. refreshed_at, updated_at) > now - duration_for_lower_threshold"
+    }
+  ];
+  string duration_comparison_by = 8 [
+    (validate.rules).string.ignore_empty = true,
+    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      description: "comparison field for duration_for_upper_threshold and duration_for_lower_threshold, e.g. refreshed_at, updated_at"
     }
   ];
 }
 
-message DeleteAssetsResponse {}
+message DeleteAssetsResponse {
+  uint32 row_affected = 7;
+}
 
 message GetAssetStargazersRequest {
   string id = 1;
