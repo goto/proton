@@ -34,6 +34,14 @@ service JobRunService {
       body: "*"
     };
   }
+
+  // GetInterval gets interval on specific job given reference time.
+  rpc GetJobUpstreamRun(GetJobUpstreamRunRequest) returns (GetJobUpstreamRunResponse) {
+    option (google.api.http) = {
+      get: "/v1beta1/project/{project_name}/job/{job_name}/upstream/run"
+    };
+  }
+
   // JobRun returns the current and past run status of jobs on a given range
   rpc JobRun(JobRunRequest) returns (JobRunResponse) {
     option (google.api.http) = {
@@ -61,6 +69,24 @@ service JobRunService {
       get: "/v1beta1/project/{project_name}/job/{job_name}/interval"
     };
   }
+}
+
+message GetJobUpstreamRunRequest {
+  string job_name = 1;
+  string project_name = 2;
+  google.protobuf.Timestamp schedule_time = 3;
+
+  string upstream_job_name = 4;
+  string upstream_project_name = 5;
+  string upstream_namespace_name = 6;
+  string upstream_host = 7;
+
+  repeated string filter = 8;
+}
+
+message GetJobUpstreamRunResponse {
+  bool all_success = 1;
+  repeated JobRun job_runs = 2;
 }
 
 message GetIntervalRequest {
