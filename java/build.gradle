@@ -4,7 +4,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.17'
-        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.4.7"
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.28.2"
         classpath "org.ajoberstar:gradle-git:1.6.0"
     }
 }
@@ -47,11 +47,21 @@ dependencies {
 protobuf {
     generatedFilesBaseDir = "${projectDir}/build/protos/"
     protoc {
-        artifact = "com.google.protobuf:protoc:3.1.0"
+        // for run locally Mac Apple M1
+        if (osdetector.os == "osx") {
+          artifact = "com.google.protobuf:protoc:3.1.0:osx-x86_64"
+        } else {
+          artifact = "com.google.protobuf:protoc:3.1.0"
+        }
     }
     plugins {
         grpc {
-            artifact = "io.grpc:protoc-gen-grpc-java:1.0.3"
+            // for run locally Mac Apple M1
+            if (osdetector.os == "osx") {
+                artifact = "io.grpc:protoc-gen-grpc-java:1.0.3:osx-x86_64"
+            } else {
+                artifact = "io.grpc:protoc-gen-grpc-java:1.0.3"
+            }
         }
     }
 
