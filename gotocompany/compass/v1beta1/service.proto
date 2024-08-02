@@ -1072,13 +1072,13 @@ message GetAllAssetsRequest {
   string duration_before_current = 11 [
     (validate.rules).string.ignore_empty = true,
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "filter by refreshed_at field > now - duration_before_current"
+      description: "filter by refreshed_at field < now - duration_before_current"
     }
   ];
   string duration_after_current = 12 [
     (validate.rules).string.ignore_empty = true,
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "filter by refreshed_at field < now - duration_before_current"
+      description: "filter by refreshed_at field > now - duration_before_current"
     }
   ];
 }
@@ -1203,13 +1203,13 @@ message DeleteAssetsRequest {
   string duration_before_current = 6 [
     (validate.rules).string.min_len = 1,
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "filter by refreshed_at field > now - duration_before_current"
+      description: "filter by refreshed_at field < now - duration_before_current"
     }
   ];
   string duration_after_current = 7 [
     (validate.rules).string.ignore_empty = true,
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "filter by refreshed_at field < now - duration_before_current"
+      description: "filter by refreshed_at field > now - duration_before_current"
     }
   ];
 }
