@@ -47,7 +47,7 @@ dependencies {
 protobuf {
     generatedFilesBaseDir = "${projectDir}/build/protos/"
     protoc {
-        // for run locally Mac Apple M1
+        // for build locally Mac Apple M1
         if (osdetector.os == "osx") {
           artifact = "com.google.protobuf:protoc:3.1.0:osx-x86_64"
         } else {
@@ -56,7 +56,7 @@ protobuf {
     }
     plugins {
         grpc {
-            // for run locally Mac Apple M1
+            // for build locally Mac Apple M1
             if (osdetector.os == "osx") {
                 artifact = "io.grpc:protoc-gen-grpc-java:1.0.3:osx-x86_64"
             } else {
