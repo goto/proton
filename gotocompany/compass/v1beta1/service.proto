@@ -1165,7 +1165,7 @@ message DeleteAssetsRequest {
   string query_expr = 1 [
     (validate.rules).string.min_len = 3,
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "filter by query expr"
+      description: "filter by query expr, example: refreshed_at <= \"2024-08-05T23:59:59\""
     }
   ];
   bool dry_run = 4 [
