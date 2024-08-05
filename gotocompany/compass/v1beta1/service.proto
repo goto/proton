@@ -1203,7 +1203,7 @@ message DeleteAssetsRequest {
 }
 
 message DeleteAssetsResponse {
-  uint32 rows_affected = 7;
+  uint32 affected_rows = 1;
 }
 
 message GetAssetStargazersRequest {
