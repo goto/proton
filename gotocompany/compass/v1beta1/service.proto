@@ -1179,32 +1179,20 @@ message DeleteAssetRequest {
 message DeleteAssetResponse {}
 
 message DeleteAssetsRequest {
-  string q = 1 [
-    (validate.rules).string.ignore_empty = true,
-    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "filter by specific query"
-    }
-  ];
-  string q_fields = 2 [
-    (validate.rules).string.ignore_empty = true,
-    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "filter by multiple query fields"
-    }
-  ];
-  string types = 3 [
+  string types = 1 [
     (validate.rules).string.ignore_empty = true,
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
       description: "filter by multiple types"
     }
   ];
-  string services = 4 [
+  string services = 2 [
     (validate.rules).string.ignore_empty = true,
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
       description: "filter by multiple services"
     }
   ];
-  map<string, string> data = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    description: "query result based on a (nested) field of the data asset. the nested field is written with period separated field name. eg, \"data[name.entity]\""
+  map<string, string> filter = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "filter result based on a (nested) field of the asset. the nested field is written with period separated field name. eg, \"filter[data.landscape]\""
   }];
   string duration_for_upper_threshold = 6 [
     (validate.rules).string.min_len = 1,
@@ -1227,7 +1215,7 @@ message DeleteAssetsRequest {
 }
 
 message DeleteAssetsResponse {
-  uint32 row_affected = 7;
+  uint32 rows_affected = 7;
 }
 
 message GetAssetStargazersRequest {
