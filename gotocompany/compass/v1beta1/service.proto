@@ -1185,13 +1185,13 @@ message DeleteAssetsRequest {
   google.protobuf.Duration duration_for_upper_threshold = 11 [
     (validate.rules).duration.required = true,
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "filter by time field (e.g. refreshed_at, updated_at) < now - duration_for_upper_threshold"
+      description: "filter by time field (e.g. refreshed_at, updated_at) <= now - duration_for_upper_threshold"
     }
   ];
   google.protobuf.Duration duration_for_lower_threshold = 12 [
     (validate.rules).duration.required = true,
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "filter by time field (e.g. refreshed_at, updated_at) > now - duration_for_lower_threshold"
+      description: "filter by time field (e.g. refreshed_at, updated_at) => now - duration_for_lower_threshold"
     }
   ];
   string duration_comparison_by = 13 [
