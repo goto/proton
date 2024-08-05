@@ -6,6 +6,7 @@ import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+import "google/protobuf/duration.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 import "validate/validate.proto";
 
@@ -1176,14 +1177,19 @@ message DeleteAssetsRequest {
   map<string, string> filter = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "filter result based on a (nested) field of the asset. the nested field is written with period separated field name. eg, \"filter[data.landscape]\""
   }];
-  string duration_for_upper_threshold = 11 [
-    (validate.rules).string.min_len = 1,
+  bool dry_run = 4 [
+    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      description: "After returning the number of affected rows, should the deletion proceed or not (dry run)?"
+    }
+  ];
+  google.protobuf.Duration duration_for_upper_threshold = 11 [
+    (validate.rules).duration.required = true,
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
       description: "filter by time field (e.g. refreshed_at, updated_at) < now - duration_for_upper_threshold"
     }
   ];
-  string duration_for_lower_threshold = 12 [
-    (validate.rules).string.ignore_empty = true,
+  google.protobuf.Duration duration_for_lower_threshold = 12 [
+    (validate.rules).duration.required = true,
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
       description: "filter by time field (e.g. refreshed_at, updated_at) > now - duration_for_lower_threshold"
     }
