@@ -1174,8 +1174,8 @@ message DeleteAssetsRequest {
       description: "filter by multiple services"
     }
   ];
-  map<string, string> filter = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    description: "filter result based on a (nested) field of the asset. the nested field is written with period separated field name. eg, \"filter[data.landscape]\""
+  map<string, string> data = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "query result based on a (nested) field of the data asset. the nested field is written with period separated field name. eg, \"data[name.entity]\""
   }];
   bool dry_run = 4 [
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
