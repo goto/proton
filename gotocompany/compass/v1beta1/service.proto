@@ -1189,7 +1189,7 @@ message DeleteAssetsRequest {
     }
   ];
   google.protobuf.Duration duration_for_lower_threshold = 12 [
-    (validate.rules).duration.required = true,
+    (validate.rules).duration.required = false,
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
       description: "filter by time field (e.g. refreshed_at, updated_at) => now - duration_for_lower_threshold"
     }
