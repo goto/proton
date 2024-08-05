@@ -1162,36 +1162,15 @@ message DeleteAssetRequest {
 message DeleteAssetResponse {}
 
 message DeleteAssetsRequest {
-  string types = 1 [
-    (validate.rules).string.ignore_empty = true,
+  string query_expr = 1 [
+    (validate.rules).string.min_len = 3,
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "filter by multiple types"
+      description: "filter by query expr"
     }
   ];
-  string services = 2 [
-    (validate.rules).string.ignore_empty = true,
-    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "filter by multiple services"
-    }
-  ];
-  map<string, string> data = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    description: "query result based on a (nested) field of the data asset. the nested field is written with period separated field name. eg, \"data[name.entity]\""
-  }];
   bool dry_run = 4 [
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
       description: "if set to true, then deletion should not proceed and only return the affected rows. else, will perform deletion in the background"
-    }
-  ];
-  google.protobuf.Timestamp refreshed_at_upper_threshold = 11 [
-    (validate.rules).timestamp.required = true,
-    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "filter by refreshed_at <= duration_for_upper_threshold"
-    }
-  ];
-  google.protobuf.Timestamp refreshed_at_lower_threshold = 12 [
-    (validate.rules).timestamp.required = false,
-    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "filter by refreshed_at => duration_for_lower_threshold"
     }
   ];
 }
