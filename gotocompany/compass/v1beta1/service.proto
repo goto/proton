@@ -1179,25 +1179,19 @@ message DeleteAssetsRequest {
   }];
   bool dry_run = 4 [
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "After returning the number of affected rows, should the deletion proceed or not (dry run)?"
+      description: "if set to true, then deletion should not proceed and only return the affected rows. else, will perform deletion in the background"
     }
   ];
   google.protobuf.Duration duration_for_upper_threshold = 11 [
     (validate.rules).duration.required = true,
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "filter by time field (e.g. refreshed_at, updated_at) <= now - duration_for_upper_threshold"
+      description: "filter by refreshed_at <= now - duration_for_upper_threshold"
     }
   ];
   google.protobuf.Duration duration_for_lower_threshold = 12 [
     (validate.rules).duration.required = false,
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "filter by time field (e.g. refreshed_at, updated_at) => now - duration_for_lower_threshold"
-    }
-  ];
-  string duration_comparison_by = 13 [
-    (validate.rules).string.ignore_empty = true,
-    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "comparison field for duration_for_upper_threshold and duration_for_lower_threshold, e.g. refreshed_at, updated_at"
+      description: "filter by refreshed_at => now - duration_for_lower_threshold"
     }
   ];
 }
