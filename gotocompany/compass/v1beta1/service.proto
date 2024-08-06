@@ -348,12 +348,13 @@ service CompassService {
 
   rpc DeleteAssets(DeleteAssetsRequest) returns (DeleteAssetsResponse) {
     option (google.api.http) = {
-      delete: "/v1beta1/assets"
+      post: "/v1beta1/assets/delete-by-query"
+      body: "*"
     };
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       summary: "Delete assets";
-      description: "Delete all assets that match with specified filter";
+      description: "Delete all assets that match with specified query expr";
       tags: [
         "Asset"
       ];
