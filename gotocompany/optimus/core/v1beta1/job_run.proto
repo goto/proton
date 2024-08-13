@@ -74,15 +74,14 @@ service JobRunService {
 message AreAllUpstreamRunsSuccessfulRequest {
   string job_name = 1;
   string project_name = 2;
-  string namespace_name = 3;
-  google.protobuf.Timestamp schedule_time = 4;
+  google.protobuf.Timestamp schedule_time = 3;
 
-  string upstream_job_name = 5;
-  string upstream_project_name = 6;
-  string upstream_namespace_name = 7;
-  string upstream_host = 8;
+  string upstream_job_name = 4;
+  string upstream_project_name = 5;
+  string upstream_namespace_name = 6;
+  string upstream_host = 7;
 
-  repeated string filter = 9;
+  repeated string filter = 8;
 }
 
 message AreAllUpstreamRunsSuccessfulResponse {
