@@ -792,6 +792,9 @@ message GetGrantResponse {
 message UpdateGrantRequest {
   string id = 1;
   string owner = 2;
+  optional bool is_permanent = 3;
+  optional google.protobuf.Timestamp expiration_date = 4;
+  optional string expiration_date_reason = 5;
 }
 
 message UpdateGrantResponse {
