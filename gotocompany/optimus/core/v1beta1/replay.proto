@@ -52,9 +52,9 @@ service ReplayService {
     };
   }
 
-  rpc GetReplayConfig(GetReplayConfigRequest) returns (GetReplayConfigResponse) {
+  rpc GetReplayDetails(GetReplayDetailsRequest) returns (GetReplayDetailsResponse) {
     option (google.api.http) = {
-      get: "/v1beta1/project/{project_name}/job/{job_name}/replay/config"
+      get: "/v1beta1/project/{project_name}/job/{job_name}/replay"
     };
   }
 }
@@ -134,13 +134,13 @@ message CancelReplayResponse {
   repeated ReplayRun replay_runs = 2;
 }
 
-
-message GetReplayConfigRequest {
+message GetReplayDetailsRequest {
   string job_name = 1;
   string project_name = 2;
   google.protobuf.Timestamp scheduled_at = 3;
+  string status = 4;
 }
 
-message GetReplayConfigResponse {
-  map<string, string> job_config = 1;
+message GetReplayDetailsResponse {
+  repeated GetReplayResponse replays = 1;
 }
