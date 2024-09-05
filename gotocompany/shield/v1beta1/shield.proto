@@ -1131,7 +1131,7 @@ message ListResourceOfUserGlobalRequest {
 }
 
 message ListResourceOfUserGlobalResponse {
-  repeated google.protobuf.Struct resources = 1;
+  google.protobuf.Struct resources = 1;
 }
 
 message Activity {
