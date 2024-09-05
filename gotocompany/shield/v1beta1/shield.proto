@@ -475,7 +475,7 @@ service ShieldService {
       get: "/v1beta1/users/{user_id}/resources",
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: "Public";
+      tags: "Resource";
       summary: "Get Resources with Authorized User Access";
     };
   }

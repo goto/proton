@@ -24,8 +24,8 @@ service PublicService {
       get: "/v1beta1/users/{user_id}/resources/{namespace}/{type}",
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: "Public";
-      summary: "Get Resources with Authorized Principal Access";
+      tags: "Resource";
+      summary: "Get Resources with Authorized User Access Under a Resource Type";
     };
   }
 }
