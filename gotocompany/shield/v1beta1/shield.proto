@@ -470,6 +470,16 @@ service ShieldService {
     };
   }
 
+  rpc ListResourceOfUserGlobal(ListResourceOfUserGlobalRequest) returns (ListResourceOfUserGlobalResponse) {
+    option (google.api.http) = {
+      get: "/v1beta1/users/{user_id}/resources",
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "Public";
+      summary: "Get Resources with Authorized User Access";
+    };
+  }
+
   // Authz
   rpc CheckResourcePermission(CheckResourcePermissionRequest) returns (CheckResourcePermissionResponse) {
     option (google.api.http) = {
@@ -1113,6 +1123,15 @@ message CheckResourceUserPermissionResponse {
     bool allowed = 4;
   }
   repeated ResourcePermissionResponse resource_permissions = 1;
+}
+
+message ListResourceOfUserGlobalRequest {
+  string user_id = 1;
+  repeated string types = 2;
+}
+
+message ListResourceOfUserGlobalResponse {
+  repeated google.protobuf.Struct resources = 1;
 }
 
 message Activity {

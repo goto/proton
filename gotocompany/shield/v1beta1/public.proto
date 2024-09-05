@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package gotocompany.shield.v1beta1;
+
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/protobuf/struct.proto";
+
+option go_package = "github.com/goto/proton/shield/v1;shieldv1beta1";
+option java_outer_classname = "Public";
+option java_package = "com.gotocompany.proton.shield.v1beta1";
+// These annotations are used when generating the OpenAPI file.
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "Public",
+    version: "0.1.0";
+  };
+  schemes: HTTP;
+};
+
+service PublicService {
+  rpc ListResourceOfUser(ListResourceOfUserRequest) returns (ListResourceOfUserResponse) {
+    option (google.api.http) = {
+      get: "/v1beta1/users/{user_id}/resources/{namespace}/{type}",
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "Public";
+      summary: "Get Resources with Authorized Principal Access";
+    };
+  }
+}
+
+message ListResourceOfUserRequest {
+  string user_id = 1;
+  string namespace = 2;
+  string type = 3;
+}
+
+message ListResourceOfUserResponse {
+  google.protobuf.Struct resources = 1;
+}
