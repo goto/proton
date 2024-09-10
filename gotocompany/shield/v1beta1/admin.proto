@@ -20,7 +20,8 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   schemes: HTTP;
 };
 
-service AdminService {
+// This is supposed to be admin service.
+service ShieldService {
   // Users
   rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {
     option (google.api.http) = {
@@ -470,13 +471,13 @@ service AdminService {
     };
   }
 
-  rpc ListUserResourcesGlobal(ListUserResourcesGlobalRequest) returns (ListUserResourcesGlobalResponse) {
+  rpc ListAllUserResources(ListAllUserResourcesRequest) returns (ListAllUserResourcesResponse) {
     option (google.api.http) = {
       get: "/v1beta1/users/{user_id}/resources",
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "Resource";
-      summary: "Get Resources with Authorized User Access";
+      summary: "Get Resources with Authorized User Access on Any Resource Type";
     };
   }
 
@@ -1125,12 +1126,12 @@ message CheckResourceUserPermissionResponse {
   repeated ResourcePermissionResponse resource_permissions = 1;
 }
 
-message ListUserResourcesGlobalRequest {
+message ListAllUserResourcesRequest {
   string user_id = 1;
   repeated string types = 2;
 }
 
-message ListUserResourcesGlobalResponse {
+message ListAllUserResourcesResponse {
   google.protobuf.Struct resources = 1;
 }
 

@@ -18,8 +18,9 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   schemes: HTTP;
 };
 
-service ShieldService {
-  rpc ListUserResources(ListUserResourcesRequest) returns (ListUserResourcesResponse) {
+// This is supposed to be shield service.
+service PublicService {
+  rpc ListUserResourcesByType(ListUserResourcesByTypeRequest) returns (ListUserResourcesByTypeResponse) {
     option (google.api.http) = {
       get: "/v1beta1/users/{user_id}/resources/{namespace}/{type}",
     };
@@ -30,12 +31,12 @@ service ShieldService {
   }
 }
 
-message ListUserResourcesRequest {
+message ListUserResourcesByTypeRequest {
   string user_id = 1;
   string namespace = 2;
   string type = 3;
 }
 
-message ListUserResourcesResponse {
+message ListUserResourcesByTypeResponse {
   google.protobuf.Struct resources = 1;
 }
