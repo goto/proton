@@ -85,4 +85,12 @@ message ProjectSpecification {
     string location = 7;
   }
   map<string, ProjectPreset> presets = 4;
+
+  repeated Location locations = 5;
+
+  message Location {
+    string name = 1;
+    string project = 2;
+    string dataset = 3;
+  }
 }
