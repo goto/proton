@@ -227,7 +227,7 @@ service ShieldService {
   rpc UpdateOrganization(UpdateOrganizationRequest) returns (UpdateOrganizationResponse) {
     option (google.api.http) = {
       put: "/v1beta1/organizations/{id}",
-      body: "*"
+      body: "body"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "Organization";
