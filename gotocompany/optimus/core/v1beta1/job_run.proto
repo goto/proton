@@ -134,7 +134,8 @@ message JobRunWithDetail {
 }
 
 message GetJobRunsResponse {
-  repeated JobRunWithDetail job_runs = 1;
+  reserved 1;
+  repeated JobRunWithDetail job_runs = 2;
 }
 
 message JobRunRequest {
