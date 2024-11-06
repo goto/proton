@@ -452,6 +452,7 @@ message JobSpecification {
       JobEvent.Type on = 1;
       repeated string channels = 2;
       map<string, string> config = 3;
+      string severity = 4;
     }
     repeated Notifiers notify = 2;
 
