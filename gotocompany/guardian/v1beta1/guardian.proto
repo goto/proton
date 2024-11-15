@@ -846,6 +846,11 @@ message PolicyConfig {
   int32 version = 2;
 }
 
+message PoliciesConfig {
+  string when = 1;
+  string policy = 2;
+}
+
 message ProviderConfig {
   string type = 1;
   string urn = 2;
@@ -873,6 +878,8 @@ message ProviderConfig {
     string description = 4;
   }
   repeated ProviderParameter parameters = 8;
+  repeated PoliciesConfig policies = 9;
+  string default_policy = 10;
 }
 
 // Provider contains information about external data provider such as BigQuery, Metabase, etc., credentials, policy, and allowed roles
