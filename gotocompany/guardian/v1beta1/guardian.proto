@@ -846,7 +846,7 @@ message PolicyConfig {
   int32 version = 2;
 }
 
-message PoliciesConfig {
+message ProviderPolicy {
   string when = 1;
   string policy = 2;
 }
@@ -878,7 +878,7 @@ message ProviderConfig {
     string description = 4;
   }
   repeated ProviderParameter parameters = 8;
-  repeated PoliciesConfig policies = 9;
+  repeated ProviderPolicy policies = 9;
   string default_policy = 10;
 }
 
