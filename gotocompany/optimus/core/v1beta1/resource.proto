@@ -4,6 +4,7 @@ package gotocompany.optimus.core.v1beta1;
 
 import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
 import "gotocompany/optimus/core/v1beta1/status.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
@@ -175,6 +176,12 @@ message ResourceStatus {
   string message = 3;
 }
 
+message Deprecation {
+  string reason = 1;
+  google.protobuf.Timestamp date = 2;
+  string replacement_table = 3;
+}
+
 // ResourceSpecification are datastore specification representation of a resource
 message ResourceSpecification {
   reserved 3; // depricated "datastore"
@@ -186,8 +193,9 @@ message ResourceSpecification {
   google.protobuf.Struct spec = 5;
   map<string, string> assets = 6;
   map<string, string> labels = 7;
-}
 
+  Deprecation deprecation = 8;
+}
 
 message ChangeResourceNamespaceRequest {
   string project_name = 1;
