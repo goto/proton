@@ -388,12 +388,6 @@ message ValidateRequest {
 }
 
 message ValidateResponse {
-  enum Level {
-    LEVEL_UNSPECIFIED = 0;
-    LEVEL_WARNING = 1;
-    LEVEL_ERROR = 2;
-  }
-
   message Result {
     string name = 1;
     repeated string messages = 2;
