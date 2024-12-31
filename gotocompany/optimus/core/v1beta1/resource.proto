@@ -128,8 +128,8 @@ message SyncExternalTablesRequest {
 }
 
 message SyncExternalTablesResponse {
-  bool success = 1;
-  string message = 2;
+  repeated string successfully_synced = 1;
+  string error = 2;
 }
 
 message ListResourceSpecificationResponse {
