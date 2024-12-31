@@ -124,7 +124,7 @@ message ListResourceSpecificationRequest {
 message SyncExternalTablesRequest {
   string project_name = 1;
   string namespace_name = 2;
-  string destination = 3;
+  string table_name = 3;
 }
 
 message SyncExternalTablesResponse {
