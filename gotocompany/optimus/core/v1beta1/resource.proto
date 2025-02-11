@@ -125,6 +125,7 @@ message SyncExternalTablesRequest {
   string project_name = 1;
   string namespace_name = 2;
   string table_name = 3;
+  bool force = 4;
 }
 
 message SyncExternalTablesResponse {
