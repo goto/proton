@@ -42,6 +42,13 @@ service JobRunService {
   }
 
   // CreateSchedulerRole creates a new role in the scheduler
+  rpc GetSchedulerRole(GetSchedulerRoleRequest) returns (GetSchedulerRoleResponse) {
+    option (google.api.http) = {
+      get: "/v1beta1/project/{project_name}/namespace/{namespace_name}/role"
+    };
+  }
+
+  // CreateSchedulerRole creates a new role in the scheduler
   rpc CreateSchedulerRole(CreateSchedulerRoleRequest) returns (CreateSchedulerRoleResponse) {
     option (google.api.http) = {
       post: "/v1beta1/project/{project_name}/namespace/{namespace_name}/role"
@@ -161,17 +168,24 @@ message JobRunResponse {
   string message = 2;
 }
 
+message GetSchedulerRoleRequest {
+  string project_name = 1;
+  string namespace_name = 2;
+  string role_name = 3;
+}
+
+message GetSchedulerRoleResponse {
+  repeated string permisions = 1;
+}
+
+
 message CreateSchedulerRoleRequest {
   string project_name = 1;
   string namespace_name = 2;
   string role_name = 3;
 }
 
-message CreateSchedulerRoleResponse {
-  bool status = 1;
-  string error_message = 2;
-}
-
+message CreateSchedulerRoleResponse {}
 
 message InstanceSpec {
   reserved 2, 4;
