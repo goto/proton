@@ -175,7 +175,7 @@ message GetSchedulerRoleRequest {
 }
 
 message GetSchedulerRoleResponse {
-  repeated string permisions = 1;
+  repeated string permissions = 1;
 }
 
 
