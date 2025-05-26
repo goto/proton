@@ -1165,7 +1165,9 @@ message DeleteAssetRequest {
   string id = 1;
 }
 
-message DeleteAssetResponse {}
+message DeleteAssetResponse {
+  string urn = 1;
+}
 
 message DeleteAssetsRequest {
   string query_expr = 1 [
