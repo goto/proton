@@ -740,6 +740,7 @@ message ListGrantsRequest {
     ignore_empty: true
   }];
   string q = 15;
+  google.protobuf.Timestamp created_at_gte = 16;
 }
 
 message ListGrantsResponse {
