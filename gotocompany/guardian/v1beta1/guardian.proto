@@ -702,28 +702,19 @@ message ListApprovalsResponse {
 }
 
 message GenerateUserApprovalsSummariesRequest {
-  repeated string statuses = 1;
-  bool stale = 2;
-  string role_patterns = 3;
-  string approver_step_names = 4;
+  map<string, SummaryItemRequest> summary_items = 1;
 }
 
 message GenerateUserApprovalsSummariesResponse {
-  map<string, ApprovalSummary> summaries = 1;
-  int32 total = 2;
+  Summaries summaries = 1;
 }
 
 message GenerateApprovalsSummariesRequest {
-  string created_by = 1;
-  repeated string statuses = 2;
-  bool stale = 3;
-  string role_patterns = 4;
-  string approver_step_names = 5;
+  map<string, SummaryItemRequest> summary_items = 1;
 }
 
 message GenerateApprovalsSummariesResponse {
-  map<string, ApprovalSummary> summaries = 1;
-  int32 total = 2;
+  Summaries summaries = 1;
 }
 
 message UpdateApprovalRequest {
@@ -1094,14 +1085,33 @@ message Approval {
   uint32 appeal_revision = 14;
 }
 
-message ApprovalSummary {
-  uint32 count = 1;
-  repeated ApprovalSummaryGroups groups = 2;
+message Summaries {
+  map<string, SummaryItemResponse> summary_items = 1;
+  int64 total = 2;
 }
 
-message ApprovalSummaryGroups {
-  uint32 count = 1;
-  map<string, string> group = 2;
+message SummaryItemRequest {
+  SummaryFilters filters = 1;
+  repeated string group_bys = 2;
+}
+
+message SummaryItemResponse {
+  SummaryFilters filters = 1;
+  repeated string group_bys = 2;
+  message GroupCount {
+    map<string, string> group = 1;
+    int64 count = 2;
+  }
+  repeated GroupCount groups = 3;
+  int64 count = 4;
+}
+
+message SummaryFilters {
+  repeated string statuses = 1;
+  string role_starts_with = 2;
+  string role_ends_with = 3;
+  string role_contains = 4;
+  repeated string approver_step_names = 5;
 }
 
 message AppealComment {
