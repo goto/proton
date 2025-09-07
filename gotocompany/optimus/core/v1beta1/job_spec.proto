@@ -490,10 +490,17 @@ message HttpDependency {
   map<string, string> params = 4;
 }
 
+message OperatorSLA {
+  google.protobuf.Duration duration = 1;
+  string severity = 2;
+  string team = 3;
+}
+
 message JobSpecTask {
   string name = 1;
-  string version = 3;
   repeated JobConfigItem config = 2;
+  string version = 3;
+  OperatorSLA sla = 4;
 }
 
 message JobSpecHook {
