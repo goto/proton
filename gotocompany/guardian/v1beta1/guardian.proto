@@ -1117,7 +1117,7 @@ message SummaryFilter {
   }
   message ApprovalSummaryFilter {
     repeated string statuses = 1;
-    repeated string step_name = 2;
+    repeated string step_names = 2;
   }
   message ApproverSummaryFilter {
     repeated string emails = 1;
