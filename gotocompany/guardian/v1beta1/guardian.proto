@@ -668,7 +668,7 @@ message ListUserApprovalsRequest {
   repeated string role_starts_with = 12;
   repeated string role_ends_with = 13;
   repeated string role_contains = 14;
-  repeated string approver_step_names = 15;
+  repeated string step_names = 15;
 }
 
 message ListUserApprovalsResponse {
@@ -697,7 +697,7 @@ message ListApprovalsRequest {
   repeated string role_starts_with = 12;
   repeated string role_ends_with = 13;
   repeated string role_contains = 14;
-  repeated string approver_step_names = 15;
+  repeated string step_names = 15;
 }
 
 message ListApprovalsResponse {
