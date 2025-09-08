@@ -1097,35 +1097,35 @@ message Summary {
     int64 total = 2;
   }
 
-  SummaryFilters filters = 1;
+  SummaryFilter filter = 1;
   repeated string group_bys = 2;
   map<string, SummaryGroups> groups = 3;
   int64 total = 4;
 }
 
 message SummaryRequest {
-  SummaryFilters filters = 1;
+  SummaryFilter filter = 1;
   repeated string group_bys = 2;
 }
 
-message SummaryFilters {
-  message AppealSummaryFilters {
+message SummaryFilter {
+  message AppealSummaryFilter {
     repeated string statuses = 1;
     repeated string role_starts_with = 2;
     repeated string role_ends_with = 3;
     repeated string role_contains = 4;
   }
-  message ApprovalsSummaryFilters {
+  message ApprovalsSummaryFilter {
     repeated string statuses = 1;
     repeated string step_name = 2;
   }
-  message ApproversSummaryFilters {
+  message ApproversSummaryFilter {
     repeated string emails = 1;
   }
 
-  AppealSummaryFilters appeal_filter = 1;
-  ApprovalsSummaryFilters approval_filter = 2;
-  ApproversSummaryFilters approvers_filter = 3;
+  AppealSummaryFilter appeal_filter = 1;
+  ApprovalsSummaryFilter approval_filter = 2;
+  ApproversSummaryFilter approvers_filter = 3;
 }
 
 message AppealComment {
