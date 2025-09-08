@@ -1091,15 +1091,15 @@ message Approval {
   uint32 appeal_revision = 14;
 }
 
-message SummaryGroup {
-  map<string, string> group = 1;
-  int64 total = 2;
-}
-
 message Summary {
+  message SummaryGroup {
+    map<string, string> group = 1;
+    int64 total = 2;
+  }
+  
   SummaryFilters filters = 1;
   repeated string group_bys = 2;
-  map<string, string> summary_groups = 3;
+  map<string, SummaryGroup> summary_groups = 3;
   int64 total = 4;
 }
 
