@@ -1099,7 +1099,7 @@ message Summary {
 
   SummaryFilters filters = 1;
   repeated string group_bys = 2;
-  map<string, SummaryGroups> summary_groups = 3;
+  map<string, SummaryGroups> groups = 3;
   int64 total = 4;
 }
 
