@@ -1115,17 +1115,17 @@ message SummaryFilter {
     repeated string role_ends_with = 3;
     repeated string role_contains = 4;
   }
-  message ApprovalsSummaryFilter {
+  message ApprovalSummaryFilter {
     repeated string statuses = 1;
     repeated string step_name = 2;
   }
-  message ApproversSummaryFilter {
+  message ApproverSummaryFilter {
     repeated string emails = 1;
   }
 
   AppealSummaryFilter appeal_filter = 1;
-  ApprovalsSummaryFilter approval_filter = 2;
-  ApproversSummaryFilter approvers_filter = 3;
+  ApprovalSummaryFilter approval_filter = 2;
+  ApproverSummaryFilter approver_filter = 3;
 }
 
 message AppealComment {
