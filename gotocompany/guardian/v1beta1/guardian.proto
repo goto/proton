@@ -1174,14 +1174,14 @@ message ProviderActivity {
 
 // Summary is global interface to summarize the implementor
 message Summary {
-  message SummaryGroups {
-    map<string, string> group = 1;
+  message SummaryGroup {
+    map<string, string> groups = 1;
     int64 total = 2;
   }
 
   SummaryFilter filter = 1;
   repeated string group_bys = 2;
-  map<string, SummaryGroups> groups = 3;
+  repeated SummaryGroup summary_groups = 3;
   int64 total = 4;
 }
 
