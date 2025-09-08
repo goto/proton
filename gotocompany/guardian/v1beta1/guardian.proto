@@ -665,8 +665,10 @@ message ListUserApprovalsRequest {
   repeated string account_types = 9;
   repeated string resource_types = 10;
   bool stale = 11;
-  string role_patterns = 12;
-  string approver_step_names = 13;
+  repeated string role_starts_with = 12;
+  repeated string role_ends_with = 13;
+  repeated string role_contains = 14;
+  repeated string approver_step_names = 15;
 }
 
 message ListUserApprovalsResponse {
@@ -692,8 +694,10 @@ message ListApprovalsRequest {
   repeated string account_types = 9;
   repeated string resource_types = 10;
   bool stale = 11;
-  string role_patterns = 12;
-  string approver_step_names = 13;
+  repeated string role_starts_with = 12;
+  repeated string role_ends_with = 13;
+  repeated string role_contains = 14;
+  repeated string approver_step_names = 15;
 }
 
 message ListApprovalsResponse {
@@ -1107,9 +1111,9 @@ message SummaryItemRequest {
 
 message SummaryFilters {
   repeated string statuses = 1;
-  string role_starts_with = 2;
-  string role_ends_with = 3;
-  string role_contains = 4;
+  repeated string role_starts_with = 2;
+  repeated string role_ends_with = 3;
+  repeated string role_contains = 4;
   repeated string approver_step_names = 5;
 }
 
