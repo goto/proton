@@ -1202,7 +1202,7 @@ message SummaryFilter {
     repeated string step_names = 2;
   }
   message ApproverSummaryFilter {
-    repeated string emails = 1;
+    string email = 1;
   }
 
   AppealSummaryFilter appeal_filter = 1;
