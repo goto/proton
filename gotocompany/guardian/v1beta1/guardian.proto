@@ -1093,7 +1093,7 @@ message Approval {
 
 message Summary {
   message SummaryGroups {
-    map<string, string> groups = 1;
+    map<string, string> group = 1;
     int64 total = 2;
   }
 
