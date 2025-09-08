@@ -1092,14 +1092,14 @@ message Approval {
 }
 
 message Summary {
-  message SummaryItems {
+  message SummaryGroups {
     map<string, string> groups = 1;
     int64 total = 2;
   }
 
   SummaryFilters filters = 1;
   repeated string group_bys = 2;
-  map<string, SummaryItems> summary_items = 3;
+  map<string, SummaryGroups> summary_groups = 3;
   int64 total = 4;
 }
 
