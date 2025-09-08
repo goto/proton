@@ -1086,24 +1086,23 @@ message Approval {
 }
 
 message Summaries {
-  map<string, SummaryItemResponse> summary_items = 1;
+  message Response {
+    SummaryFilters filters = 1;
+    repeated string group_bys = 2;
+    message GroupCount {
+      map<string, string> group = 1;
+      int64 count = 2;
+    }
+    repeated GroupCount groups = 3;
+    int64 count = 4;
+  }
+  map<string, Response> summary_items = 1;
   int64 total = 2;
 }
 
 message SummaryItemRequest {
   SummaryFilters filters = 1;
   repeated string group_bys = 2;
-}
-
-message SummaryItemResponse {
-  SummaryFilters filters = 1;
-  repeated string group_bys = 2;
-  message GroupCount {
-    map<string, string> group = 1;
-    int64 count = 2;
-  }
-  repeated GroupCount groups = 3;
-  int64 count = 4;
 }
 
 message SummaryFilters {
