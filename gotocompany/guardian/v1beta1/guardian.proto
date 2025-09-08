@@ -1091,43 +1091,6 @@ message Approval {
   uint32 appeal_revision = 14;
 }
 
-message Summary {
-  message SummaryGroups {
-    map<string, string> group = 1;
-    int64 total = 2;
-  }
-
-  SummaryFilter filter = 1;
-  repeated string group_bys = 2;
-  map<string, SummaryGroups> groups = 3;
-  int64 total = 4;
-}
-
-message SummaryRequest {
-  SummaryFilter filter = 1;
-  repeated string group_bys = 2;
-}
-
-message SummaryFilter {
-  message AppealSummaryFilter {
-    repeated string statuses = 1;
-    repeated string role_starts_with = 2;
-    repeated string role_ends_with = 3;
-    repeated string role_contains = 4;
-  }
-  message ApprovalSummaryFilter {
-    repeated string statuses = 1;
-    repeated string step_names = 2;
-  }
-  message ApproverSummaryFilter {
-    repeated string emails = 1;
-  }
-
-  AppealSummaryFilter appeal_filter = 1;
-  ApprovalSummaryFilter approval_filter = 2;
-  ApproverSummaryFilter approver_filter = 3;
-}
-
 message AppealComment {
   string id = 1;
   string appeal_id = 2;
@@ -1207,4 +1170,42 @@ message ProviderActivity {
   Resource resource = 12;
   string provider_activity_id = 13;
   repeated string related_permissions = 14;
+}
+
+// Summary is global interface to summarize the implementor
+message Summary {
+  message SummaryGroups {
+    map<string, string> group = 1;
+    int64 total = 2;
+  }
+
+  SummaryFilter filter = 1;
+  repeated string group_bys = 2;
+  map<string, SummaryGroups> groups = 3;
+  int64 total = 4;
+}
+
+message SummaryRequest {
+  SummaryFilter filter = 1;
+  repeated string group_bys = 2;
+}
+
+message SummaryFilter {
+  message AppealSummaryFilter {
+    repeated string statuses = 1;
+    repeated string role_starts_with = 2;
+    repeated string role_ends_with = 3;
+    repeated string role_contains = 4;
+  }
+  message ApprovalSummaryFilter {
+    repeated string statuses = 1;
+    repeated string step_names = 2;
+  }
+  message ApproverSummaryFilter {
+    repeated string emails = 1;
+  }
+
+  AppealSummaryFilter appeal_filter = 1;
+  ApprovalSummaryFilter approval_filter = 2;
+  ApproverSummaryFilter approver_filter = 3;
 }
