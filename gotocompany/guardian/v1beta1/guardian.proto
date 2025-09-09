@@ -1196,6 +1196,7 @@ message SummaryFilter {
     repeated string role_starts_with = 2;
     repeated string role_ends_with = 3;
     repeated string role_contains = 4;
+    repeated string account_types = 5;
   }
   message ApprovalsSummaryFilter {
     repeated string statuses = 1;
