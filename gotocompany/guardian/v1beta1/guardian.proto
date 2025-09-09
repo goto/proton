@@ -1191,21 +1191,21 @@ message SummaryRequest {
 }
 
 message SummaryFilter {
-  message AppealSummaryFilter {
+  message AppealsSummaryFilter {
     repeated string statuses = 1;
     repeated string role_starts_with = 2;
     repeated string role_ends_with = 3;
     repeated string role_contains = 4;
   }
-  message ApprovalSummaryFilter {
+  message ApprovalsSummaryFilter {
     repeated string statuses = 1;
     repeated string step_names = 2;
   }
-  message ApproverSummaryFilter {
+  message ApproversSummaryFilter {
     string email = 1;
   }
 
-  AppealSummaryFilter appeal_filter = 1;
-  ApprovalSummaryFilter approval_filter = 2;
-  ApproverSummaryFilter approver_filter = 3;
+  AppealsSummaryFilter appeals_filter = 1;
+  ApprovalsSummaryFilter approvals_filter = 2;
+  ApproversSummaryFilter approvers_filter = 3;
 }
