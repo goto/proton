@@ -711,7 +711,7 @@ message GenerateListUserApprovalsSummariesRequest {
 
 message GenerateListUserApprovalsSummariesResponse {
   map<string, Summary> summaries = 1;
-  int64 total = 2;
+  int32 total = 2;
 }
 
 message GenerateListApprovalsSummariesRequest {
@@ -720,7 +720,7 @@ message GenerateListApprovalsSummariesRequest {
 
 message GenerateListApprovalsSummariesResponse {
   map<string, Summary> summaries = 1;
-  int64 total = 2;
+  int32 total = 2;
 }
 
 message UpdateApprovalRequest {
@@ -1176,13 +1176,13 @@ message ProviderActivity {
 message Summary {
   message SummaryGroup {
     map<string, string> groups = 1;
-    int64 total = 2;
+    int32 total = 2;
   }
 
   SummaryFilter filter = 1;
   repeated string group_bys = 2;
   repeated SummaryGroup summary_groups = 3;
-  int64 total = 4;
+  int32 total = 4;
 }
 
 message SummaryRequest {
