@@ -1201,6 +1201,7 @@ message SummaryFilter {
   message ApprovalsSummaryFilter {
     repeated string statuses = 1;
     repeated string step_names = 2;
+    bool stale = 3;
   }
   message ApproversSummaryFilter {
     string email = 1;
