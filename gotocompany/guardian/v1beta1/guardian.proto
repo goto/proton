@@ -212,14 +212,14 @@ service GuardianService {
     };
   }
 
-  rpc GenerateListUserApprovalsSummaries(GenerateListUserApprovalsSummariesRequest) returns (GenerateListUserApprovalsSummariesResponse) {
+  rpc GenerateUserApprovalsSummaries(GenerateUserApprovalsSummariesRequest) returns (GenerateUserApprovalsSummariesResponse) {
     option (google.api.http) = {
       post: "/v1beta1/me/approvals/summaries"
       body: "*"
     };
   }
 
-  rpc GenerateListApprovalsSummaries(GenerateListApprovalsSummariesRequest) returns (GenerateListApprovalsSummariesResponse) {
+  rpc GenerateApprovalsSummaries(GenerateApprovalsSummariesRequest) returns (GenerateApprovalsSummariesResponse) {
     option (google.api.http) = {
       post: "/v1beta1/approvals/summaries"
       body: "*"
@@ -665,9 +665,9 @@ message ListUserApprovalsRequest {
   repeated string account_types = 9;
   repeated string resource_types = 10;
   bool stale = 11;
-  repeated string role_starts_with = 12;
-  repeated string role_ends_with = 13;
-  repeated string role_contains = 14;
+  string role_starts_with = 12;
+  string role_ends_with = 13;
+  string role_contains = 14;
   repeated string step_names = 15;
 }
 
@@ -694,9 +694,9 @@ message ListApprovalsRequest {
   repeated string account_types = 9;
   repeated string resource_types = 10;
   bool stale = 11;
-  repeated string role_starts_with = 12;
-  repeated string role_ends_with = 13;
-  repeated string role_contains = 14;
+  string role_starts_with = 12;
+  string role_ends_with = 13;
+  string role_contains = 14;
   repeated string step_names = 15;
 }
 
@@ -705,21 +705,21 @@ message ListApprovalsResponse {
   int32 total = 2;
 }
 
-message GenerateListUserApprovalsSummariesRequest {
-  map<string, SummaryRequest> requests = 1;
+message GenerateUserApprovalsSummariesRequest {
+  map<string, SummaryParameters> summary_items = 1;
 }
 
-message GenerateListUserApprovalsSummariesResponse {
-  map<string, Summary> summaries = 1;
+message GenerateUserApprovalsSummariesResponse {
+  map<string, SummaryResult> summary_items = 1;
   int32 total = 2;
 }
 
-message GenerateListApprovalsSummariesRequest {
-  map<string, SummaryRequest> requests = 1;
+message GenerateApprovalsSummariesRequest {
+  map<string, SummaryParameters> summary_items = 1;
 }
 
-message GenerateListApprovalsSummariesResponse {
-  map<string, Summary> summaries = 1;
+message GenerateApprovalsSummariesResponse {
+  map<string, SummaryResult> summary_items = 1;
   int32 total = 2;
 }
 
@@ -1173,41 +1173,18 @@ message ProviderActivity {
 }
 
 // Summary is global interface to summarize the implementor
-message Summary {
-  message SummaryGroup {
-    map<string, string> groups = 1;
+message SummaryParameters {
+  map<string, google.protobuf.Value> filters = 1;
+  repeated string group_bys = 2;
+}
+
+message SummaryResult {
+  message Group {
+    map<string, google.protobuf.Value> group_fields = 1;
     int32 total = 2;
   }
 
-  SummaryFilter filter = 1;
-  repeated string group_bys = 2;
-  repeated SummaryGroup summary_groups = 3;
-  int32 total = 4;
-}
-
-message SummaryRequest {
-  SummaryFilter filter = 1;
-  repeated string group_bys = 2;
-}
-
-message SummaryFilter {
-  message AppealsSummaryFilter {
-    repeated string statuses = 1;
-    repeated string role_starts_with = 2;
-    repeated string role_ends_with = 3;
-    repeated string role_contains = 4;
-    repeated string account_types = 5;
-  }
-  message ApprovalsSummaryFilter {
-    repeated string statuses = 1;
-    repeated string step_names = 2;
-    bool stale = 3;
-  }
-  message ApproversSummaryFilter {
-    string email = 1;
-  }
-
-  AppealsSummaryFilter appeals_filter = 1;
-  ApprovalsSummaryFilter approvals_filter = 2;
-  ApproversSummaryFilter approvers_filter = 3;
+  SummaryParameters applied_parameters = 1;
+  repeated Group groups = 2;
+  int32 total = 3;
 }
