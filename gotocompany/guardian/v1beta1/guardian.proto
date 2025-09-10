@@ -212,14 +212,14 @@ service GuardianService {
     };
   }
 
-  rpc GenerateUserApprovalsSummaries(GenerateUserApprovalsSummariesRequest) returns (GenerateUserApprovalsSummariesResponse) {
+  rpc GenerateUserApprovalSummaries(GenerateUserApprovalSummariesRequest) returns (GenerateUserApprovalSummariesResponse) {
     option (google.api.http) = {
       post: "/v1beta1/me/approvals/summaries"
       body: "*"
     };
   }
 
-  rpc GenerateApprovalsSummaries(GenerateApprovalsSummariesRequest) returns (GenerateApprovalsSummariesResponse) {
+  rpc GenerateApprovalSummaries(GenerateApprovalSummariesRequest) returns (GenerateApprovalSummariesResponse) {
     option (google.api.http) = {
       post: "/v1beta1/approvals/summaries"
       body: "*"
@@ -705,20 +705,20 @@ message ListApprovalsResponse {
   int32 total = 2;
 }
 
-message GenerateUserApprovalsSummariesRequest {
+message GenerateUserApprovalSummariesRequest {
   map<string, SummaryParameters> summary_items = 1;
 }
 
-message GenerateUserApprovalsSummariesResponse {
+message GenerateUserApprovalSummariesResponse {
   map<string, SummaryResult> summary_items = 1;
   int32 total = 2;
 }
 
-message GenerateApprovalsSummariesRequest {
+message GenerateApprovalSummariesRequest {
   map<string, SummaryParameters> summary_items = 1;
 }
 
-message GenerateApprovalsSummariesResponse {
+message GenerateApprovalSummariesResponse {
   map<string, SummaryResult> summary_items = 1;
   int32 total = 2;
 }
