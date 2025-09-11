@@ -711,7 +711,6 @@ message GenerateUserApprovalSummariesRequest {
 
 message GenerateUserApprovalSummariesResponse {
   map<string, SummaryResult> summary_items = 1;
-  int32 total = 2;
 }
 
 message GenerateApprovalSummariesRequest {
@@ -720,7 +719,6 @@ message GenerateApprovalSummariesRequest {
 
 message GenerateApprovalSummariesResponse {
   map<string, SummaryResult> summary_items = 1;
-  int32 total = 2;
 }
 
 message UpdateApprovalRequest {
@@ -1181,10 +1179,10 @@ message SummaryParameters {
 message SummaryResult {
   message Group {
     map<string, google.protobuf.Value> group_fields = 1;
-    int32 total = 2;
+    int32 count = 2;
   }
 
   SummaryParameters applied_parameters = 1;
   repeated Group groups = 2;
-  int32 total = 3;
+  int32 count = 3;
 }
