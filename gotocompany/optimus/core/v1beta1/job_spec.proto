@@ -491,7 +491,7 @@ message HttpDependency {
 }
 
 message SLAMissAlertConfig {
-  string duration_threshold = 1;
+  google.protobuf.Duration duration_threshold = 1;
   string severity = 2;
 }
 
