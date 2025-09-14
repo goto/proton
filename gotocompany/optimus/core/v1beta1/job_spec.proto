@@ -392,6 +392,7 @@ message ValidateResponse {
     string name = 1;
     repeated string messages = 2;
     bool success = 3;
+    optional Level level = 4;
   }
 
   message ResultList {
