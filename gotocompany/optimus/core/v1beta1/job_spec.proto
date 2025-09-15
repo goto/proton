@@ -528,6 +528,7 @@ message JobSpecHook {
   string name = 1;
   repeated JobConfigItem config = 2;
   string version = 3;
+  OperatorAlertConfig alert = 4;
 }
 
 message JobConfigItem {
