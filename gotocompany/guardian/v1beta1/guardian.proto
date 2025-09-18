@@ -1157,6 +1157,8 @@ message Resource {
   string parent_id = 12;
   repeated Resource children = 13;
   string global_urn = 14;
+  string group_id = 15;
+  string group_type = 16;
 }
 
 message Grant {
