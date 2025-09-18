@@ -480,6 +480,8 @@ message ListResourcesRequest {
   }];
   repeated string order_by = 10;
   string q = 11;
+  repeated string group_ids = 12;
+  repeated string group_types = 13;
 }
 
 message ListResourcesResponse {
