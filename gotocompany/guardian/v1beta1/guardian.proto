@@ -696,7 +696,7 @@ message ListUserApprovalsRequest {
   repeated string step_names = 15;
   repeated string provider_types = 16;
   repeated string provider_urns = 17;
-  repeated string approval_actor = 18;
+  repeated string actors = 18;
 }
 
 message ListUserApprovalsResponse {
