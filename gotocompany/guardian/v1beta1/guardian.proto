@@ -118,6 +118,13 @@ service GuardianService {
     };
   }
 
+  rpc CreateResource(CreateResourceRequest) returns (CreateResourceResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/resources"
+      body: "resource"
+    };
+  }
+
   rpc ListResources(ListResourcesRequest) returns (ListResourcesResponse) {
     option (google.api.http) = {
       get: "/v1beta1/resources"
@@ -209,6 +216,20 @@ service GuardianService {
   rpc ListApprovals(ListApprovalsRequest) returns (ListApprovalsResponse) {
     option (google.api.http) = {
       get: "/v1beta1/approvals"
+    };
+  }
+
+  rpc GenerateUserApprovalSummaries(GenerateUserApprovalSummariesRequest) returns (GenerateUserApprovalSummariesResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/me/approvals/summaries"
+      body: "*"
+    };
+  }
+
+  rpc GenerateApprovalSummaries(GenerateApprovalSummariesRequest) returns (GenerateApprovalSummariesResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/approvals/summaries"
+      body: "*"
     };
   }
 
@@ -433,6 +454,14 @@ message UpdatePolicyResponse {
   Policy policy = 1;
 }
 
+message CreateResourceRequest {
+  Resource resource = 1;
+}
+
+message CreateResourceResponse {
+  Resource resource = 1;
+}
+
 message ListResourcesRequest {
   bool is_deleted = 1;
   string provider_type = 2;
@@ -451,6 +480,8 @@ message ListResourcesRequest {
   }];
   repeated string order_by = 10;
   string q = 11;
+  repeated string group_ids = 12;
+  repeated string group_types = 13;
 }
 
 message ListResourcesResponse {
@@ -499,6 +530,8 @@ message ListUserAppealsRequest {
   }];
   string q = 10;
   repeated string account_types = 11;
+  repeated string group_ids = 12;
+  repeated string group_types = 13;
 }
 
 message ListUserAppealsResponse {
@@ -526,6 +559,8 @@ message ListAppealsRequest {
   }];
   string q = 12;
   repeated string account_types = 13;
+  repeated string group_ids = 14;
+  repeated string group_types = 15;
 }
 
 message ListAppealsResponse {
@@ -583,10 +618,16 @@ message CreateAppealRequest {
     string role = 2;
     google.protobuf.Struct options = 3;
     google.protobuf.Struct details = 4;
+    string group_id = 5;
+    string group_type = 6;
   }
   repeated Resource resources = 2;
   string account_type = 3;
   string description = 4;
+  reserved 5;
+  reserved "group_id";
+  reserved 6;
+  reserved "group_type";
 }
 
 message PatchAppealRequest {
@@ -651,6 +692,13 @@ message ListUserApprovalsRequest {
   repeated string account_types = 9;
   repeated string resource_types = 10;
   bool stale = 11;
+  string role_starts_with = 12;
+  string role_ends_with = 13;
+  string role_contains = 14;
+  repeated string step_names = 15;
+  repeated string provider_types = 16;
+  repeated string provider_urns = 17;
+  repeated string actors = 18;
 }
 
 message ListUserApprovalsResponse {
@@ -676,11 +724,34 @@ message ListApprovalsRequest {
   repeated string account_types = 9;
   repeated string resource_types = 10;
   bool stale = 11;
+  string role_starts_with = 12;
+  string role_ends_with = 13;
+  string role_contains = 14;
+  repeated string step_names = 15;
+  repeated string provider_types = 16;
+  repeated string provider_urns = 17;
+  repeated string actors = 18;
 }
 
 message ListApprovalsResponse {
   repeated Approval approvals = 1;
   int32 total = 2;
+}
+
+message GenerateUserApprovalSummariesRequest {
+  map<string, SummaryParameters> summary_items = 1;
+}
+
+message GenerateUserApprovalSummariesResponse {
+  map<string, SummaryResult> summary_items = 1;
+}
+
+message GenerateApprovalSummariesRequest {
+  map<string, SummaryParameters> summary_items = 1;
+}
+
+message GenerateApprovalSummariesResponse {
+  map<string, SummaryResult> summary_items = 1;
 }
 
 message UpdateApprovalRequest {
@@ -740,6 +811,9 @@ message ListGrantsRequest {
     ignore_empty: true
   }];
   string q = 15;
+  repeated string group_ids = 16;
+  repeated string group_types = 17;
+  bool with_approvals = 18;
 }
 
 message ListGrantsResponse {
@@ -767,6 +841,8 @@ message ListUserGrantsRequest {
     ignore_empty: true
   }];
   string q = 13;
+  repeated string group_ids = 14;
+  repeated string group_types = 15;
 }
 
 message ListUserGrantsResponse {
@@ -924,7 +1000,7 @@ message PolicyAppealConfig {
   }
   repeated Question questions = 5;
   bool allow_creator_details_failure = 6;
-  
+
   message MetadataSource {
     string name = 1;
     string description = 2;
@@ -996,6 +1072,12 @@ message Policy {
   IAM iam = 9;
 
   PolicyAppealConfig appeal = 10;
+
+  message CustomSteps {
+    string type = 1;
+    google.protobuf.Value config = 2;
+  }
+  CustomSteps custom_steps =  11;
 }
 
 message AppealOptions {
@@ -1031,6 +1113,8 @@ message Appeal {
   Grant grant = 22;
   string description = 23;
   uint32 revision = 24;
+  string group_id = 25;
+  string group_type = 26;
 }
 
 // Approval is an approval item that generated in an appeal based on the selected policy
@@ -1084,6 +1168,8 @@ message Resource {
   string parent_id = 12;
   repeated Resource children = 13;
   string global_urn = 14;
+  string group_id = 15;
+  string group_type = 16;
 }
 
 message Grant {
@@ -1113,6 +1199,8 @@ message Grant {
   string restore_reason = 23;
   string restored_by = 24;
   google.protobuf.Timestamp restored_at = 25;
+  string group_id = 26;
+  string group_type = 27;
 }
 
 message ProviderActivity {
@@ -1130,4 +1218,21 @@ message ProviderActivity {
   Resource resource = 12;
   string provider_activity_id = 13;
   repeated string related_permissions = 14;
+}
+
+// Summary is global interface to summarize the implementor
+message SummaryParameters {
+  map<string, google.protobuf.Value> filters = 1;
+  repeated string group_bys = 2;
+}
+
+message SummaryResult {
+  message Group {
+    map<string, google.protobuf.Value> group_fields = 1;
+    int32 count = 2;
+  }
+
+  SummaryParameters applied_parameters = 1;
+  repeated Group groups = 2;
+  int32 count = 3;
 }
