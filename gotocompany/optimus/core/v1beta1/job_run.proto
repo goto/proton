@@ -86,7 +86,8 @@ service JobRunService {
   // GetJobRunLineageSummary gets the summary of a specific job run execution & all its upstream dependencies.
   rpc GetJobRunLineageSummary(GetJobRunLineageSummaryRequest) returns (GetJobRunLineageSummaryResponse) {
     option (google.api.http) = {
-      get: "/v1beta1/job-run-lineage-summary"
+      post: "/v1beta1/job-run-lineage-summary"
+      body: "*"
     };
   }
 }
