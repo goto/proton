@@ -83,10 +83,10 @@ service JobRunService {
     };
   }
 
-  // TriggerPotentialSLABreach notifies optimus service about potential SLA breach for given job(s)
-  rpc TriggerPotentialSLABreach(TriggerPotentialSLABreachRequest) returns (TriggerPotentialSLABreachResponse) {
+  // IdentifyPotentialSLABreach notifies optimus service about potential SLA breach for given job(s)
+  rpc IdentifyPotentialSLABreach(IdentifyPotentialSLABreachRequest) returns (IdentifyPotentialSLABreachResponse) {
     option (google.api.http) = {
-      post: "/v1beta1/project/{project_name}/potential_sla_breach/trigger"
+      post: "/v1beta1/project/{project_name}/potential_sla_breach/identify"
       body: "*"
     };
   }
@@ -195,13 +195,15 @@ message CreateSchedulerRoleRequest {
 
 message CreateSchedulerRoleResponse {}
 
-message TriggerPotentialSLABreachRequest {
+message IdentifyPotentialSLABreachRequest {
   string project_name = 1;
-  repeated PotentialSLABreachJobTarget job_targets = 2;
-  repeated PotentialSLABreachJobTargetByLabel job_target_labels = 3;
+  repeated string job_names = 2;
+  repeated PotentialSLABreachByLabel job_labels = 3;
+  int32 next_scheduled_range_in_hours = 4;
+  bool alert_on_breach = 5;
 }
 
-message TriggerPotentialSLABreachResponse {
+message IdentifyPotentialSLABreachResponse {
   map<string, PotentialSLABreachJobs> jobs = 1;
 }
 
@@ -254,19 +256,11 @@ message TaskWindow {
   string truncate_to = 3;
 }
 
-message PotentialSLABreachJobTarget {
-  string job_name = 1;
-  google.protobuf.Timestamp scheduled_at = 2;
-  google.protobuf.Timestamp targeted_sla_time = 3;
-}
-
-message PotentialSLABreachJobTargetByLabel {
+message PotentialSLABreachByLabel {
   map<string, string> labels = 1;
-  google.protobuf.Timestamp scheduled_at = 2;
-  google.protobuf.Timestamp targeted_sla_time = 3;
 }
 
-message PotentialSLABreachJob {
+message UpstreamJobStatus {
   string project_name = 1;
   string job_name = 2;
   google.protobuf.Timestamp inferred_sla_time = 3;
@@ -275,5 +269,5 @@ message PotentialSLABreachJob {
 }
 
 message PotentialSLABreachJobs {
-  repeated PotentialSLABreachJob jobs = 1;
+  repeated UpstreamJobStatus upstream_jobs = 1;
 }
