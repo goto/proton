@@ -272,12 +272,8 @@ message JobExecutionSummary {
 }
 
 message JobRunSummary {
-<<<<<<< HEAD
   google.protobuf.Timestamp scheduled_at = 1;
   google.protobuf.Timestamp sla_time = 2;
-=======
-  google.protobuf.Timestamp scheduled_at = 2;
->>>>>>> 46c664e (feat: add GetJobRunLineageSummary proto)
   google.protobuf.Timestamp job_start_time = 3;
   google.protobuf.Timestamp job_end_time = 4;
   google.protobuf.Timestamp wait_start_time = 5;
