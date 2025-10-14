@@ -817,7 +817,7 @@ message ListGrantsRequest {
   repeated string group_types = 17;
   bool with_approvals = 18;
   bool with_summaries = 19;
-  bool summary_group_bys = 20;
+  repeated string summary_group_bys = 20;
 }
 
 message ListGrantsResponse {
