@@ -823,6 +823,7 @@ message ListGrantsRequest {
 message ListGrantsResponse {
   repeated Grant grants = 1;
   int32 total = 2;
+  map<string, SummaryResult> summary_items = 3;
 }
 
 message ListUserGrantsRequest {
@@ -847,11 +848,14 @@ message ListUserGrantsRequest {
   string q = 13;
   repeated string group_ids = 14;
   repeated string group_types = 15;
+  bool with_summaries = 16;
+  repeated string summary_group_bys = 27;
 }
 
 message ListUserGrantsResponse {
   repeated Grant grants = 1;
   int32 total = 2;
+  map<string, SummaryResult> summary_items = 3;
 }
 
 message ListUserRolesRequest {
