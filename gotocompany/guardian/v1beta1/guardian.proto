@@ -823,7 +823,7 @@ message ListGrantsRequest {
 message ListGrantsResponse {
   repeated Grant grants = 1;
   int32 total = 2;
-  map<string, SummaryResult> summary_items = 3;
+  SummaryResult summary = 3;
 }
 
 message ListUserGrantsRequest {
@@ -855,7 +855,7 @@ message ListUserGrantsRequest {
 message ListUserGrantsResponse {
   repeated Grant grants = 1;
   int32 total = 2;
-  map<string, SummaryResult> summary_items = 3;
+  SummaryResult summary = 3;
 }
 
 message ListUserRolesRequest {
