@@ -817,8 +817,9 @@ message ListGrantsRequest {
   repeated string group_types = 17;
   bool with_approvals = 18;
   uint32 expiring_in_days = 19;
-  bool with_summary = 20;
-  repeated string summary_group_bys = 21;
+  bool hide_inactive_with_active = 20;
+  bool with_summary = 21;
+  repeated string summary_group_bys = 22;
 }
 
 message ListGrantsResponse {
@@ -850,8 +851,9 @@ message ListUserGrantsRequest {
   repeated string group_ids = 14;
   repeated string group_types = 15;
   uint32 expiring_in_days = 16;
-  bool with_summary = 17;
-  repeated string summary_group_bys = 18;
+  bool hide_inactive_with_active = 17;
+  bool with_summary = 18;
+  repeated string summary_group_bys = 19;
 }
 
 message ListUserGrantsResponse {
