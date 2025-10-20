@@ -819,8 +819,8 @@ message ListGrantsRequest {
   bool omit_grants = 19;
   uint32 expiring_in_days = 20;
   bool hide_inactive_with_active = 21;
-  bool with_summary = 22;
-  repeated string summary_group_bys = 23;
+  repeated string summary_group_bys = 22;
+  repeated string summary_uniques = 23;
 }
 
 message ListGrantsResponse {
@@ -854,8 +854,8 @@ message ListUserGrantsRequest {
   bool omit_grants = 16;
   uint32 expiring_in_days = 17;
   bool hide_inactive_with_active = 18;
-  bool with_summary = 19;
-  repeated string summary_group_bys = 20;
+  repeated string summary_group_bys = 19;
+  repeated string summary_uniques = 20;
 }
 
 message ListUserGrantsResponse {
@@ -1245,8 +1245,15 @@ message SummaryResult {
     map<string, google.protobuf.Value> group_fields = 1;
     int32 count = 2;
   }
+  
+  message Unique {
+    string field = 1;
+    repeated google.protobuf.Value values = 2;
+    int32 count = 3;
+  }
 
   SummaryParameters applied_parameters = 1;
   repeated Group groups = 2;
   int32 count = 3;
+  repeated Unique uniques = 4;
 }
