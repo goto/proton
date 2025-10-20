@@ -1245,7 +1245,7 @@ message SummaryResult {
     map<string, google.protobuf.Value> group_fields = 1;
     int32 count = 2;
   }
-  
+
   message Unique {
     string field = 1;
     repeated google.protobuf.Value values = 2;
@@ -1254,6 +1254,8 @@ message SummaryResult {
 
   SummaryParameters applied_parameters = 1;
   repeated Group groups = 2;
-  int32 count = 3;
+  int32 count = 3; // deprecated
   repeated Unique uniques = 4;
+  int32 groups_count = 5;
+  int32 uniques_count = 6;
 }
