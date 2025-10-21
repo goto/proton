@@ -835,7 +835,7 @@ message ListGrantsRequest {
   repeated string summary_uniques = 20;
   uint32 expiring_in_days = 21;
   InactiveGrantPolicy inactive_grant_policy = 22;
-  repeated string field_mask = 23;
+  repeated string field_masks = 23;
 }
 
 message ListGrantsResponse {
@@ -870,7 +870,7 @@ message ListUserGrantsRequest {
   repeated string summary_uniques = 17;
   uint32 expiring_in_days = 18;
   InactiveGrantPolicy inactive_grant_policy = 19;
-  repeated string field_mask = 20;
+  repeated string field_masks = 20;
 }
 
 message ListUserGrantsResponse {
