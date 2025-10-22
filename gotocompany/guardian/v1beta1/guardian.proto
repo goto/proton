@@ -834,6 +834,7 @@ message ListGrantsRequest {
   repeated string summary_uniques = 20;
   uint32 expiring_in_days = 21;
   repeated string field_masks = 23;
+  bool with_pending_appeals = 24;
 }
 
 message ListGrantsResponse {
@@ -869,6 +870,7 @@ message ListUserGrantsRequest {
   uint32 expiring_in_days = 18;
   InactiveGrantPolicy inactive_grant_policy = 19;
   repeated string field_masks = 20;
+  bool with_pending_appeals = 21;
 }
 
 message ListUserGrantsResponse {
@@ -1228,6 +1230,7 @@ message Grant {
   google.protobuf.Timestamp restored_at = 25;
   string group_id = 26;
   string group_type = 27;
+  string pending_appeal_id = 28;
 }
 
 message ProviderActivity {
