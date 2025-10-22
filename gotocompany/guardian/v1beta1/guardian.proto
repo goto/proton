@@ -791,21 +791,6 @@ message DeleteApproverResponse {
   Appeal appeal = 1;
 }
 
-enum InactiveGrantPolicy {
-  // Unspecified behavior. Defaults to INCLUDE_ALL.
-  // The server should treat this as INACTIVE_GRANT_POLICY_INCLUDE_ALL.
-  INACTIVE_GRANT_POLICY_UNSPECIFIED = 0;
-
-  // Include all grants, both active and inactive.
-  // This is the default behavior if no policy is specified.
-  INACTIVE_GRANT_POLICY_INCLUDE_ALL = 1;
-
-  // Smart visibility mode:
-  // - If a resource has both active and inactive grants, only active ones are shown.
-  // - If all grants for a resource are inactive, only the latest inactive grant is returned.
-  INACTIVE_GRANT_POLICY_SMART = 2;
-}
-
 message ListGrantsRequest {
   repeated string statuses = 1;
   repeated string account_ids = 2;
@@ -834,7 +819,6 @@ message ListGrantsRequest {
   repeated string summary_group_bys = 19;
   repeated string summary_uniques = 20;
   uint32 expiring_in_days = 21;
-  InactiveGrantPolicy inactive_grant_policy = 22;
   repeated string field_masks = 23;
 }
 
@@ -845,6 +829,20 @@ message ListGrantsResponse {
 }
 
 message ListUserGrantsRequest {
+  enum InactiveGrantPolicy {
+    // Unspecified behavior. Defaults to INCLUDE_ALL.
+    // The server should treat this as INACTIVE_GRANT_POLICY_INCLUDE_ALL.
+    INACTIVE_GRANT_POLICY_UNSPECIFIED = 0;
+
+    // Include all grants, both active and inactive.
+    // This is the default behavior if no policy is specified.
+    INACTIVE_GRANT_POLICY_INCLUDE_ALL = 1;
+
+    // Smart visibility mode:
+    // - If a resource has both active and inactive grants, only active ones are shown.
+    INACTIVE_GRANT_POLICY_SMART = 2;
+  }
+
   repeated string statuses = 1;
   repeated string account_ids = 2;
   repeated string account_types = 3;
