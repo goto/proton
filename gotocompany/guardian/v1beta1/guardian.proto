@@ -834,7 +834,7 @@ message ListGrantsRequest {
   repeated string summary_uniques = 20;
   uint32 expiring_in_days = 21;
   repeated string field_masks = 23;
-  bool with_pending_appeals = 24;
+  bool with_pending_appeal = 24;
 }
 
 message ListGrantsResponse {
@@ -870,7 +870,7 @@ message ListUserGrantsRequest {
   uint32 expiring_in_days = 18;
   InactiveGrantPolicy inactive_grant_policy = 19;
   repeated string field_masks = 20;
-  bool with_pending_appeals = 21;
+  bool with_pending_appeal = 21;
 }
 
 message ListUserGrantsResponse {
