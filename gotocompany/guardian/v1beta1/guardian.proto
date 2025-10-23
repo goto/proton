@@ -735,8 +735,6 @@ message ListApprovalsRequest {
   repeated string provider_types = 16;
   repeated string provider_urns = 17;
   repeated string actors = 18;
-  google.protobuf.Timestamp start_time = 19;
-  google.protobuf.Timestamp end_time = 20;
 }
 
 message ListApprovalsResponse {
