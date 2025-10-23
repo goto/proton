@@ -303,6 +303,7 @@ message IdentifyPotentialSLABreachRequest {
   int32 next_scheduled_range_in_hours = 4;
   bool alert_on_breach = 5;
   string severity = 6;
+  google.protobuf.Timestamp reference_time = 7; // RFC3339 format
 }
 
 message IdentifyPotentialSLABreachResponse {
