@@ -846,7 +846,7 @@ message ListUserGrantsRequest {
     // - If a resource has both active and inactive grants, only active ones are shown.
     INACTIVE_GRANT_POLICY_SMART = 2;
   }
-  
+
   repeated string statuses = 1;
   repeated string account_ids = 2;
   repeated string account_types = 3;
@@ -871,12 +871,12 @@ message ListUserGrantsRequest {
   repeated string summary_group_bys = 16;
   repeated string summary_uniques = 17;
   uint32 expiring_in_days = 18;
-  InactiveGrantPolicy inactive_grant_policy = 19;
-  repeated string field_masks = 20;
-  bool with_pending_appeal = 21;
-  string role_starts_with = 22;
-  string role_ends_with = 23;
-  string role_contains = 24;
+  repeated string field_masks = 19;
+  bool with_pending_appeal = 20;
+  string role_starts_with = 21;
+  string role_ends_with = 22;
+  string role_contains = 23;
+  InactiveGrantPolicy inactive_grant_policy = 24;
 }
 
 message ListUserGrantsResponse {
@@ -1112,7 +1112,7 @@ message Policy {
     string type = 1;
     google.protobuf.Value config = 2;
   }
-  CustomSteps custom_steps =  11;
+  CustomSteps custom_steps = 11;
 }
 
 message AppealOptions {
