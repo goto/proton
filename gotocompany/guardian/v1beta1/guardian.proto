@@ -701,8 +701,8 @@ message ListUserApprovalsRequest {
   repeated string provider_types = 16;
   repeated string provider_urns = 17;
   repeated string actors = 18;
-  google.protobuf.Timestamp start_time = 19;
-  google.protobuf.Timestamp end_time = 20;
+  optional google.protobuf.Timestamp start_time = 19;
+  optional google.protobuf.Timestamp end_time = 20;
 }
 
 message ListUserApprovalsResponse {
@@ -735,8 +735,8 @@ message ListApprovalsRequest {
   repeated string provider_types = 16;
   repeated string provider_urns = 17;
   repeated string actors = 18;
-  google.protobuf.Timestamp start_time = 19;
-  google.protobuf.Timestamp end_time = 20;
+  optional google.protobuf.Timestamp start_time = 19;
+  optional google.protobuf.Timestamp end_time = 20;
 }
 
 message ListApprovalsResponse {
@@ -828,8 +828,8 @@ message ListGrantsRequest {
   string role_starts_with = 25;
   string role_ends_with = 26;
   string role_contains = 27;
-  google.protobuf.Timestamp start_time = 28;
-  google.protobuf.Timestamp end_time = 29;
+  optional google.protobuf.Timestamp start_time = 28;
+  optional google.protobuf.Timestamp end_time = 29;
 }
 
 message ListGrantsResponse {
@@ -883,8 +883,8 @@ message ListUserGrantsRequest {
   string role_ends_with = 22;
   string role_contains = 23;
   InactiveGrantPolicy inactive_grant_policy = 24;
-  google.protobuf.Timestamp start_time = 25;
-  google.protobuf.Timestamp end_time = 26;
+  optional google.protobuf.Timestamp start_time = 25;
+  optional google.protobuf.Timestamp end_time = 26;
 }
 
 message ListUserGrantsResponse {
