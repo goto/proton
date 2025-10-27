@@ -701,8 +701,11 @@ message ListUserApprovalsRequest {
   repeated string provider_types = 16;
   repeated string provider_urns = 17;
   repeated string actors = 18;
-  optional google.protobuf.Timestamp start_time = 19;
-  optional google.protobuf.Timestamp end_time = 20;
+  repeated string summary_group_bys = 19;
+  repeated string summary_uniques = 20;
+  repeated string field_masks = 21;
+  optional google.protobuf.Timestamp start_time = 22;
+  optional google.protobuf.Timestamp end_time = 23;
 }
 
 message ListUserApprovalsResponse {
@@ -735,8 +738,11 @@ message ListApprovalsRequest {
   repeated string provider_types = 16;
   repeated string provider_urns = 17;
   repeated string actors = 18;
-  optional google.protobuf.Timestamp start_time = 19;
-  optional google.protobuf.Timestamp end_time = 20;
+  repeated string summary_group_bys = 19;
+  repeated string summary_uniques = 20;
+  repeated string field_masks = 21;
+  optional google.protobuf.Timestamp start_time = 22;
+  optional google.protobuf.Timestamp end_time = 23;
 }
 
 message ListApprovalsResponse {
