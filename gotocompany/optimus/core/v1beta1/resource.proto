@@ -277,9 +277,11 @@ message GetResourceChangelogsResponse {
 
 message GetResourceDataCompletenessRequest {
   string project_name = 1;
-  string resource_name = 2;
-  google.protobuf.Timestamp from = 3;
-  google.protobuf.Timestamp to = 4;
+  string store = 2;
+  string namespace_name = 3;
+  string resource_name = 4;
+  google.protobuf.Timestamp from = 5;
+  google.protobuf.Timestamp to = 6;
 }
 
 message DataCompleteness{
