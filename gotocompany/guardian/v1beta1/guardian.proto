@@ -711,6 +711,7 @@ message ListUserApprovalsRequest {
 message ListUserApprovalsResponse {
   repeated Approval approvals = 1;
   int32 total = 2;
+  SummaryResult summary = 3;
 }
 
 message ListApprovalsRequest {
@@ -748,6 +749,7 @@ message ListApprovalsRequest {
 message ListApprovalsResponse {
   repeated Approval approvals = 1;
   int32 total = 2;
+  SummaryResult summary = 3;
 }
 
 message GenerateUserApprovalSummariesRequest {
