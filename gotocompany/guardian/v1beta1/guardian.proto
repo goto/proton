@@ -630,6 +630,7 @@ message CreateAppealRequest {
   reserved "group_id";
   reserved 6;
   reserved "group_type";
+  bool dry_run = 7;
 }
 
 message PatchAppealRequest {
@@ -1193,6 +1194,9 @@ message Approval {
   string reason = 12;
   bool is_stale = 13;
   uint32 appeal_revision = 14;
+  bool dont_allow_self_approval = 15;
+  bool allow_failed = 16;
+  google.protobuf.Struct details = 17;
 }
 
 message AppealComment {
