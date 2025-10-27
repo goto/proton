@@ -61,6 +61,13 @@ service JobRunService {
       get: "/v1beta1/project/{project_name}/job/{job_name}/job_runs"
     };
   }
+
+  rpc GetThirdPartySensorStatus(GetThirdPartySensorRequest) returns (GetThirdPartySensorResponse) {
+    option (google.api.http) = {
+      get: "/v1beta1/project/{project_name}/job/{job_name}/third-party-sensor"
+    };
+  }
+
   // RegisterJobEvent notifies optimus service about an event related to job
   rpc RegisterJobEvent(RegisterJobEventRequest) returns (RegisterJobEventResponse) {
     option (google.api.http) = {
@@ -97,6 +104,38 @@ service JobRunService {
       post: "/v1beta1/project/{project_name}/potential_sla_breach/identify"
       body: "*"
     };
+  }
+}
+
+message DexSensorRequest {
+  string store = 1;
+  string table_name = 2;
+  google.protobuf.Timestamp from = 3;
+  google.protobuf.Timestamp to = 4;
+}
+
+message DataCompleteness{
+  google.protobuf.Timestamp date = 1;
+  bool is_complete = 2;
+}
+
+message DexSensorResponse {
+  bool is_complete = 3;
+  repeated DataCompleteness log = 4;
+}
+
+message GetThirdPartySensorRequest {
+  string project_name = 1;
+  string job_name = 2;
+  string third_party_type = 3;
+  oneof payload {
+    DexSensorRequest dex_sensor_request = 4;
+  }
+}
+
+message GetThirdPartySensorResponse {
+  oneof payload {
+    DexSensorResponse dex_sensor_response = 1;
   }
 }
 
