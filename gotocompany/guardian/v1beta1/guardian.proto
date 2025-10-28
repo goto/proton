@@ -708,7 +708,7 @@ message ListUserApprovalsRequest {
   optional google.protobuf.Timestamp end_time = 23;
   repeated string resource_urns = 24;
   repeated string roles = 25;
-  repeated string created_bys = 26;
+  repeated string appeal_created_bys = 26;
   repeated string account_ids = 27;
 }
 
@@ -750,7 +750,7 @@ message ListApprovalsRequest {
   optional google.protobuf.Timestamp end_time = 23;
   repeated string resource_urns = 24;
   repeated string roles = 25;
-  repeated string created_bys = 26;
+  repeated string appeal_created_bys = 26;
   repeated string account_ids = 27;
 }
 
