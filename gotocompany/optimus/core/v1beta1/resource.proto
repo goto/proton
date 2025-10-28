@@ -4,6 +4,7 @@ package gotocompany.optimus.core.v1beta1;
 
 import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
 import "gotocompany/optimus/core/v1beta1/status.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
@@ -100,6 +101,7 @@ service ResourceService {
       get: "/v1beta1/project/{project_name}/resource/{resource_name}/changelog"
     };
   }
+
 }
 
 message DeployResourceSpecificationRequest {
