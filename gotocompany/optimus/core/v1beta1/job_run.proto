@@ -64,7 +64,8 @@ service JobRunService {
 
   rpc GetThirdPartySensorStatus(GetThirdPartySensorRequest) returns (GetThirdPartySensorResponse) {
     option (google.api.http) = {
-      get: "/v1beta1/project/{project_name}/job/{job_name}/third-party-sensor"
+      put: "/v1beta1/project/{project_name}/job/{job_name}/third-party-sensor"
+      body: "*"
     };
   }
 
