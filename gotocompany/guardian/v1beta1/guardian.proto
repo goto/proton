@@ -866,6 +866,7 @@ message ListUserGrantsRequest {
 
     // Smart visibility mode:
     // - If a resource has both active and inactive grants, only active ones are shown.
+    // - If all grants for a resource are inactive, only the latest inactive grant is returned.
     INACTIVE_GRANT_POLICY_SMART = 2;
   }
 
