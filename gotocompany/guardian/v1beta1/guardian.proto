@@ -313,7 +313,13 @@ service GuardianService {
   }
 }
 
-message ListProvidersRequest {}
+message ListProvidersRequest {
+  string type = 1;
+  string urn = 2;
+  string role_starts_with = 3;
+  string role_ends_with = 4;
+  string role_contains = 5;
+}
 
 message ListProvidersResponse {
   repeated Provider providers = 1;
@@ -482,6 +488,9 @@ message ListResourcesRequest {
   string q = 11;
   repeated string group_ids = 12;
   repeated string group_types = 13;
+  string role_starts_with = 14;
+  string role_ends_with = 15;
+  string role_contains = 16;
 }
 
 message ListResourcesResponse {
@@ -902,6 +911,7 @@ message ListUserGrantsRequest {
   InactiveGrantPolicy inactive_grant_policy = 24;
   optional google.protobuf.Timestamp start_time = 25;
   optional google.protobuf.Timestamp end_time = 26;
+  repeated string not_provider_types = 27;
 }
 
 message ListUserGrantsResponse {
