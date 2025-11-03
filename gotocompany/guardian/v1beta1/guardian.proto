@@ -482,6 +482,10 @@ message ListResourcesRequest {
   string q = 11;
   repeated string group_ids = 12;
   repeated string group_types = 13;
+  string provider_types = 14;
+  string provider_urns = 15;
+  string types = 16;
+  string urns = 17;
 }
 
 message ListResourcesResponse {
