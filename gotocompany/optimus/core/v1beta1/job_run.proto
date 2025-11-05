@@ -108,11 +108,6 @@ service JobRunService {
   }
 }
 
-message DexSensorRequest {
-  string store = 1;
-  string table_name = 2;
-}
-
 message DataCompleteness{
   google.protobuf.Timestamp date = 1;
   bool is_complete = 2;
@@ -128,9 +123,7 @@ message GetThirdPartySensorRequest {
   string job_name = 2;
   string third_party_type = 3;
   google.protobuf.Timestamp scheduled_at = 4;
-  oneof payload {
-    DexSensorRequest dex_sensor_request = 5;
-  }
+  string identifier = 5;
 }
 
 message GetThirdPartySensorResponse {
