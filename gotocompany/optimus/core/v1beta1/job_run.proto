@@ -127,9 +127,8 @@ message GetThirdPartySensorRequest {
   string job_name = 2;
   string third_party_type = 3;
   google.protobuf.Timestamp scheduled_at = 4;
-  string identifier = 5;
   oneof payload {
-    DexSensorRequest dex_sensor_request = 6;
+    DexSensorRequest dex_sensor_request = 5;
   }
 }
 
