@@ -1256,7 +1256,6 @@ message Resource {
   string global_urn = 14;
   string group_id = 15;
   string group_type = 16;
-  Provider provider = 17;
 }
 
 message Grant {
