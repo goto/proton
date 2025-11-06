@@ -355,6 +355,7 @@ message UpstreamJobStatus {
   google.protobuf.Timestamp inferred_sla_time = 3;
   int32 relative_level = 4;
   string status = 5;
+  google.protobuf.Timestamp scheduled_at = 6;
 }
 
 message UpstreamJobsStatus {
