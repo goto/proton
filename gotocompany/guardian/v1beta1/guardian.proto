@@ -537,11 +537,22 @@ message ListUserAppealsRequest {
   repeated string group_ids = 12;
   repeated string group_types = 13;
   repeated string resource_ids = 14;
+  repeated string account_ids = 15;
+  repeated string roles = 16;
+  repeated string summary_group_bys = 17;
+  repeated string summary_uniques = 18;
+  repeated string field_masks = 19;
+  string role_starts_with = 20;
+  string role_ends_with = 21;
+  string role_contains = 22;
+  optional google.protobuf.Timestamp start_time = 23;
+  optional google.protobuf.Timestamp end_time = 24;
 }
 
 message ListUserAppealsResponse {
   repeated Appeal appeals = 1;
   int32 total = 2;
+  SummaryResult summary = 3;
 }
 
 message ListAppealsRequest {
@@ -567,11 +578,22 @@ message ListAppealsRequest {
   repeated string group_ids = 14;
   repeated string group_types = 15;
   repeated string resource_ids = 16;
+  repeated string account_ids = 17;
+  repeated string roles = 18;
+  repeated string summary_group_bys = 19;
+  repeated string summary_uniques = 20;
+  repeated string field_masks = 21;
+  string role_starts_with = 22;
+  string role_ends_with = 23;
+  string role_contains = 24;
+  optional google.protobuf.Timestamp start_time = 25;
+  optional google.protobuf.Timestamp end_time = 26;
 }
 
 message ListAppealsResponse {
   repeated Appeal appeals = 1;
   int32 total = 2;
+  SummaryResult summary = 3;
 }
 
 message GetAppealRequest {
