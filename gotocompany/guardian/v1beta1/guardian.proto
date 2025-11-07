@@ -872,6 +872,7 @@ message ListGrantsRequest {
   string role_contains = 27;
   optional google.protobuf.Timestamp start_time = 28;
   optional google.protobuf.Timestamp end_time = 29;
+  repeated string summary_distinct_counts = 30;
 }
 
 message ListGrantsResponse {
@@ -1317,6 +1318,7 @@ message SummaryResult {
   message Group {
     map<string, google.protobuf.Value> group_fields = 1;
     int32 count = 2;
+    map<string, int32> distinct_counts = 3;
   }
 
   message Unique {
