@@ -1148,6 +1148,15 @@ message Policy {
       string account_type = 5;
     }
     repeated AdditionalAppeal appeals = 2;
+
+    message PostAppealHook {
+      string name = 1;
+      string description = 2;
+      string type = 3;
+      google.protobuf.Struct config = 4;
+      bool allow_failed = 5;
+    }
+    repeated PostAppealHook post_hooks = 3;
   }
   repeated Requirement requirements = 8;
 
