@@ -957,6 +957,9 @@ message GetGraphRequest {
     ]
   }];
   optional bool with_attributes = 4;
+  bool include_deleted = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "If true, include soft deleted assets in the lineage graph result"
+  }];
 }
 
 message GetGraphResponse {
