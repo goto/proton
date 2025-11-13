@@ -298,6 +298,7 @@ message GetJobRunLineageSummaryRequest {
 message TargetJobRunIdentifier {
   string job_name = 1;
   google.protobuf.Timestamp scheduled_at = 2;
+  string project_name = 3;
 }
 
 message GetJobRunLineageSummaryResponse {
@@ -308,6 +309,7 @@ message JobRunLineageSummary {
   string job_name = 1;
   google.protobuf.Timestamp scheduled_at = 2;
   repeated JobExecutionSummary job_runs = 3;
+  string project_name = 4;
 }
 
 message JobExecutionSummary {
@@ -315,6 +317,7 @@ message JobExecutionSummary {
   SLAConfig sla = 2;
   int32 level = 3;
   JobRunSummary job_run_summary = 4;
+  string project_name = 5;
 }
 
 message JobRunSummary {
