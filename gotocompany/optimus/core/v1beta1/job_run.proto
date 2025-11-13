@@ -345,6 +345,7 @@ message IdentifyPotentialSLABreachRequest {
   int32 scheduled_range_in_hours = 8;
   bool enable_deduplication = 9;
   float damper_coeff = 10;
+  repeated string skip_job_names = 11;
 }
 
 message IdentifyPotentialSLABreachResponse {
