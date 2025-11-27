@@ -656,6 +656,7 @@ message CreateAppealRequest {
   reserved "group_id";
   reserved 6;
   reserved "group_type";
+  bool dry_run = 7;
 }
 
 message PatchAppealRequest {
