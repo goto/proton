@@ -676,6 +676,7 @@ message PatchAppealResponse {
 
 message CreateAppealResponse {
   repeated Appeal appeals = 1;
+  bool dry_run = 7;
 }
 
 message ListAppealCommentsRequest {
