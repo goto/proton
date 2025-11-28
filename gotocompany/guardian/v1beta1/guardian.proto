@@ -1116,6 +1116,7 @@ message Policy {
     repeated string approvers = 7;
     string rejection_reason = 8;
     bool dont_allow_self_approval = 9;
+    google.protobuf.Struct details = 10;
   }
   repeated ApprovalStep steps = 4;
 
@@ -1231,6 +1232,9 @@ message Approval {
   string reason = 12;
   bool is_stale = 13;
   uint32 appeal_revision = 14;
+  bool allow_failed = 15;
+  bool dont_allow_self_approval = 16;
+  google.protobuf.Struct details = 17;
 }
 
 message AppealComment {
