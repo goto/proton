@@ -547,6 +547,7 @@ message ListUserAppealsRequest {
   string role_contains = 22;
   optional google.protobuf.Timestamp start_time = 23;
   optional google.protobuf.Timestamp end_time = 24;
+  bool with_approvals = 25;
 }
 
 message ListUserAppealsResponse {
@@ -588,6 +589,7 @@ message ListAppealsRequest {
   string role_contains = 24;
   optional google.protobuf.Timestamp start_time = 25;
   optional google.protobuf.Timestamp end_time = 26;
+  bool with_approvals = 27;
 }
 
 message ListAppealsResponse {
@@ -1098,6 +1100,8 @@ message PolicyAppealConfig {
     google.protobuf.Value value = 5;
   }
   map<string, MetadataSource> metadata_sources = 7;
+
+  string terms_and_conditions = 8;
 }
 
 // Policy is a configurable steps for appeal's approval
