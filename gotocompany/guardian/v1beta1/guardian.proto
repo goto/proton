@@ -1121,6 +1121,7 @@ message Policy {
     string rejection_reason = 8;
     bool dont_allow_self_approval = 9;
     google.protobuf.Struct details = 10;
+    string terms_and_conditions = 11;
   }
   repeated ApprovalStep steps = 4;
 
