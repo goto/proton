@@ -571,6 +571,7 @@ message JobEvent {
 message JobMetadata {
   JobSpecMetadataResource resource = 1;
   JobSpecMetadataAirflow airflow = 2;
+  JobSpecMetadataKubernetes kubernetes = 3;
 }
 
 message JobSpecMetadataResource {
@@ -586,6 +587,10 @@ message JobSpecMetadataResourceConfig {
 message JobSpecMetadataAirflow {
   string pool = 1;
   string queue = 2;
+}
+
+message JobSpecMetadataKubernetes {
+  string service_account = 1;
 }
 
 message RefreshJobsRequest {
