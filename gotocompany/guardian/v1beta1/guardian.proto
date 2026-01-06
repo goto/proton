@@ -877,6 +877,7 @@ message ListGrantsRequest {
   optional google.protobuf.Timestamp start_time = 28;
   optional google.protobuf.Timestamp end_time = 29;
   repeated string summary_distinct_counts = 30;
+  repeated string created_bys = 31;
 }
 
 message ListGrantsResponse {
