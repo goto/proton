@@ -324,6 +324,13 @@ message LineageExecutionSummary {
   // outline jobs with the longest duration
   LineageDelaySummary largest_scheduled_way_too_late_job = 6;
   LineageDelaySummary largest_system_scheduling_delay_job = 7;
+  JobWithTaskDuration job_with_longest_task_duration = 8;
+  JobWithTaskDuration job_with_longest_hook_duration = 9;
+}
+
+message JobWithTaskDuration {
+  string job_name = 1;
+  int32 duration_seconds = 2;
 }
 
 message LineageDelaySummary {
