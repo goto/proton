@@ -308,6 +308,30 @@ message JobRunLineageSummary {
   string job_name = 1;
   google.protobuf.Timestamp scheduled_at = 2;
   repeated JobExecutionSummary job_runs = 3;
+  LineageExecutionSummary execution_summary = 4;
+}
+
+message LineageExecutionSummary {
+  // summary on scheduling delay
+  int32 total_scheduled_way_too_late_seconds = 1;
+  int32 total_system_scheduling_delay_seconds = 2;
+  int32 average_system_scheduling_delay_seconds = 3;
+
+  // summary on lineage execution
+  int32 total_lineage_delay_seconds = 4;
+  int32 total_lineage_duration_seconds = 5;
+
+  // outline jobs with the longest duration
+  LineageDelaySummary largest_scheduled_way_too_late_job = 6;
+  LineageDelaySummary largest_system_scheduling_delay_job = 7;
+}
+
+message LineageDelaySummary {
+  string job_name = 1;
+  google.protobuf.Timestamp scheduled_at = 2;
+  string upstream_job_name = 3;
+  google.protobuf.Timestamp upstream_scheduled_at = 4;
+  int32 delay_duration = 5;
 }
 
 message JobExecutionSummary {
@@ -316,6 +340,7 @@ message JobExecutionSummary {
   int32 level = 3;
   JobRunSummary job_run_summary = 4;
   string downstream_path_name = 5;
+  JobRunDelaySummary delay_summary = 6;
 }
 
 message JobRunSummary {
@@ -329,6 +354,11 @@ message JobRunSummary {
   google.protobuf.Timestamp task_end_time = 8;
   google.protobuf.Timestamp hook_start_time = 9;
   google.protobuf.Timestamp hook_end_time = 10;
+}
+
+message JobRunDelaySummary {
+  int32 scheduled_way_too_late_seconds = 1;
+  int32 system_scheduling_delay_seconds = 2;
 }
 
 message SLAConfig {
