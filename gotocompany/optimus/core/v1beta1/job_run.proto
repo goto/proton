@@ -331,6 +331,7 @@ message LineageExecutionSummary {
 message JobWithTaskDuration {
   string job_name = 1;
   int32 duration_seconds = 2;
+  int32 level = 3;
 }
 
 message LineageDelaySummary {
