@@ -701,10 +701,12 @@ message CreateAppealCommentResponse {
 
 message ListAppealActivitiesRequest {
   string appeal_id = 1;
+  bool with_resources = 2;
 }
 
 message ListAppealActivitiesResponse {
   repeated AppealActivity activities = 1;
+  repeated Resource resources = 2;
 }
 
 message ListUserApprovalsRequest {
