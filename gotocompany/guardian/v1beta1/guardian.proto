@@ -740,6 +740,15 @@ message ListUserApprovalsRequest {
   repeated string roles = 25;
   repeated string requestors = 26;
   repeated string account_ids = 27;
+  string provider_urn_starts_with = 28;
+  string provider_urn_ends_with = 29;
+  string provider_urn_contains = 30;
+  string provider_urn_not_starts_with = 31;
+  string provider_urn_not_ends_with = 32;
+  string provider_urn_not_contains = 33;
+  repeated string appeal_durations = 34;
+  repeated string not_appeal_durations = 35;
+  repeated string appeal_created_bys = 36;
 }
 
 message ListUserApprovalsResponse {
@@ -782,6 +791,15 @@ message ListApprovalsRequest {
   repeated string roles = 25;
   repeated string requestors = 26;
   repeated string account_ids = 27;
+  string provider_urn_starts_with = 28;
+  string provider_urn_ends_with = 29;
+  string provider_urn_contains = 30;
+  string provider_urn_not_starts_with = 31;
+  string provider_urn_not_ends_with = 32;
+  string provider_urn_not_contains = 33;
+  repeated string appeal_durations = 34;
+  repeated string not_appeal_durations = 35;
+  repeated string appeal_created_bys = 36;
 }
 
 message ListApprovalsResponse {
