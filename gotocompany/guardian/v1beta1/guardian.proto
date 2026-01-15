@@ -497,6 +497,7 @@ message ListResourcesRequest {
   string provider_urn_not_contains = 26;
   repeated string summary_group_bys = 27;
   repeated string summary_uniques = 28;
+  repeated string field_masks = 29;
 }
 
 message ListResourcesResponse {
