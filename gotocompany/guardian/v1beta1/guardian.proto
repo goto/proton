@@ -489,15 +489,6 @@ message ListResourcesRequest {
   repeated string ids = 18;
   repeated string global_urns = 19;
   repeated string parent_ids = 20;
-  string provider_urn_starts_with = 21;
-  string provider_urn_ends_with = 22;
-  string provider_urn_contains = 23;
-  string provider_urn_not_starts_with = 24;
-  string provider_urn_not_ends_with = 25;
-  string provider_urn_not_contains = 26;
-  repeated string summary_group_bys = 27;
-  repeated string summary_uniques = 28;
-  repeated string field_masks = 29;
 }
 
 message ListResourcesResponse {
@@ -572,6 +563,9 @@ message ListUserAppealsRequest {
   repeated string details_paths = 34;
   repeated string details = 35;
   repeated string not_details = 36;
+  string role_not_starts_with = 37;
+  string role_not_ends_with = 38;
+  string role_not_contains = 39;
 }
 
 message ListUserAppealsResponse {
@@ -625,6 +619,9 @@ message ListAppealsRequest {
   repeated string details_paths = 36;
   repeated string details = 37;
   repeated string not_details = 38;
+  string role_not_starts_with = 39;
+  string role_not_ends_with = 40;
+  string role_not_contains = 41;
 }
 
 message ListAppealsResponse {
@@ -786,6 +783,9 @@ message ListUserApprovalsRequest {
   repeated string appeal_details_paths = 36;
   repeated string appeal_details = 37;
   repeated string not_appeal_details = 38;
+  string role_not_starts_with = 39;
+  string role_not_ends_with = 40;
+  string role_not_contains = 41;
 }
 
 message ListUserApprovalsResponse {
@@ -839,6 +839,9 @@ message ListApprovalsRequest {
   repeated string appeal_details_paths = 36;
   repeated string appeal_details = 37;
   repeated string not_appeal_details = 38;
+  string role_not_starts_with = 39;
+  string role_not_ends_with = 40;
+  string role_not_contains = 41;
 }
 
 message ListApprovalsResponse {
@@ -946,6 +949,9 @@ message ListGrantsRequest {
   repeated string appeal_details_paths = 40;
   repeated string appeal_details = 41;
   repeated string not_appeal_details = 42;
+  string role_not_starts_with = 43;
+  string role_not_ends_with = 44;
+  string role_not_contains = 45;
 }
 
 message ListGrantsResponse {
@@ -1013,6 +1019,9 @@ message ListUserGrantsRequest {
   repeated string appeal_details_paths = 35;
   repeated string appeal_details = 36;
   repeated string not_appeal_details = 37;
+  string role_not_starts_with = 38;
+  string role_not_ends_with = 39;
+  string role_not_contains = 40;
 }
 
 message ListUserGrantsResponse {
