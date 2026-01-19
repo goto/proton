@@ -621,6 +621,8 @@ message ListAppealsRequest {
   string role_not_starts_with = 39;
   string role_not_ends_with = 40;
   string role_not_contains = 41;
+  map<string, LabelValues> labels = 42;
+  repeated string label_keys = 43;
 }
 
 message ListAppealsResponse {
@@ -690,6 +692,8 @@ message CreateAppealRequest {
   reserved 6;
   reserved "group_type";
   bool dry_run = 7;
+
+  map<string, string> user_labels = 8;
 }
 
 message PatchAppealRequest {
@@ -1190,6 +1194,9 @@ message PolicyAppealConfig {
   map<string, MetadataSource> metadata_sources = 7;
 
   string terms_and_conditions = 8;
+
+  repeated LabelingRule labeling_rules = 9;
+  ManualLabelConfig manual_label_config = 10;
 }
 
 // Policy is a configurable steps for appeal's approval
@@ -1307,6 +1314,7 @@ message Appeal {
   uint32 revision = 24;
   string group_id = 25;
   string group_type = 26;
+  map<string, LabelMetadata> labels_metadata = 27;
 }
 
 // Approval is an approval item that generated in an appeal based on the selected policy
@@ -1441,4 +1449,48 @@ message SummaryResult {
   repeated Unique uniques = 4;
   int32 groups_count = 5;
   int32 uniques_count = 6;
+}
+
+// LabelingRule defines automatic label application rules
+message LabelingRule {
+    string rule_name = 1;
+    string description = 2;
+    string when = 3;                                    // Expression for condition
+    map<string, string> labels = 4;                     // Static or dynamic label values
+    map<string, LabelMetadataConfig> label_metadata = 5;
+    int32 priority = 6;
+    bool allow_failure = 7;
+}
+
+// LabelMetadataConfig defines metadata to attach to labels
+message LabelMetadataConfig {
+    string category = 1;
+    google.protobuf.Struct attributes = 2;              // Arbitrary key-value metadata
+}
+
+// ManualLabelConfig defines validation rules for user-provided labels
+message ManualLabelConfig {
+    bool allow_user_labels = 1;
+    repeated string allowed_keys = 2;                   // Whitelist with glob support
+    repeated string required_keys = 3;
+    int32 max_labels = 4;
+    string key_pattern = 5;                             // Regex for key validation
+    string value_pattern = 6;                           // Regex for value validation
+    bool allow_override = 7;
+}
+
+// LabelMetadata contains rich information about label derivation
+message LabelMetadata {
+    string value = 1;
+    string derived_from = 2;                            // Rule name or "user"
+    string source = 3;                                  // "policy_rule", "user", etc.
+    string category = 4;
+    google.protobuf.Struct attributes = 5;
+    string applied_by = 6;                              // User email for manual labels
+    google.protobuf.Timestamp applied_at = 7;
+}
+
+// LabelValues for filtering (OR within values)
+message LabelValues {
+    repeated string values = 1;
 }
