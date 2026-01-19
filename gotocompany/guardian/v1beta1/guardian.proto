@@ -612,8 +612,11 @@ message ListAppealsRequest {
   repeated string details_paths = 36;
   repeated string details = 37;
   repeated string not_details = 38;
-  map<string, LabelValues> labels = 39;
-  repeated string label_keys = 40;
+  string role_not_starts_with = 39;
+  string role_not_ends_with = 40;
+  string role_not_contains = 41;
+  map<string, LabelValues> labels = 42;
+  repeated string label_keys = 43;
 }
 
 message ListAppealsResponse {
