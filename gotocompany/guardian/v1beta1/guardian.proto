@@ -1196,7 +1196,7 @@ message PolicyAppealConfig {
   string terms_and_conditions = 8;
 
   repeated LabelingRule labeling_rules = 9;
-  ManualLabelConfig manual_label_config = 10;
+  UserLabelConfig user_label_config = 10;
 }
 
 // Policy is a configurable steps for appeal's approval
@@ -1468,8 +1468,8 @@ message LabelMetadataConfig {
     google.protobuf.Struct attributes = 2;              // Arbitrary key-value metadata
 }
 
-// ManualLabelConfig defines validation rules for user-provided labels
-message ManualLabelConfig {
+// UserLabelConfig defines validation rules for user-provided labels
+message UserLabelConfig {
     bool allow_user_labels = 1;
     repeated string allowed_keys = 2;                   // Whitelist with glob support
     repeated string required_keys = 3;
@@ -1486,7 +1486,7 @@ message LabelMetadata {
     string source = 3;                                  // "policy_rule", "user", etc.
     string category = 4;
     google.protobuf.Struct attributes = 5;
-    string applied_by = 6;                              // User email for manual labels
+    string applied_by = 6;                              // User email for user labels
     google.protobuf.Timestamp applied_at = 7;
 }
 
