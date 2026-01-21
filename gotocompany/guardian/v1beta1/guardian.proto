@@ -565,6 +565,20 @@ message ListUserAppealsRequest {
   string role_not_starts_with = 37;
   string role_not_ends_with = 38;
   string role_not_contains = 39;
+  string appeal_details_starts_with = 40;
+  string appeal_details_ends_with = 41;
+  string appeal_details_contains = 42;
+  string appeal_details_not_starts_with = 43;
+  string appeal_details_not_ends_with = 44;
+  string appeal_details_not_contains = 45;
+  string group_types_starts_with = 46;
+  string group_types_ends_with = 47;
+  string group_types_contains = 48;
+  string group_types_not_starts_with = 49;
+  string group_types_not_ends_with = 50;
+  string group_types_not_contains = 51;
+  bool for_self = 52;
+  repeated string for_self_criteria = 53;
 }
 
 message ListUserAppealsResponse {
@@ -623,6 +637,20 @@ message ListAppealsRequest {
   string role_not_contains = 41;
   map<string, LabelValues> labels = 42;
   repeated string label_keys = 43;
+  string appeal_details_starts_with = 44;
+  string appeal_details_ends_with = 45;
+  string appeal_details_contains = 46;
+  string appeal_details_not_starts_with = 47;
+  string appeal_details_not_ends_with = 48;
+  string appeal_details_not_contains = 49;
+  string group_types_starts_with = 50;
+  string group_types_ends_with = 51;
+  string group_types_contains = 52;
+  string group_types_not_starts_with = 53;
+  string group_types_not_ends_with = 54;
+  string group_types_not_contains = 55;
+  bool for_self = 56;
+  repeated string for_self_criteria = 57;
 }
 
 message ListAppealsResponse {
@@ -789,6 +817,22 @@ message ListUserApprovalsRequest {
   string role_not_starts_with = 39;
   string role_not_ends_with = 40;
   string role_not_contains = 41;
+  string appeal_details_starts_with = 42;
+  string appeal_details_ends_with = 43;
+  string appeal_details_contains = 44;
+  string appeal_details_not_starts_with = 45;
+  string appeal_details_not_ends_with = 46;
+  string appeal_details_not_contains = 47;
+  repeated string group_ids = 48;
+  repeated string group_types = 49;
+  string group_types_starts_with = 50;
+  string group_types_ends_with = 51;
+  string group_types_contains = 52;
+  string group_types_not_starts_with = 53;
+  string group_types_not_ends_with = 54;
+  string group_types_not_contains = 55;
+  bool appeal_for_self = 56;
+  repeated string appeal_for_self_criteria = 57;
 }
 
 message ListUserApprovalsResponse {
@@ -845,6 +889,22 @@ message ListApprovalsRequest {
   string role_not_starts_with = 39;
   string role_not_ends_with = 40;
   string role_not_contains = 41;
+  string appeal_details_starts_with = 42;
+  string appeal_details_ends_with = 43;
+  string appeal_details_contains = 44;
+  string appeal_details_not_starts_with = 45;
+  string appeal_details_not_ends_with = 46;
+  string appeal_details_not_contains = 47;
+  repeated string group_ids = 48;
+  repeated string group_types = 49;
+  string group_types_starts_with = 50;
+  string group_types_ends_with = 51;
+  string group_types_contains = 52;
+  string group_types_not_starts_with = 53;
+  string group_types_not_ends_with = 54;
+  string group_types_not_contains = 55;
+  bool appeal_for_self = 56;
+  repeated string appeal_for_self_criteria = 57;
 }
 
 message ListApprovalsResponse {
@@ -955,6 +1015,20 @@ message ListGrantsRequest {
   string role_not_starts_with = 43;
   string role_not_ends_with = 44;
   string role_not_contains = 45;
+  string appeal_details_starts_with = 46;
+  string appeal_details_ends_with = 47;
+  string appeal_details_contains = 48;
+  string appeal_details_not_starts_with = 49;
+  string appeal_details_not_ends_with = 50;
+  string appeal_details_not_contains = 51;
+  string group_types_starts_with = 52;
+  string group_types_ends_with = 53;
+  string group_types_contains = 54;
+  string group_types_not_starts_with = 55;
+  string group_types_not_ends_with = 56;
+  string group_types_not_contains = 57;
+  bool appeal_for_self = 58;
+  repeated string appeal_for_self_criteria = 59;
 }
 
 message ListGrantsResponse {
@@ -1025,6 +1099,20 @@ message ListUserGrantsRequest {
   string role_not_starts_with = 38;
   string role_not_ends_with = 39;
   string role_not_contains = 40;
+  string appeal_details_starts_with = 41;
+  string appeal_details_ends_with = 42;
+  string appeal_details_contains = 43;
+  string appeal_details_not_starts_with = 44;
+  string appeal_details_not_ends_with = 45;
+  string appeal_details_not_contains = 46;
+  string group_types_starts_with = 47;
+  string group_types_ends_with = 48;
+  string group_types_contains = 49;
+  string group_types_not_starts_with = 50;
+  string group_types_not_ends_with = 51;
+  string group_types_not_contains = 52;
+  bool appeal_for_self = 53;
+  repeated string appeal_for_self_criteria = 54;
 }
 
 message ListUserGrantsResponse {
