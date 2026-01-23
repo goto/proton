@@ -827,8 +827,9 @@ message ListUserApprovalsRequest {
   string group_type_not_starts_with = 53;
   string group_type_not_ends_with = 54;
   string group_type_not_contains = 55;
-  bool appeal_for_self = 56;
+  bool appeal_for_self = 56; // deprecated
   repeated string appeal_details_for_self_criteria = 57;
+  repeated string not_appeal_details_for_self_criteria = 58;
 }
 
 message ListUserApprovalsResponse {
@@ -899,8 +900,9 @@ message ListApprovalsRequest {
   string group_type_not_starts_with = 53;
   string group_type_not_ends_with = 54;
   string group_type_not_contains = 55;
-  bool appeal_for_self = 56;
+  bool appeal_for_self = 56; // deprecated
   repeated string appeal_details_for_self_criteria = 57;
+  repeated string not_appeal_details_for_self_criteria = 58;
 }
 
 message ListApprovalsResponse {
