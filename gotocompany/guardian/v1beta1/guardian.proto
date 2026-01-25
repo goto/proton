@@ -412,11 +412,23 @@ message ListActivitiesResponse {
 }
 
 message ListPoliciesRequest {
-  // List of policy IDs to include.
-  // You can specify either:
-  // - "<id>" to retrieve the latest version, or
-  // - "<id>:<version>" to retrieve a specific version.
-  repeated string ids = 1;
+  uint32 size = 1 [(validate.rules).uint32 = {
+    gte: 0,
+    ignore_empty: true
+  }];
+  uint32 offset = 2 [(validate.rules).uint32 = {
+    gte: 0,
+    ignore_empty: true
+  }];
+  repeated string order_by = 3;
+
+  // List of policy identifiers to include.
+  // Supported formats:
+  // - "<id>"        → returns all versions of the policy
+  // - "<id>:0"      → returns the latest version of the policy
+  // - "<id>:<n>"    → returns version <n> of the policy (n > 0)
+  // Invalid or malformed entries are ignored.
+  repeated string ids = 4;
 }
 
 message ListPoliciesResponse {
