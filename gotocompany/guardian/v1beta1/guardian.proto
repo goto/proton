@@ -1064,6 +1064,8 @@ message ListGrantsRequest {
   string group_type_not_starts_with = 55;
   string group_type_not_ends_with = 56;
   string group_type_not_contains = 57;
+  repeated string appeal_details_for_self_criteria = 58;
+  repeated string not_appeal_details_for_self_criteria = 59;
 }
 
 message ListGrantsResponse {
@@ -1146,6 +1148,8 @@ message ListUserGrantsRequest {
   string group_type_not_starts_with = 50;
   string group_type_not_ends_with = 51;
   string group_type_not_contains = 52;
+  repeated string appeal_details_for_self_criteria = 53;
+  repeated string not_appeal_details_for_self_criteria = 54;
 }
 
 message ListUserGrantsResponse {
