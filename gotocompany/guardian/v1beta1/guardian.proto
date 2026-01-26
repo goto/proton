@@ -614,6 +614,8 @@ message ListUserAppealsRequest {
   string group_type_not_contains = 51;
   repeated string ids = 52;
   repeated string not_ids = 53;
+  repeated string details_for_self_criteria = 54;
+  repeated string not_details_for_self_criteria = 55;
 }
 
 message ListUserAppealsResponse {
@@ -686,6 +688,8 @@ message ListAppealsRequest {
   string group_type_not_contains = 55;
   repeated string ids = 56;
   repeated string not_ids = 57;
+  repeated string details_for_self_criteria = 58;
+  repeated string not_details_for_self_criteria = 59;
 }
 
 message ListAppealsResponse {
