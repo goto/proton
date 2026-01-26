@@ -313,10 +313,28 @@ service GuardianService {
   }
 }
 
-message ListProvidersRequest {}
+message ListProvidersRequest {
+  uint32 size = 1 [(validate.rules).uint32 = {
+    gte: 0,
+    ignore_empty: true
+  }];
+  uint32 offset = 2 [(validate.rules).uint32 = {
+    gte: 0,
+    ignore_empty: true
+  }];
+  repeated string field_masks = 3;
+  repeated string ids = 4;
+  // Supported formats:
+  // - "<urn>" -> returns providers that match with the urn
+  // - "<urn>:<type>" -> returns providers that match with the urn and type
+  // Invalid or malformed entries are ignored.
+  repeated string urns = 5;
+  repeated string types = 6;
+}
 
 message ListProvidersResponse {
   repeated Provider providers = 1;
+  int32 total = 2;
 }
 
 message GetProviderRequest {
@@ -420,9 +438,7 @@ message ListPoliciesRequest {
     gte: 0,
     ignore_empty: true
   }];
-  repeated string order_by = 3;
-
-  // List of policy identifiers to include.
+  repeated string field_masks = 3;
   // Supported formats:
   // - "<id>"        → returns all versions of the policy
   // - "<id>:0"      → returns the latest version of the policy
@@ -433,6 +449,7 @@ message ListPoliciesRequest {
 
 message ListPoliciesResponse {
   repeated Policy policies = 1;
+  int32 total = 2;
 }
 
 message GetPolicyRequest {
