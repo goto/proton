@@ -616,6 +616,10 @@ message ListUserAppealsRequest {
   repeated string not_ids = 53;
   repeated string details_for_self_criteria = 54;
   repeated string not_details_for_self_criteria = 55;
+  // Supported formats:
+  // - "<key>" -> returns appeals that match with the key
+  // - "<key>:<value>" -> returns appeals that match with the key and value
+  repeated string q_labels = 56;
 }
 
 message ListUserAppealsResponse {
@@ -690,6 +694,10 @@ message ListAppealsRequest {
   repeated string not_ids = 57;
   repeated string details_for_self_criteria = 58;
   repeated string not_details_for_self_criteria = 59;
+  // Supported formats:
+  // - "<key>" -> returns appeals that match with the key
+  // - "<key>:<value>" -> returns appeals that match with the key and value
+  repeated string q_labels = 60;
 }
 
 message ListAppealsResponse {
