@@ -616,6 +616,8 @@ message ListUserAppealsRequest {
   repeated string not_ids = 53;
   repeated string details_for_self_criteria = 54;
   repeated string not_details_for_self_criteria = 55;
+  map<string, LabelValues> labels = 56;
+  repeated string label_keys = 57;
 }
 
 message ListUserAppealsResponse {
@@ -873,6 +875,8 @@ message ListUserApprovalsRequest {
   bool appeal_for_self = 56; // deprecated
   repeated string appeal_details_for_self_criteria = 57;
   repeated string not_appeal_details_for_self_criteria = 58;
+  map<string, LabelValues> labels = 59;
+  repeated string label_keys = 60;  
 }
 
 message ListUserApprovalsResponse {
@@ -946,6 +950,8 @@ message ListApprovalsRequest {
   bool appeal_for_self = 56; // deprecated
   repeated string appeal_details_for_self_criteria = 57;
   repeated string not_appeal_details_for_self_criteria = 58;
+  map<string, LabelValues> labels = 59;
+  repeated string label_keys = 60;
 }
 
 message ListApprovalsResponse {
