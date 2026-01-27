@@ -616,10 +616,11 @@ message ListUserAppealsRequest {
   repeated string not_ids = 53;
   repeated string details_for_self_criteria = 54;
   repeated string not_details_for_self_criteria = 55;
+  bool summary_labels = 56;
   // Supported formats:
   // - "<key>" -> returns appeals that match with the key
   // - "<key>:<value>" -> returns appeals that match with the key and value
-  repeated string q_labels = 56;
+  repeated string q_labels = 57;
 }
 
 message ListUserAppealsResponse {
@@ -694,10 +695,11 @@ message ListAppealsRequest {
   repeated string not_ids = 57;
   repeated string details_for_self_criteria = 58;
   repeated string not_details_for_self_criteria = 59;
+  bool summary_labels = 60;
   // Supported formats:
   // - "<key>" -> returns appeals that match with the key
   // - "<key>:<value>" -> returns appeals that match with the key and value
-  repeated string q_labels = 60;
+  repeated string q_labels = 61;
 }
 
 message ListAppealsResponse {
@@ -1580,12 +1582,20 @@ message SummaryResult {
     int32 count = 3;
   }
 
+  message Label {
+    string key = 1;
+    repeated string values = 2;
+    int32 count = 3;
+  }
+
   SummaryParameters applied_parameters = 1;
   repeated Group groups = 2;
   int32 count = 3; // deprecated
   repeated Unique uniques = 4;
   int32 groups_count = 5;
   int32 uniques_count = 6;
+  repeated Label labels = 7;
+  int32 labels_count = 8;
 }
 
 // LabelingRule defines automatic label application rules
