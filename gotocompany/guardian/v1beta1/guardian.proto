@@ -313,10 +313,28 @@ service GuardianService {
   }
 }
 
-message ListProvidersRequest {}
+message ListProvidersRequest {
+  uint32 size = 1 [(validate.rules).uint32 = {
+    gte: 0,
+    ignore_empty: true
+  }];
+  uint32 offset = 2 [(validate.rules).uint32 = {
+    gte: 0,
+    ignore_empty: true
+  }];
+  repeated string field_masks = 3;
+  repeated string ids = 4;
+  // Supported formats:
+  // - "<urn>" -> returns providers that match with the urn
+  // - "<urn>:<type>" -> returns providers that match with the urn and type
+  // Invalid or malformed entries are ignored.
+  repeated string urns = 5;
+  repeated string types = 6;
+}
 
 message ListProvidersResponse {
   repeated Provider providers = 1;
+  int32 total = 2;
 }
 
 message GetProviderRequest {
@@ -411,10 +429,27 @@ message ListActivitiesResponse {
   repeated ProviderActivity activities = 1;
 }
 
-message ListPoliciesRequest {}
+message ListPoliciesRequest {
+  uint32 size = 1 [(validate.rules).uint32 = {
+    gte: 0,
+    ignore_empty: true
+  }];
+  uint32 offset = 2 [(validate.rules).uint32 = {
+    gte: 0,
+    ignore_empty: true
+  }];
+  repeated string field_masks = 3;
+  // Supported formats:
+  // - "<id>"        → returns all versions of the policy
+  // - "<id>:0"      → returns the latest version of the policy
+  // - "<id>:<n>"    → returns version <n> of the policy (n > 0)
+  // Invalid or malformed entries are ignored.
+  repeated string ids = 4;
+}
 
 message ListPoliciesResponse {
   repeated Policy policies = 1;
+  int32 total = 2;
 }
 
 message GetPolicyRequest {
@@ -577,6 +612,10 @@ message ListUserAppealsRequest {
   string group_type_not_starts_with = 49;
   string group_type_not_ends_with = 50;
   string group_type_not_contains = 51;
+  repeated string ids = 52;
+  repeated string not_ids = 53;
+  repeated string details_for_self_criteria = 54;
+  repeated string not_details_for_self_criteria = 55;
 }
 
 message ListUserAppealsResponse {
@@ -647,6 +686,10 @@ message ListAppealsRequest {
   string group_type_not_starts_with = 53;
   string group_type_not_ends_with = 54;
   string group_type_not_contains = 55;
+  repeated string ids = 56;
+  repeated string not_ids = 57;
+  repeated string details_for_self_criteria = 58;
+  repeated string not_details_for_self_criteria = 59;
 }
 
 message ListAppealsResponse {
@@ -1025,6 +1068,8 @@ message ListGrantsRequest {
   string group_type_not_starts_with = 55;
   string group_type_not_ends_with = 56;
   string group_type_not_contains = 57;
+  repeated string appeal_details_for_self_criteria = 58;
+  repeated string not_appeal_details_for_self_criteria = 59;
 }
 
 message ListGrantsResponse {
@@ -1107,6 +1152,8 @@ message ListUserGrantsRequest {
   string group_type_not_starts_with = 50;
   string group_type_not_ends_with = 51;
   string group_type_not_contains = 52;
+  repeated string appeal_details_for_self_criteria = 53;
+  repeated string not_appeal_details_for_self_criteria = 54;
 }
 
 message ListUserGrantsResponse {
