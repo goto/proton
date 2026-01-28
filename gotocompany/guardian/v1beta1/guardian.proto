@@ -617,10 +617,6 @@ message ListUserAppealsRequest {
   repeated string details_for_self_criteria = 54;
   repeated string not_details_for_self_criteria = 55;
   bool summary_labels = 56;
-  // Supported formats:
-  // - "<key>" -> returns appeals that match with the key
-  // - "<key>:<value>" -> returns appeals that match with the key and value
-  repeated string q_labels = 57;
 }
 
 message ListUserAppealsResponse {
@@ -696,10 +692,6 @@ message ListAppealsRequest {
   repeated string details_for_self_criteria = 58;
   repeated string not_details_for_self_criteria = 59;
   bool summary_labels = 60;
-  // Supported formats:
-  // - "<key>" -> returns appeals that match with the key
-  // - "<key>:<value>" -> returns appeals that match with the key and value
-  repeated string q_labels = 61;
 }
 
 message ListAppealsResponse {
@@ -883,6 +875,7 @@ message ListUserApprovalsRequest {
   bool appeal_for_self = 56; // deprecated
   repeated string appeal_details_for_self_criteria = 57;
   repeated string not_appeal_details_for_self_criteria = 58;
+  bool summary_labels = 59;
 }
 
 message ListUserApprovalsResponse {
@@ -956,6 +949,7 @@ message ListApprovalsRequest {
   bool appeal_for_self = 56; // deprecated
   repeated string appeal_details_for_self_criteria = 57;
   repeated string not_appeal_details_for_self_criteria = 58;
+  bool summary_labels = 59;
 }
 
 message ListApprovalsResponse {
@@ -1080,6 +1074,7 @@ message ListGrantsRequest {
   string group_type_not_contains = 57;
   repeated string appeal_details_for_self_criteria = 58;
   repeated string not_appeal_details_for_self_criteria = 59;
+  bool summary_labels = 60;
 }
 
 message ListGrantsResponse {
@@ -1164,6 +1159,7 @@ message ListUserGrantsRequest {
   string group_type_not_contains = 52;
   repeated string appeal_details_for_self_criteria = 53;
   repeated string not_appeal_details_for_self_criteria = 54;
+  bool summary_labels = 55;
 }
 
 message ListUserGrantsResponse {
