@@ -618,6 +618,7 @@ message ListUserAppealsRequest {
   repeated string not_details_for_self_criteria = 55;
   map<string, LabelValues> labels = 56;
   repeated string label_keys = 57;
+  bool summary_labels = 58;
 }
 
 message ListUserAppealsResponse {
@@ -692,6 +693,7 @@ message ListAppealsRequest {
   repeated string not_ids = 57;
   repeated string details_for_self_criteria = 58;
   repeated string not_details_for_self_criteria = 59;
+  bool summary_labels = 60;
 }
 
 message ListAppealsResponse {
@@ -876,7 +878,8 @@ message ListUserApprovalsRequest {
   repeated string appeal_details_for_self_criteria = 57;
   repeated string not_appeal_details_for_self_criteria = 58;
   map<string, LabelValues> labels = 59;
-  repeated string label_keys = 60;  
+  repeated string label_keys = 60;
+  bool summary_labels = 61;
 }
 
 message ListUserApprovalsResponse {
@@ -952,6 +955,7 @@ message ListApprovalsRequest {
   repeated string not_appeal_details_for_self_criteria = 58;
   map<string, LabelValues> labels = 59;
   repeated string label_keys = 60;
+  bool summary_labels = 61;
 }
 
 message ListApprovalsResponse {
@@ -1076,6 +1080,9 @@ message ListGrantsRequest {
   string group_type_not_contains = 57;
   repeated string appeal_details_for_self_criteria = 58;
   repeated string not_appeal_details_for_self_criteria = 59;
+  map<string, LabelValues> labels = 60;
+  repeated string label_keys = 61;
+  bool summary_labels = 62;
 }
 
 message ListGrantsResponse {
@@ -1160,6 +1167,7 @@ message ListUserGrantsRequest {
   string group_type_not_contains = 52;
   repeated string appeal_details_for_self_criteria = 53;
   repeated string not_appeal_details_for_self_criteria = 54;
+  bool summary_labels = 55;
 }
 
 message ListUserGrantsResponse {
@@ -1578,54 +1586,62 @@ message SummaryResult {
     int32 count = 3;
   }
 
+  message Label {
+    string key = 1;
+    repeated string values = 2;
+    int32 count = 3;
+  }
+
   SummaryParameters applied_parameters = 1;
   repeated Group groups = 2;
   int32 count = 3; // deprecated
   repeated Unique uniques = 4;
   int32 groups_count = 5;
   int32 uniques_count = 6;
+  repeated Label labels = 7;
+  int32 labels_count = 8;
 }
 
 // LabelingRule defines automatic label application rules
 message LabelingRule {
-    string rule_name = 1;
-    string description = 2;
-    string when = 3;                                    // Expression for condition
-    map<string, string> labels = 4;                     // Static or dynamic label values
-    map<string, LabelMetadataConfig> label_metadata = 5;
-    int32 priority = 6;
-    bool allow_failure = 7;
+  string rule_name = 1;
+  string description = 2;
+  string when = 3;                                    // Expression for condition
+  map<string, string> labels = 4;                     // Static or dynamic label values
+  map<string, LabelMetadataConfig> label_metadata = 5;
+  int32 priority = 6;
+  bool allow_failure = 7;
 }
 
 // LabelMetadataConfig defines metadata to attach to labels
 message LabelMetadataConfig {
-    string category = 1;
-    google.protobuf.Struct attributes = 2;              // Arbitrary key-value metadata
+  string category = 1;
+  google.protobuf.Struct attributes = 2;              // Arbitrary key-value metadata
 }
 
 // UserLabelConfig defines validation rules for user-provided labels
 message UserLabelConfig {
-    bool allow_user_labels = 1;
-    repeated string allowed_keys = 2;                   // Whitelist with glob support
-    repeated string required_keys = 3;
-    int32 max_labels = 4;
-    string key_pattern = 5;                             // Regex for key validation
-    string value_pattern = 6;                           // Regex for value validation
-    bool allow_override = 7;
+  bool allow_user_labels = 1;
+  repeated string allowed_keys = 2;                   // Whitelist with glob support
+  repeated string required_keys = 3;
+  int32 max_labels = 4;
+  string key_pattern = 5;                             // Regex for key validation
+  string value_pattern = 6;                           // Regex for value validation
+  bool allow_override = 7;
 }
 
 // LabelMetadata contains rich information about label derivation
 message LabelMetadata {
-    string value = 1;
-    string derived_from = 2;                            // Rule name or "user"
-    string source = 3;                                  // "policy_rule", "user", etc.
-    string category = 4;
-    google.protobuf.Struct attributes = 5;
-    string applied_by = 6;                              // User email for user labels
-    google.protobuf.Timestamp applied_at = 7;
+  string value = 1;
+  string derived_from = 2;                            // Rule name or "user"
+  string source = 3;                                  // "policy_rule", "user", etc.
+  string category = 4;
+  google.protobuf.Struct attributes = 5;
+  string applied_by = 6;                              // User email for user labels
+  google.protobuf.Timestamp applied_at = 7;
 }
 
 // LabelValues for filtering (OR within values)
 message LabelValues {
-    repeated string values = 1;
+  repeated string values = 1;
 }
