@@ -1167,7 +1167,9 @@ message ListUserGrantsRequest {
   string group_type_not_contains = 52;
   repeated string appeal_details_for_self_criteria = 53;
   repeated string not_appeal_details_for_self_criteria = 54;
-  bool summary_labels = 55;
+  map<string, LabelValues> labels = 55;
+  repeated string label_keys = 56;
+  bool summary_labels = 57;
 }
 
 message ListUserGrantsResponse {
