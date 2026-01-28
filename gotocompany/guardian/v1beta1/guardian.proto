@@ -188,6 +188,13 @@ service GuardianService {
     };
   }
 
+  rpc RelabelAppeal(RelabelAppealRequest) returns (RelabelAppealResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/appeals/{appeal_id}/relabel"
+      body: "*"
+    };
+  }
+
   rpc ListAppealComments(ListAppealCommentsRequest) returns (ListAppealCommentsResponse) {
     option (google.api.http) = {
       get: "/v1beta1/appeals/{appeal_id}/comments"
@@ -779,6 +786,16 @@ message PatchAppealRequest {
 }
 
 message PatchAppealResponse {
+  Appeal appeal = 1;
+}
+
+message RelabelAppealRequest {
+  string appeal_id = 1;
+  optional uint32 policy_version = 2;
+  bool dry_run = 3;
+}
+
+message RelabelAppealResponse {
   Appeal appeal = 1;
 }
 
