@@ -73,6 +73,14 @@ message Event {
   ingestion systems to distribute or perform other functions.
   */
   string type = 2;
+  /*
+  `is_mirrored` indicates whether the event is mirrored.
+
+  If set to true, Raccoon will publish the events to a Kafka topic
+  with a different naming format than the default topic name format
+  */
+  bool is_mirrored = 3;
+
 }
 
 /*
