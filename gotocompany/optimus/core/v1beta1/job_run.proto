@@ -343,6 +343,9 @@ message IdentifyPotentialSLABreachRequest {
   string severity = 6;
   google.protobuf.Timestamp reference_time = 7; // RFC3339 format
   int32 scheduled_range_in_hours = 8;
+  bool enable_deduplication = 9;
+  float damper_coeff = 10;
+  repeated string skip_job_names = 11;
 }
 
 message IdentifyPotentialSLABreachResponse {

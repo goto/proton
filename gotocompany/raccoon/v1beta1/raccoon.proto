@@ -74,12 +74,30 @@ message Event {
   */
   string type = 2;
   /*
+   `event_name` denotes the name of the event.
+    Example: "BookingConfirmed", "HomePageLoaded", etc.
+  */
+  string event_name = 3;
+  /*
+   `product` denotes the product or business from which the event originates.
+    Example: "GOFOOD", "GOBIZ", "GOPAY".
+  */
+  string product = 4;
+  /*
+   `event_timestamp` denotes the exact time the event occurred
+   on the client or producer side.
+   Note:
+   This is not the time when the event is sent to Raccoon;
+   that is represented separately by `SendEventRequest.sent_time`.
+  */
+  google.protobuf.Timestamp event_timestamp = 5;
+  /*
   `is_mirrored` indicates whether the event is mirrored.
 
   If set to true, Raccoon will publish the events to a Kafka topic
   with a different naming format than the default topic name format
   */
-  bool is_mirrored = 3;
+  bool is_mirrored = 6;
 
 }
 

@@ -26,6 +26,9 @@ message Table {
   // preview_rows is a multidimensional array containing preview of table
   google.protobuf.ListValue preview_rows = 4;
 
+  // The DDL statement of the table.
+  string ddl_statement = 5;
+
   // List of attributes the model has.
   google.protobuf.Struct attributes = 10;
 

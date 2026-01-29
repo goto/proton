@@ -313,10 +313,28 @@ service GuardianService {
   }
 }
 
-message ListProvidersRequest {}
+message ListProvidersRequest {
+  uint32 size = 1 [(validate.rules).uint32 = {
+    gte: 0,
+    ignore_empty: true
+  }];
+  uint32 offset = 2 [(validate.rules).uint32 = {
+    gte: 0,
+    ignore_empty: true
+  }];
+  repeated string field_masks = 3;
+  repeated string ids = 4;
+  // Supported formats:
+  // - "<urn>" -> returns providers that match with the urn
+  // - "<urn>:<type>" -> returns providers that match with the urn and type
+  // Invalid or malformed entries are ignored.
+  repeated string urns = 5;
+  repeated string types = 6;
+}
 
 message ListProvidersResponse {
   repeated Provider providers = 1;
+  int32 total = 2;
 }
 
 message GetProviderRequest {
@@ -411,10 +429,27 @@ message ListActivitiesResponse {
   repeated ProviderActivity activities = 1;
 }
 
-message ListPoliciesRequest {}
+message ListPoliciesRequest {
+  uint32 size = 1 [(validate.rules).uint32 = {
+    gte: 0,
+    ignore_empty: true
+  }];
+  uint32 offset = 2 [(validate.rules).uint32 = {
+    gte: 0,
+    ignore_empty: true
+  }];
+  repeated string field_masks = 3;
+  // Supported formats:
+  // - "<id>"        → returns all versions of the policy
+  // - "<id>:0"      → returns the latest version of the policy
+  // - "<id>:<n>"    → returns version <n> of the policy (n > 0)
+  // Invalid or malformed entries are ignored.
+  repeated string ids = 4;
+}
 
 message ListPoliciesResponse {
   repeated Policy policies = 1;
+  int32 total = 2;
 }
 
 message GetPolicyRequest {
@@ -486,6 +521,9 @@ message ListResourcesRequest {
   repeated string provider_urns = 15;
   repeated string types = 16;
   repeated string urns = 17;
+  repeated string ids = 18;
+  repeated string global_urns = 19;
+  repeated string parent_ids = 20;
 }
 
 message ListResourcesResponse {
@@ -547,6 +585,40 @@ message ListUserAppealsRequest {
   string role_contains = 22;
   optional google.protobuf.Timestamp start_time = 23;
   optional google.protobuf.Timestamp end_time = 24;
+  bool with_approvals = 25;
+  string provider_urn_starts_with = 26;
+  string provider_urn_ends_with = 27;
+  string provider_urn_contains = 28;
+  string provider_urn_not_starts_with = 29;
+  string provider_urn_not_ends_with = 30;
+  string provider_urn_not_contains = 31;
+  repeated string durations = 32;
+  repeated string not_durations = 33;
+  repeated string details_paths = 34;
+  repeated string details = 35;
+  repeated string not_details = 36;
+  string role_not_starts_with = 37;
+  string role_not_ends_with = 38;
+  string role_not_contains = 39;
+  string details_starts_with = 40;
+  string details_ends_with = 41;
+  string details_contains = 42;
+  string details_not_starts_with = 43;
+  string details_not_ends_with = 44;
+  string details_not_contains = 45;
+  string group_type_starts_with = 46;
+  string group_type_ends_with = 47;
+  string group_type_contains = 48;
+  string group_type_not_starts_with = 49;
+  string group_type_not_ends_with = 50;
+  string group_type_not_contains = 51;
+  repeated string ids = 52;
+  repeated string not_ids = 53;
+  repeated string details_for_self_criteria = 54;
+  repeated string not_details_for_self_criteria = 55;
+  map<string, LabelValues> labels = 56;
+  repeated string label_keys = 57;
+  bool summary_labels = 58;
 }
 
 message ListUserAppealsResponse {
@@ -588,6 +660,40 @@ message ListAppealsRequest {
   string role_contains = 24;
   optional google.protobuf.Timestamp start_time = 25;
   optional google.protobuf.Timestamp end_time = 26;
+  bool with_approvals = 27;
+  string provider_urn_starts_with = 28;
+  string provider_urn_ends_with = 29;
+  string provider_urn_contains = 30;
+  string provider_urn_not_starts_with = 31;
+  string provider_urn_not_ends_with = 32;
+  string provider_urn_not_contains = 33;
+  repeated string durations = 34;
+  repeated string not_durations = 35;
+  repeated string details_paths = 36;
+  repeated string details = 37;
+  repeated string not_details = 38;
+  string role_not_starts_with = 39;
+  string role_not_ends_with = 40;
+  string role_not_contains = 41;
+  map<string, LabelValues> labels = 42;
+  repeated string label_keys = 43;
+  string details_starts_with = 44;
+  string details_ends_with = 45;
+  string details_contains = 46;
+  string details_not_starts_with = 47;
+  string details_not_ends_with = 48;
+  string details_not_contains = 49;
+  string group_type_starts_with = 50;
+  string group_type_ends_with = 51;
+  string group_type_contains = 52;
+  string group_type_not_starts_with = 53;
+  string group_type_not_ends_with = 54;
+  string group_type_not_contains = 55;
+  repeated string ids = 56;
+  repeated string not_ids = 57;
+  repeated string details_for_self_criteria = 58;
+  repeated string not_details_for_self_criteria = 59;
+  bool summary_labels = 60;
 }
 
 message ListAppealsResponse {
@@ -656,6 +762,9 @@ message CreateAppealRequest {
   reserved "group_id";
   reserved 6;
   reserved "group_type";
+  bool dry_run = 7;
+
+  map<string, string> user_labels = 8;
 }
 
 message PatchAppealRequest {
@@ -675,6 +784,7 @@ message PatchAppealResponse {
 
 message CreateAppealResponse {
   repeated Appeal appeals = 1;
+  bool dry_run = 7;
 }
 
 message ListAppealCommentsRequest {
@@ -736,6 +846,40 @@ message ListUserApprovalsRequest {
   repeated string roles = 25;
   repeated string requestors = 26;
   repeated string account_ids = 27;
+  string provider_urn_starts_with = 28;
+  string provider_urn_ends_with = 29;
+  string provider_urn_contains = 30;
+  string provider_urn_not_starts_with = 31;
+  string provider_urn_not_ends_with = 32;
+  string provider_urn_not_contains = 33;
+  repeated string appeal_durations = 34;
+  repeated string not_appeal_durations = 35;
+  repeated string appeal_details_paths = 36;
+  repeated string appeal_details = 37;
+  repeated string not_appeal_details = 38;
+  string role_not_starts_with = 39;
+  string role_not_ends_with = 40;
+  string role_not_contains = 41;
+  string appeal_details_starts_with = 42;
+  string appeal_details_ends_with = 43;
+  string appeal_details_contains = 44;
+  string appeal_details_not_starts_with = 45;
+  string appeal_details_not_ends_with = 46;
+  string appeal_details_not_contains = 47;
+  repeated string group_ids = 48;
+  repeated string group_types = 49;
+  string group_type_starts_with = 50;
+  string group_type_ends_with = 51;
+  string group_type_contains = 52;
+  string group_type_not_starts_with = 53;
+  string group_type_not_ends_with = 54;
+  string group_type_not_contains = 55;
+  bool appeal_for_self = 56; // deprecated
+  repeated string appeal_details_for_self_criteria = 57;
+  repeated string not_appeal_details_for_self_criteria = 58;
+  map<string, LabelValues> labels = 59;
+  repeated string label_keys = 60;
+  bool summary_labels = 61;
 }
 
 message ListUserApprovalsResponse {
@@ -778,6 +922,40 @@ message ListApprovalsRequest {
   repeated string roles = 25;
   repeated string requestors = 26;
   repeated string account_ids = 27;
+  string provider_urn_starts_with = 28;
+  string provider_urn_ends_with = 29;
+  string provider_urn_contains = 30;
+  string provider_urn_not_starts_with = 31;
+  string provider_urn_not_ends_with = 32;
+  string provider_urn_not_contains = 33;
+  repeated string appeal_durations = 34;
+  repeated string not_appeal_durations = 35;
+  repeated string appeal_details_paths = 36;
+  repeated string appeal_details = 37;
+  repeated string not_appeal_details = 38;
+  string role_not_starts_with = 39;
+  string role_not_ends_with = 40;
+  string role_not_contains = 41;
+  string appeal_details_starts_with = 42;
+  string appeal_details_ends_with = 43;
+  string appeal_details_contains = 44;
+  string appeal_details_not_starts_with = 45;
+  string appeal_details_not_ends_with = 46;
+  string appeal_details_not_contains = 47;
+  repeated string group_ids = 48;
+  repeated string group_types = 49;
+  string group_type_starts_with = 50;
+  string group_type_ends_with = 51;
+  string group_type_contains = 52;
+  string group_type_not_starts_with = 53;
+  string group_type_not_ends_with = 54;
+  string group_type_not_contains = 55;
+  bool appeal_for_self = 56; // deprecated
+  repeated string appeal_details_for_self_criteria = 57;
+  repeated string not_appeal_details_for_self_criteria = 58;
+  map<string, LabelValues> labels = 59;
+  repeated string label_keys = 60;
+  bool summary_labels = 61;
 }
 
 message ListApprovalsResponse {
@@ -872,6 +1050,39 @@ message ListGrantsRequest {
   string role_contains = 27;
   optional google.protobuf.Timestamp start_time = 28;
   optional google.protobuf.Timestamp end_time = 29;
+  repeated string summary_distinct_counts = 30;
+  repeated string owners = 31;
+  string provider_urn_starts_with = 32;
+  string provider_urn_ends_with = 33;
+  string provider_urn_contains = 34;
+  string provider_urn_not_starts_with = 35;
+  string provider_urn_not_ends_with = 36;
+  string provider_urn_not_contains = 37;
+  repeated string appeal_durations = 38;
+  repeated string not_appeal_durations = 39;
+  repeated string appeal_details_paths = 40;
+  repeated string appeal_details = 41;
+  repeated string not_appeal_details = 42;
+  string role_not_starts_with = 43;
+  string role_not_ends_with = 44;
+  string role_not_contains = 45;
+  string appeal_details_starts_with = 46;
+  string appeal_details_ends_with = 47;
+  string appeal_details_contains = 48;
+  string appeal_details_not_starts_with = 49;
+  string appeal_details_not_ends_with = 50;
+  string appeal_details_not_contains = 51;
+  string group_type_starts_with = 52;
+  string group_type_ends_with = 53;
+  string group_type_contains = 54;
+  string group_type_not_starts_with = 55;
+  string group_type_not_ends_with = 56;
+  string group_type_not_contains = 57;
+  repeated string appeal_details_for_self_criteria = 58;
+  repeated string not_appeal_details_for_self_criteria = 59;
+  map<string, LabelValues> labels = 60;
+  repeated string label_keys = 61;
+  bool summary_labels = 62;
 }
 
 message ListGrantsResponse {
@@ -928,6 +1139,37 @@ message ListUserGrantsRequest {
   InactiveGrantPolicy inactive_grant_policy = 24;
   optional google.protobuf.Timestamp start_time = 25;
   optional google.protobuf.Timestamp end_time = 26;
+  string provider_urn_starts_with = 27;
+  string provider_urn_ends_with = 28;
+  string provider_urn_contains = 29;
+  string provider_urn_not_starts_with = 30;
+  string provider_urn_not_ends_with = 31;
+  string provider_urn_not_contains = 32;
+  repeated string appeal_durations = 33;
+  repeated string not_appeal_durations = 34;
+  repeated string appeal_details_paths = 35;
+  repeated string appeal_details = 36;
+  repeated string not_appeal_details = 37;
+  string role_not_starts_with = 38;
+  string role_not_ends_with = 39;
+  string role_not_contains = 40;
+  string appeal_details_starts_with = 41;
+  string appeal_details_ends_with = 42;
+  string appeal_details_contains = 43;
+  string appeal_details_not_starts_with = 44;
+  string appeal_details_not_ends_with = 45;
+  string appeal_details_not_contains = 46;
+  string group_type_starts_with = 47;
+  string group_type_ends_with = 48;
+  string group_type_contains = 49;
+  string group_type_not_starts_with = 50;
+  string group_type_not_ends_with = 51;
+  string group_type_not_contains = 52;
+  repeated string appeal_details_for_self_criteria = 53;
+  repeated string not_appeal_details_for_self_criteria = 54;
+  map<string, LabelValues> labels = 55;
+  repeated string label_keys = 56;
+  bool summary_labels = 57;
 }
 
 message ListUserGrantsResponse {
@@ -1095,6 +1337,11 @@ message PolicyAppealConfig {
     google.protobuf.Value value = 5;
   }
   map<string, MetadataSource> metadata_sources = 7;
+
+  string terms_and_conditions = 8;
+
+  repeated LabelingRule labeling_rules = 9;
+  UserLabelConfig user_label_config = 10;
 }
 
 // Policy is a configurable steps for appeal's approval
@@ -1113,6 +1360,8 @@ message Policy {
     repeated string approvers = 7;
     string rejection_reason = 8;
     bool dont_allow_self_approval = 9;
+    google.protobuf.Struct details = 10;
+    string terms_and_conditions = 11;
   }
   repeated ApprovalStep steps = 4;
 
@@ -1147,6 +1396,15 @@ message Policy {
       string account_type = 5;
     }
     repeated AdditionalAppeal appeals = 2;
+
+    message PostAppealHook {
+      string name = 1;
+      string description = 2;
+      string type = 3;
+      google.protobuf.Struct config = 4;
+      bool allow_failed = 5;
+    }
+    repeated PostAppealHook post_hooks = 3;
   }
   repeated Requirement requirements = 8;
 
@@ -1201,6 +1459,7 @@ message Appeal {
   uint32 revision = 24;
   string group_id = 25;
   string group_type = 26;
+  map<string, LabelMetadata> labels_metadata = 27;
 }
 
 // Approval is an approval item that generated in an appeal based on the selected policy
@@ -1219,6 +1478,9 @@ message Approval {
   string reason = 12;
   bool is_stale = 13;
   uint32 appeal_revision = 14;
+  bool allow_failed = 15;
+  bool dont_allow_self_approval = 16;
+  google.protobuf.Struct details = 17;
 }
 
 message AppealComment {
@@ -1317,11 +1579,18 @@ message SummaryResult {
   message Group {
     map<string, google.protobuf.Value> group_fields = 1;
     int32 count = 2;
+    map<string, int32> distinct_counts = 3;
   }
 
   message Unique {
     string field = 1;
     repeated google.protobuf.Value values = 2;
+    int32 count = 3;
+  }
+
+  message Label {
+    string key = 1;
+    repeated string values = 2;
     int32 count = 3;
   }
 
@@ -1331,4 +1600,50 @@ message SummaryResult {
   repeated Unique uniques = 4;
   int32 groups_count = 5;
   int32 uniques_count = 6;
+  repeated Label labels = 7;
+  int32 labels_count = 8;
+}
+
+// LabelingRule defines automatic label application rules
+message LabelingRule {
+  string rule_name = 1;
+  string description = 2;
+  string when = 3;                                    // Expression for condition
+  map<string, string> labels = 4;                     // Static or dynamic label values
+  map<string, LabelMetadataConfig> label_metadata = 5;
+  int32 priority = 6;
+  bool allow_failure = 7;
+}
+
+// LabelMetadataConfig defines metadata to attach to labels
+message LabelMetadataConfig {
+  string category = 1;
+  google.protobuf.Struct attributes = 2;              // Arbitrary key-value metadata
+}
+
+// UserLabelConfig defines validation rules for user-provided labels
+message UserLabelConfig {
+  bool allow_user_labels = 1;
+  repeated string allowed_keys = 2;                   // Whitelist with glob support
+  repeated string required_keys = 3;
+  int32 max_labels = 4;
+  string key_pattern = 5;                             // Regex for key validation
+  string value_pattern = 6;                           // Regex for value validation
+  bool allow_override = 7;
+}
+
+// LabelMetadata contains rich information about label derivation
+message LabelMetadata {
+  string value = 1;
+  string derived_from = 2;                            // Rule name or "user"
+  string source = 3;                                  // "policy_rule", "user", etc.
+  string category = 4;
+  google.protobuf.Struct attributes = 5;
+  string applied_by = 6;                              // User email for user labels
+  google.protobuf.Timestamp applied_at = 7;
+}
+
+// LabelValues for filtering (OR within values)
+message LabelValues {
+  repeated string values = 1;
 }
