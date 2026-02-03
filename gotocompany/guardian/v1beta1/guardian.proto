@@ -761,8 +761,23 @@ message CreateAppealRequest {
     google.protobuf.Struct details = 4;
     string group_id = 5;
     string group_type = 6;
-    repeated ApprovalStep additional_approval_steps = 7;
+
+    message AdditionalApprovalStep {
+      string name = 1;
+      string description = 2;
+      bool allow_failed = 3;
+      string when = 4;
+      string strategy = 5;
+      string approve_if = 6;
+      repeated string approvers = 7;
+      string rejection_reason = 8;
+      bool dont_allow_self_approval = 9;
+      google.protobuf.Struct details = 10;
+      string terms_and_conditions = 11;
+    }
+    repeated AdditionalApprovalStep additional_approval_steps = 7;
   }
+
   repeated Resource resources = 2;
   string account_type = 3;
   string description = 4;
@@ -1362,27 +1377,27 @@ message PolicyAppealConfig {
   UserLabelConfig user_label_config = 10;
 }
 
-// ApprovalStep is a single step in an approval policy
-message ApprovalStep {
-  string name = 1;
-  string description = 2;
-  bool allow_failed = 3;
-  string when = 4;
-  string strategy = 5;
-  string approve_if = 6;
-  repeated string approvers = 7;
-  string rejection_reason = 8;
-  bool dont_allow_self_approval = 9;
-  google.protobuf.Struct details = 10;
-  string terms_and_conditions = 11;
-}
-
 // Policy is a configurable steps for appeal's approval
 message Policy {
   string id = 1;
   uint32 version = 2;
   string description = 3;
+
+  message ApprovalStep {
+    string name = 1;
+    string description = 2;
+    bool allow_failed = 3;
+    string when = 4;
+    string strategy = 5;
+    string approve_if = 6;
+    repeated string approvers = 7;
+    string rejection_reason = 8;
+    bool dont_allow_self_approval = 9;
+    google.protobuf.Struct details = 10;
+    string terms_and_conditions = 11;
+  }
   repeated ApprovalStep steps = 4;
+
   map<string, string> labels = 5;
   google.protobuf.Timestamp created_at = 6;
   google.protobuf.Timestamp updated_at = 7;
