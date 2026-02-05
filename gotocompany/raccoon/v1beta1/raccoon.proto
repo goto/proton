@@ -91,6 +91,14 @@ message Event {
    that is represented separately by `SendEventRequest.sent_time`.
   */
   google.protobuf.Timestamp event_timestamp = 5;
+  /*
+   `is_mirrored` indicates whether the event is mirrored.
+
+    If set to true, Raccoon will publish the events to a Kafka topic
+    with a different naming format than the default topic name format
+  */
+  bool is_mirrored = 6;
+
 }
 
 /*
