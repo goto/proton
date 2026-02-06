@@ -93,11 +93,30 @@ message Event {
   google.protobuf.Timestamp event_timestamp = 5;
   /*
    `is_mirrored` indicates whether the event is mirrored.
+    DEPRECATED:
+    This field is deprecated and will be removed in a future release.
+    Use `is_exclusive` instead.
 
-    If set to true, Raccoon will publish the events to a Kafka topic
+    Historically, If set to true, Raccoon will publish the events to a Kafka topic
     with a different naming format than the default topic name format
   */
-  bool is_mirrored = 6;
+  bool is_mirrored = 6 [deprecated = true];
+
+  /*
+   `is_exclusive` indicates whether the event is exclusive to ingest on actual clickstream topic.
+    This flag replaces `is_mirrored`.
+
+    Backward compatibility:
+    - For older app versions that do not send this field, the value will default to `false`.
+    - This ensures events from older clients continue to be routed to the MQTT-specific topic by default.
+
+    When MQTT consumer is enabled:
+    - If set to true:
+      The event is considered exclusive and will be published to the actual Clickstream topic.
+    - If set to false:
+      The event will be published to an MQTT-specific topic.
+*/
+  bool is_exclusive = 7;
 
 }
 
