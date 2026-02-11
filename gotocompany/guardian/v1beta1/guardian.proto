@@ -244,6 +244,10 @@ service GuardianService {
     option (google.api.http) = {
       post: "/v1beta1/appeals/{id}/approvals/{approval_name}"
       body: "action"
+      additional_bindings: {
+        post: "/v1beta1/appeals/{id}/approvals"
+        body: "*"
+      }
     };
   }
 
@@ -1006,6 +1010,7 @@ message UpdateApprovalRequest {
     string reason = 2;
   }
   Action action = 3;
+  string approval_id = 4;
 }
 
 message UpdateApprovalResponse {
