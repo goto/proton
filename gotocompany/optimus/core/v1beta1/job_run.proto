@@ -427,5 +427,8 @@ message GenerateExpectedFinishTimeResponse {
 
 message FinishTimeDetailResponse {
   google.protobuf.Timestamp scheduled_at = 1;
-  google.protobuf.Timestamp expected_finish_time = 2;
+  oneof finish_time {
+    google.protobuf.Timestamp expected_finish_time = 2;
+    google.protobuf.Timestamp actual_finish_time = 3;
+  }
 }
