@@ -106,6 +106,14 @@ service JobRunService {
       body: "*"
     };
   }
+
+  // GenerateExpectedFinishTime generates and stores the expected finish time for a given job(s)
+  rpc GenerateExpectedFinishTime(GenerateExpectedFinishTimeRequest) returns (GenerateExpectedFinishTimeResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/project/{project_name}/expected_job_finish_time"
+      body: "*"
+    };
+  }
 }
 
 message DexSensorRequest {
@@ -402,4 +410,25 @@ message UpstreamJobStatus {
 
 message UpstreamJobsStatus {
   repeated UpstreamJobStatus jobs_status = 1;
+}
+
+message GenerateExpectedFinishTimeRequest {
+  string project_name = 1;
+  repeated string job_names = 2;
+  map<string, string> job_labels = 3;
+  int32 scheduled_range_in_hours = 4;
+  google.protobuf.Timestamp reference_time = 5; // RFC3339 format
+}
+
+message GenerateExpectedFinishTimeResponse {
+  map<string, FinishTimeDetailResponse> inprogress_jobs = 1;
+  map<string, FinishTimeDetailResponse> finished_jobs = 2;
+}
+
+message FinishTimeDetailResponse {
+  google.protobuf.Timestamp scheduled_at = 1;
+  oneof finish_time {
+    google.protobuf.Timestamp expected_finish_time = 2;
+    google.protobuf.Timestamp actual_finish_time = 3;
+  }
 }
