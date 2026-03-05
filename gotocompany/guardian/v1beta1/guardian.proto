@@ -260,6 +260,20 @@ service GuardianService {
     };
   }
 
+  rpc AddApprovalStep(AddApprovalStepRequest) returns (AddApprovalStepResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/appeals/{appeal_id}/approvals"
+      body: "*"
+    };
+  }
+
+  rpc UpdateApprovalStep(UpdateApprovalStepRequest) returns (UpdateApprovalStepResponse) {
+    option (google.api.http) = {
+      patch: "/v1beta1/appeals/{appeal_id}/approvals/{approval_id}"
+      body: "*"
+    };
+  }
+
   rpc ListGrants(ListGrantsRequest) returns (ListGrantsResponse) {
     option (google.api.http) = {
       get: "/v1beta1/grants"
@@ -1029,6 +1043,32 @@ message DeleteApproverRequest {
 }
 
 message DeleteApproverResponse {
+  Appeal appeal = 1;
+}
+
+message ApprovalStepInput {
+  string name = 1;
+  repeated string approvers = 2;
+  google.protobuf.Struct details = 3;
+  int32 index = 4; // 0 = append at end
+}
+
+message AddApprovalStepRequest {
+  string appeal_id = 1;
+  repeated ApprovalStepInput steps = 2;
+}
+
+message AddApprovalStepResponse {
+  Appeal appeal = 1;
+}
+
+message UpdateApprovalStepRequest {
+  string appeal_id = 1;
+  string approval_id = 2;
+  google.protobuf.Struct details = 3;
+}
+
+message UpdateApprovalStepResponse {
   Appeal appeal = 1;
 }
 
