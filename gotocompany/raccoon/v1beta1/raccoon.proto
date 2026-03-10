@@ -117,6 +117,17 @@ message Event {
       The event will be published to an MQTT-specific topic.
 */
   bool is_exclusive = 7;
+  /*
+ `app_version` denotes the version of the mobile app generating the event.
+ Example: "7.15.2"
+  */
+  string app_version = 8;
+
+  /*
+   `platform` denotes the mobile client platform generating the event.
+   Example: ANDROID, IOS, FLUTTER
+  */
+  Platform platform = 9;
 
 }
 
@@ -199,4 +210,30 @@ enum Code {
   contains unique identifier is configurable on Raccoon by setting `SERVER_WEBSOCKET_CONN_UNIQ_ID_HEADER`
   */
   CODE_MAX_USER_LIMIT_REACHED = 5;
+}
+
+enum Platform {
+  /*
+   `PLATFORM_UNSPECIFIED` indicates the platform is not provided
+   or cannot be determined. This is the default value.
+  */
+  PLATFORM_UNSPECIFIED = 0;
+
+  /*
+   `PLATFORM_ANDROID` indicates the event originated from
+   an Android native application.
+  */
+  PLATFORM_ANDROID = 1;
+
+  /*
+   `PLATFORM_IOS` indicates the event originated from
+   an iOS native application.
+  */
+  PLATFORM_IOS = 2;
+
+  /*
+   `PLATFORM_FLUTTER` indicates the event originated from
+   a Flutter-based application.
+  */
+  PLATFORM_FLUTTER = 3;
 }
