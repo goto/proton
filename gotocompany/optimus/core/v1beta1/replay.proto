@@ -87,6 +87,7 @@ message ReplayConfig {
   bool parallel = 3;
   map<string, string> job_config = 4;
   string description = 5;
+  string category = 6;
 }
 
 message ReplayRun {
@@ -107,6 +108,7 @@ message ReplayRequest {
   bool parallel = 6;
   string description = 7;
   string job_config = 8;
+  string category = 9;
 }
 
 message ReplayDryRunRequest {
@@ -118,6 +120,7 @@ message ReplayDryRunRequest {
   bool parallel = 6;
   string description = 7;
   string job_config = 8;
+  string category = 9;
 }
 
 message ReplayResponse {
