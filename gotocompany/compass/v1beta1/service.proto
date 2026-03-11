@@ -260,6 +260,21 @@ service CompassService {
     };
   }
 
+  rpc GetGraphV2(GetGraphV2Request) returns (GetGraphV2Response) {
+    option (google.api.http) = {
+      get: "/v1beta1/v2/lineage/{urn=**}"
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Get Lineage Graph V2 (Table/Column Level)";
+      description: "Returns the full table dan column level lineage graph. Each entry in the graph describes a (edge) directed relation of assets with source and destination using it's urn, type, and service.";
+      tags: [
+        "Lineage",
+        "Asset"
+      ];
+    };
+  }
+
   rpc GetAllTypes(GetAllTypesRequest) returns (GetAllTypesResponse) {
     option (google.api.http) = {
       get: "/v1beta1/types"
@@ -978,6 +993,46 @@ message GetGraphResponse {
   map<string, NodeAttributes> node_attrs = 2;
 }
 
+message GetGraphV2Request {
+  string urn = 1;
+  uint32 level = 2;
+  string direction = 3 [(validate.rules).string = {
+    in: [
+      "upstream",
+      "downstream",
+      ""
+    ]
+  }];
+  optional bool with_attributes = 4;
+  bool include_deleted = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "If true, include soft deleted assets in the lineage graph result"
+  }];
+  optional string coverage = 6 [(validate.rules).string = {
+    in: [
+      "asset",
+      "column",
+      ""
+    ]
+  }];
+  optional string column_name = 7;
+}
+
+message GetGraphV2Response {
+  message ProbesInfo {
+    Probe latest = 1;
+  }
+
+  message NodeAttributes {
+    ProbesInfo probes = 1;
+  }
+
+  // Edges in the graph.
+  repeated LineageEdgeV2 data = 1;
+  // Key is the asset URN. Node attributes, if present, will be returned for
+  // source and target nodes in the LineageEdge.
+  map<string, NodeAttributes> node_attrs = 2;
+}
+
 message GetAllTypesRequest {
   string q = 1 [
     (validate.rules).string.ignore_empty = true,
@@ -1603,6 +1658,20 @@ message LineageEdge {
   string source = 1;
   string target = 2;
   google.protobuf.Struct prop = 3;
+}
+
+message LineageEdgeV2 {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "LineageEdgeV2"
+    }
+  };
+
+  string source_asset = 1;
+  optional string source_column = 2;
+  string target_asset = 3;
+  optional string target_column = 4;
+  google.protobuf.Struct prop = 5;
 }
 
 message LineageNode {
