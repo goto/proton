@@ -1026,11 +1026,13 @@ message GetGraphV2Response {
     ProbesInfo probes = 1;
   }
 
+  // Lineage graph type if it's asset or column level lineage.
+  string type = 1;
   // Edges in the graph.
-  repeated LineageEdgeV2 data = 1;
+  repeated LineageEdgeV2 data = 2;
   // Key is the asset URN. Node attributes, if present, will be returned for
   // source and target nodes in the LineageEdge.
-  map<string, NodeAttributes> node_attrs = 2;
+  map<string, NodeAttributes> node_attrs = 3;
 }
 
 message GetAllTypesRequest {
