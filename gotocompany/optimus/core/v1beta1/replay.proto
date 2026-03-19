@@ -18,8 +18,8 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   external_docs: {
     description: "Optimus Replay Service";
   }
-  schemes: HTTP;
-  host: "127.0.0.1:9100";
+  schemes  : HTTP;
+  host     : "127.0.0.1:9100";
   base_path: "/api";
 };
 
@@ -68,31 +68,32 @@ message ListReplayResponse {
 }
 
 message GetReplayRequest {
-  string replay_id = 1;
+  string replay_id    = 1;
   string project_name = 2;
+  string approver_id  = 3;
 }
 
 message GetReplayResponse {
-  string id = 1;
-  string job_name = 2;
-  string status = 3;
-  ReplayConfig replay_config = 4;
-  repeated ReplayRun replay_runs = 5;
-  string message = 6;
+  string             id            = 1;
+  string             job_name      = 2;
+  string             status        = 3;
+  ReplayConfig       replay_config = 4;
+  repeated ReplayRun replay_runs   = 5;
+  string             message       = 6;
 }
 
 message ReplayConfig {
-  google.protobuf.Timestamp start_time = 1;
-  google.protobuf.Timestamp end_time = 2;
-  bool parallel = 3;
-  map<string, string> job_config = 4;
-  string description = 5;
-  string category = 6;
+  google.protobuf.Timestamp start_time  = 1;
+  google.protobuf.Timestamp end_time    = 2;
+  bool                      parallel    = 3;
+  map<string, string>       job_config  = 4;
+  string                    description = 5;
+  string                    category    = 6;
 }
 
 message ReplayRun {
   google.protobuf.Timestamp scheduled_at = 1;
-  string status = 2;
+  string                    status       = 2;
 }
 
 message ReplayDryRunResponse {
@@ -100,27 +101,29 @@ message ReplayDryRunResponse {
 }
 
 message ReplayRequest {
-  string project_name = 1;
-  string job_name = 2;
-  string namespace_name = 3;
-  google.protobuf.Timestamp start_time = 4;
-  google.protobuf.Timestamp end_time = 5;
-  bool parallel = 6;
-  string description = 7;
-  string job_config = 8;
-  string category = 9;
+  string                    project_name   = 1;
+  string                    job_name       = 2;
+  string                    namespace_name = 3;
+  google.protobuf.Timestamp start_time     = 4;
+  google.protobuf.Timestamp end_time       = 5;
+  bool                      parallel       = 6;
+  string                    description    = 7;
+  string                    job_config     = 8;
+  string                    category       = 9;
+  string                    approver_id    = 10;
+  string                    user_id        = 11;
 }
 
 message ReplayDryRunRequest {
-  string project_name = 1;
-  string job_name = 2;
-  string namespace_name = 3;
-  google.protobuf.Timestamp start_time = 4;
-  google.protobuf.Timestamp end_time = 5;
-  bool parallel = 6;
-  string description = 7;
-  string job_config = 8;
-  string category = 9;
+  string                    project_name   = 1;
+  string                    job_name       = 2;
+  string                    namespace_name = 3;
+  google.protobuf.Timestamp start_time     = 4;
+  google.protobuf.Timestamp end_time       = 5;
+  bool                      parallel       = 6;
+  string                    description    = 7;
+  string                    job_config     = 8;
+  string                    category       = 9;
 }
 
 message ReplayResponse {
@@ -129,20 +132,22 @@ message ReplayResponse {
 
 message CancelReplayRequest {
   string project_name = 1;
-  string replay_id = 2;
+  string replay_id    = 2;
+  string approver_id  = 3;
 }
 
 message CancelReplayResponse {
-  string job_name = 1;
+  string             job_name    = 1;
   repeated ReplayRun replay_runs = 2;
 }
 
 message GetReplayDetailsRequest {
-  string project_name = 1;
-  string replay_id = 2;
-  repeated string job_names = 3;
+  string                    project_name = 1;
+  string                    replay_id    = 2;
+  repeated string           job_names    = 3;
   google.protobuf.Timestamp scheduled_at = 4;
-  string status = 5;
+  string                    status       = 5;
+  string                    approver_id  = 6;
 }
 
 message GetReplayDetailsResponse {
