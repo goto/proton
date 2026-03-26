@@ -32,6 +32,9 @@ message Table {
   // List of attributes the model has.
   google.protobuf.Struct attributes = 10;
 
+  //Optional. List of labels.
+  map<string, string> labels = 20;
+
   // The timestamp of the table's creation.
   google.protobuf.Timestamp create_time = 101;
 
