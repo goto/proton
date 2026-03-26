@@ -125,6 +125,8 @@ message ReplayDryRunRequest {
   string                    description    = 7;
   string                    job_config     = 8;
   string                    category       = 9;
+  string                    approver_id    = 10;
+  string                    user_id        = 11;
 }
 
 message ReplayResponse {
