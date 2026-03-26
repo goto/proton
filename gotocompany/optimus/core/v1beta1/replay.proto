@@ -80,6 +80,7 @@ message GetReplayResponse {
   ReplayConfig       replay_config = 4;
   repeated ReplayRun replay_runs   = 5;
   string             message       = 6;
+  string             approver_id   = 7;
 }
 
 message ReplayConfig {
