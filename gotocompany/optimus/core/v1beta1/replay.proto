@@ -81,6 +81,7 @@ message GetReplayResponse {
   repeated ReplayRun replay_runs   = 5;
   string             message       = 6;
   string             approver_id   = 7;
+  string             user_id       = 8;
 }
 
 message ReplayConfig {
