@@ -79,7 +79,7 @@ message GetReplayResponse {
   ReplayConfig       replay_config = 4;
   repeated ReplayRun replay_runs   = 5;
   string             message       = 6;
-  string             approver_id   = 7;
+  string             approval_id   = 7;
   string             user_id       = 8;
 }
 
@@ -111,7 +111,7 @@ message ReplayRequest {
   string                    description    = 7;
   string                    job_config     = 8;
   string                    category       = 9;
-  string                    approver_id    = 10;
+  string                    approval_id    = 10;
   string                    user_id        = 11;
 }
 
@@ -125,7 +125,7 @@ message ReplayDryRunRequest {
   string                    description    = 7;
   string                    job_config     = 8;
   string                    category       = 9;
-  string                    approver_id    = 10;
+  string                    approval_id    = 10;
   string                    user_id        = 11;
 }
 
@@ -149,7 +149,7 @@ message GetReplayDetailsRequest {
   repeated string           job_names    = 3;
   google.protobuf.Timestamp scheduled_at = 4;
   string                    status       = 5;
-  string                    approver_id  = 6;
+  string                    approval_id  = 6;
 }
 
 message GetReplayDetailsResponse {
