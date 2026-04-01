@@ -150,6 +150,7 @@ message GetReplayDetailsRequest {
   google.protobuf.Timestamp scheduled_at = 4;
   string                    status       = 5;
   string                    approval_id  = 6;
+  string                    user_id      = 7;
 }
 
 message GetReplayDetailsResponse {
