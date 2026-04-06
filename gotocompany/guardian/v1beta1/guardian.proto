@@ -640,7 +640,6 @@ message ListUserAppealsRequest {
   map<string, LabelValues> labels = 56;
   repeated string label_keys = 57;
   bool summary_labels = 58;
-  bool include_filters_to_labels = 59;
 }
 
 message ListUserAppealsResponse {
@@ -716,7 +715,6 @@ message ListAppealsRequest {
   repeated string details_for_self_criteria = 58;
   repeated string not_details_for_self_criteria = 59;
   bool summary_labels = 60;
-  bool include_filters_to_labels = 61;
 }
 
 message ListAppealsResponse {
@@ -913,7 +911,6 @@ message ListUserApprovalsRequest {
   map<string, LabelValues> labels = 59;
   repeated string label_keys = 60;
   bool summary_labels = 61;
-  bool include_filters_to_labels = 62;
 }
 
 message ListUserApprovalsResponse {
@@ -990,7 +987,6 @@ message ListApprovalsRequest {
   map<string, LabelValues> labels = 59;
   repeated string label_keys = 60;
   bool summary_labels = 61;
-  bool include_filters_to_labels = 62;
 }
 
 message ListApprovalsResponse {
@@ -1144,8 +1140,6 @@ message ListGrantsRequest {
   map<string, LabelValues> labels = 60;
   repeated string label_keys = 61;
   bool summary_labels = 62;
-  bool include_filters_to_labels = 63;
-  bool exclude_empty_appeal = 64;
 }
 
 message ListGrantsResponse {
@@ -1233,8 +1227,6 @@ message ListUserGrantsRequest {
   map<string, LabelValues> labels = 55;
   repeated string label_keys = 56;
   bool summary_labels = 57;
-  bool include_filters_to_labels = 58;
-  bool exclude_empty_appeal = 59;
 }
 
 message ListUserGrantsResponse {
