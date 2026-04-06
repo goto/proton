@@ -636,6 +636,9 @@ message JobChangelog {
   string event_type = 1;
   string timestamp = 2;
   repeated JobChange change = 3;
+  string author = 4;
+  string source = 5;
+  map<string, string> metadata = 6;
 }
 
 message GetJobChangelogResponse {
