@@ -640,6 +640,7 @@ message ListUserAppealsRequest {
   map<string, LabelValues> labels = 56;
   repeated string label_keys = 57;
   bool summary_labels = 58;
+  bool summary_labels_v2 = 59;
 }
 
 message ListUserAppealsResponse {
@@ -715,6 +716,7 @@ message ListAppealsRequest {
   repeated string details_for_self_criteria = 58;
   repeated string not_details_for_self_criteria = 59;
   bool summary_labels = 60;
+  bool summary_labels_v2 = 61;
 }
 
 message ListAppealsResponse {
@@ -911,6 +913,7 @@ message ListUserApprovalsRequest {
   map<string, LabelValues> labels = 59;
   repeated string label_keys = 60;
   bool summary_labels = 61;
+  bool summary_labels_v2 = 62;
 }
 
 message ListUserApprovalsResponse {
@@ -987,6 +990,7 @@ message ListApprovalsRequest {
   map<string, LabelValues> labels = 59;
   repeated string label_keys = 60;
   bool summary_labels = 61;
+  bool summary_labels_v2 = 62;
 }
 
 message ListApprovalsResponse {
@@ -1073,6 +1077,22 @@ message UpdateApprovalStepResponse {
 }
 
 message ListGrantsRequest {
+  enum InactiveGrantPolicy {
+    // Unspecified behavior. Defaults to INCLUDE_ALL.
+    // The server should treat this as INACTIVE_GRANT_POLICY_INCLUDE_ALL.
+    INACTIVE_GRANT_POLICY_UNSPECIFIED = 0;
+
+    // Include all grants, both active and inactive.
+    // This is the default behavior if no policy is specified.
+    INACTIVE_GRANT_POLICY_INCLUDE_ALL = 1;
+
+    // Smart visibility mode:
+    // - If X-Auth-Email not provided it will fallback to INACTIVE_GRANT_POLICY_UNSPECIFIED behaviour.
+    // - If a resource has both active and inactive grants, only active ones are shown.
+    // - If all grants for a resource are inactive, only the latest inactive grant is returned.
+    INACTIVE_GRANT_POLICY_SMART = 2;
+  }
+
   repeated string statuses = 1;
   repeated string account_ids = 2;
   repeated string account_types = 3;
@@ -1140,6 +1160,9 @@ message ListGrantsRequest {
   map<string, LabelValues> labels = 60;
   repeated string label_keys = 61;
   bool summary_labels = 62;
+  bool summary_labels_v2 = 63;
+  bool exclude_empty_appeal = 64;
+  InactiveGrantPolicy inactive_grant_policy = 65;
 }
 
 message ListGrantsResponse {
@@ -1227,6 +1250,8 @@ message ListUserGrantsRequest {
   map<string, LabelValues> labels = 55;
   repeated string label_keys = 56;
   bool summary_labels = 57;
+  bool summary_labels_v2 = 58;
+  bool exclude_empty_appeal = 59;
 }
 
 message ListUserGrantsResponse {
