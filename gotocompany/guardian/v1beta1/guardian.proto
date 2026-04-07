@@ -1164,6 +1164,7 @@ message ListGrantsRequest {
   bool exclude_empty_appeal = 64;
   InactiveGrantPolicy inactive_grant_policy = 65;
   InactiveGrantPolicy inactive_grant_group_id = 66;
+  InactiveGrantPolicy inactive_grant_resource_id = 67;
 }
 
 message ListGrantsResponse {
