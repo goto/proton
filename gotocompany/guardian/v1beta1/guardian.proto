@@ -1163,6 +1163,7 @@ message ListGrantsRequest {
   bool summary_labels_v2 = 63;
   bool exclude_empty_appeal = 64;
   InactiveGrantPolicy inactive_grant_policy = 65;
+  InactiveGrantPolicy inactive_grant_group_id = 66;
 }
 
 message ListGrantsResponse {
