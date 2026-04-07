@@ -1086,10 +1086,13 @@ message ListGrantsRequest {
     // This is the default behavior if no policy is specified.
     INACTIVE_GRANT_POLICY_INCLUDE_ALL = 1;
 
-    // Smart visibility mode:
-    // - If X-Auth-Email not provided it will fallback to INACTIVE_GRANT_POLICY_UNSPECIFIED behaviour.
-    // - If a resource has both active and inactive grants, only active ones are shown.
-    // - If all grants for a resource are inactive, only the latest inactive grant is returned.
+    // Smart deduplication mode scoped to a group, resource, or provider.
+    // Requires at least one of: inactive_grant_group_id, inactive_grant_group_type,
+    // inactive_grant_resource_id, or inactive_grant_provider_type to be set.
+    // - If a grant key (resource + account + role) has both active and inactive grants,
+    //   only the active ones are shown (inactive are excluded).
+    // - If all grants for a key are inactive, only the latest inactive grant is returned;
+    //   older duplicates are excluded.
     INACTIVE_GRANT_POLICY_SMART = 2;
   }
 
@@ -1163,9 +1166,14 @@ message ListGrantsRequest {
   bool summary_labels_v2 = 63;
   bool exclude_empty_appeal = 64;
   InactiveGrantPolicy inactive_grant_policy = 65;
+  // Scope for INACTIVE_GRANT_POLICY_SMART: filter by grant's group_id.
+  // At least one scope field must be set when using SMART policy.
   string inactive_grant_group_id = 66;
+  // Scope for INACTIVE_GRANT_POLICY_SMART: filter by grant's group_type.
   string inactive_grant_group_type = 67;
+  // Scope for INACTIVE_GRANT_POLICY_SMART: filter by grant's resource_id.
   string inactive_grant_resource_id = 68;
+  // Scope for INACTIVE_GRANT_POLICY_SMART: filter by grant's provider_type.
   string inactive_grant_provider_type = 69;
 }
 
@@ -1185,9 +1193,12 @@ message ListUserGrantsRequest {
     // This is the default behavior if no policy is specified.
     INACTIVE_GRANT_POLICY_INCLUDE_ALL = 1;
 
-    // Smart visibility mode:
-    // - If a resource has both active and inactive grants, only active ones are shown.
-    // - If all grants for a resource are inactive, only the latest inactive grant is returned.
+    // Smart deduplication mode scoped to the authenticated user (X-Auth-Email).
+    // - If X-Auth-Email is not provided, the request will fail with Unauthenticated.
+    // - If a grant key (resource + account + role) has both active and inactive grants
+    //   for this user, only the active ones are shown (inactive are excluded).
+    // - If all grants for a key are inactive, only the latest inactive grant is returned;
+    //   older duplicates are excluded.
     INACTIVE_GRANT_POLICY_SMART = 2;
   }
 
