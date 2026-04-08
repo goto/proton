@@ -1140,6 +1140,7 @@ message ListGrantsRequest {
   map<string, LabelValues> labels = 60;
   repeated string label_keys = 61;
   bool summary_labels = 62;
+  bool exclude_empty_appeal = 64;
 }
 
 message ListGrantsResponse {
@@ -1227,6 +1228,7 @@ message ListUserGrantsRequest {
   map<string, LabelValues> labels = 55;
   repeated string label_keys = 56;
   bool summary_labels = 57;
+  bool exclude_empty_appeal = 59;
 }
 
 message ListUserGrantsResponse {
