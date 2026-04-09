@@ -640,7 +640,7 @@ message ListUserAppealsRequest {
   map<string, LabelValues> labels = 56;
   repeated string label_keys = 57;
   bool summary_labels = 58;
-  // If true, includes label summaries (v2) in the response, grouped by label key with aggregated values and count. Mutually exclusive with summary_labels.
+  // If true, includes label summaries using faceted search: for each label key, available values are computed by applying all other active label filters except that key. Mutually exclusive with summary_labels.
   bool summary_labels_v2 = 59;
 }
 
@@ -717,7 +717,7 @@ message ListAppealsRequest {
   repeated string details_for_self_criteria = 58;
   repeated string not_details_for_self_criteria = 59;
   bool summary_labels = 60;
-  // If true, includes label summaries (v2) in the response, grouped by label key with aggregated values and count. Mutually exclusive with summary_labels.
+  // If true, includes label summaries using faceted search: for each label key, available values are computed by applying all other active label filters except that key. Mutually exclusive with summary_labels.
   bool summary_labels_v2 = 61;
 }
 
@@ -915,7 +915,7 @@ message ListUserApprovalsRequest {
   map<string, LabelValues> labels = 59;
   repeated string label_keys = 60;
   bool summary_labels = 61;
-  // If true, includes label summaries (v2) in the response, grouped by label key with aggregated values and count. Mutually exclusive with summary_labels.
+  // If true, includes label summaries using faceted search: for each label key, available values are computed by applying all other active label filters except that key. Mutually exclusive with summary_labels.
   bool summary_labels_v2 = 62;
 }
 
@@ -993,7 +993,7 @@ message ListApprovalsRequest {
   map<string, LabelValues> labels = 59;
   repeated string label_keys = 60;
   bool summary_labels = 61;
-  // If true, includes label summaries (v2) in the response, grouped by label key with aggregated values and count. Mutually exclusive with summary_labels.
+  // If true, includes label summaries using faceted search: for each label key, available values are computed by applying all other active label filters except that key. Mutually exclusive with summary_labels.
   bool summary_labels_v2 = 62;
 }
 
@@ -1167,7 +1167,7 @@ message ListGrantsRequest {
   map<string, LabelValues> labels = 60;
   repeated string label_keys = 61;
   bool summary_labels = 62;
-  // If true, includes label summaries (v2) in the response, grouped by label key with aggregated values and count. Mutually exclusive with summary_labels.
+  // If true, includes label summaries using faceted search: for each label key, available values are computed by applying all other active label filters except that key. Mutually exclusive with summary_labels.
   bool summary_labels_v2 = 63;
   bool exclude_empty_appeal = 64;
   InactiveGrantPolicy inactive_grant_policy = 65;
@@ -1262,7 +1262,7 @@ message ListUserGrantsRequest {
   map<string, LabelValues> labels = 55;
   repeated string label_keys = 56;
   bool summary_labels = 57;
-  // If true, includes label summaries (v2) in the response, grouped by label key with aggregated values and count. Mutually exclusive with summary_labels.
+  // If true, includes label summaries using faceted search: for each label key, available values are computed by applying all other active label filters except that key. Mutually exclusive with summary_labels.
   bool summary_labels_v2 = 58;
   bool exclude_empty_appeal = 59;
 }
