@@ -1160,7 +1160,7 @@ message ListGrantsRequest {
   repeated string label_keys = 61;
   bool summary_labels = 62;
   InactiveGrantPolicy inactive_grant_policy = 65;
-  string inactive_grant_keys = 66;
+  repeated string inactive_grant_filter_keys = 66;
 }
 
 message ListGrantsResponse {
