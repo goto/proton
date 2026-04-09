@@ -1160,15 +1160,7 @@ message ListGrantsRequest {
   repeated string label_keys = 61;
   bool summary_labels = 62;
   InactiveGrantPolicy inactive_grant_policy = 65;
-  // Scope for INACTIVE_GRANT_POLICY_SMART: filter by grant's group_id.
-  // At least one scope field must be set when using SMART policy.
-  string inactive_grant_group_id = 66;
-  // Scope for INACTIVE_GRANT_POLICY_SMART: filter by grant's group_type.
-  string inactive_grant_group_type = 67;
-  // Scope for INACTIVE_GRANT_POLICY_SMART: filter by grant's resource_id.
-  string inactive_grant_resource_id = 68;
-  // Scope for INACTIVE_GRANT_POLICY_SMART: filter by grant's provider_type.
-  string inactive_grant_provider_type = 69;
+  string inactive_grant_keys = 66;
 }
 
 message ListGrantsResponse {
