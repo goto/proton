@@ -1159,9 +1159,9 @@ message ListGrantsRequest {
   map<string, LabelValues> labels = 60;
   repeated string label_keys = 61;
   bool summary_labels = 62;
-  bool exclude_empty_appeal = 63;
-  InactiveGrantPolicy inactive_grant_policy = 64;
-  repeated string inactive_grant_filter_keys = 65;
+  bool exclude_empty_appeal = 64;
+  InactiveGrantPolicy inactive_grant_policy = 65;
+  repeated string inactive_grant_filter_keys = 66;
 }
 
 message ListGrantsResponse {
@@ -1252,7 +1252,7 @@ message ListUserGrantsRequest {
   map<string, LabelValues> labels = 55;
   repeated string label_keys = 56;
   bool summary_labels = 57;
-  bool exclude_empty_appeal = 58;
+  bool exclude_empty_appeal = 59;
 }
 
 message ListUserGrantsResponse {
