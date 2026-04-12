@@ -417,6 +417,7 @@ message JobSpecification {
   string task_name = 9 [deprecated = true];
   repeated JobConfigItem config = 10 [deprecated = true];
   JobSpecTask task = 26;
+  bool enable_dex_sensor = 27;
 
   string window_size = 11 [deprecated = true];
   string window_offset = 12 [deprecated = true];
