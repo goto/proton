@@ -301,6 +301,12 @@ message TaskWindow {
 message GetJobRunLineageSummaryRequest {
   repeated TargetJobRunIdentifier target_jobs = 1;
   int32 number_of_upstream_per_level = 2;
+  HistoricalDurationConfig historical_duration_config = 3;
+}
+
+message HistoricalDurationConfig {
+  int32 last_n_runs = 1;
+  int32 percentile = 2;
 }
 
 message TargetJobRunIdentifier {
@@ -357,6 +363,7 @@ message JobExecutionSummary {
   JobRunSummary job_run_summary = 4;
   string downstream_path_name = 5;
   JobRunDelaySummary delay_summary = 6;
+  HistoricalSummary historical_summary = 7;
 }
 
 message JobRunSummary {
@@ -370,6 +377,11 @@ message JobRunSummary {
   google.protobuf.Timestamp task_end_time = 8;
   google.protobuf.Timestamp hook_start_time = 9;
   google.protobuf.Timestamp hook_end_time = 10;
+}
+
+message HistoricalSummary {
+  int32 task_duration_seconds = 1;
+  int32 hook_duration_seconds = 2;
 }
 
 message JobRunDelaySummary {
