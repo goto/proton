@@ -301,12 +301,6 @@ message TaskWindow {
 message GetJobRunLineageSummaryRequest {
   repeated TargetJobRunIdentifier target_jobs = 1;
   int32 number_of_upstream_per_level = 2;
-  HistoricalDurationConfig historical_duration_config = 3;
-}
-
-message HistoricalDurationConfig {
-  int32 last_n_runs = 1;
-  int32 percentile = 2;
 }
 
 message TargetJobRunIdentifier {
