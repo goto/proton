@@ -642,6 +642,8 @@ message ListUserAppealsRequest {
   bool summary_labels = 58;
   // If true, includes label summaries using faceted search: for each label key, available values are computed by applying all other active label filters except that key. Mutually exclusive with summary_labels.
   bool summary_labels_v2 = 59;
+  repeated string resource_details_paths = 60;
+  repeated string resource_details = 61;
 }
 
 message ListUserAppealsResponse {
@@ -719,6 +721,8 @@ message ListAppealsRequest {
   bool summary_labels = 60;
   // If true, includes label summaries using faceted search: for each label key, available values are computed by applying all other active label filters except that key. Mutually exclusive with summary_labels.
   bool summary_labels_v2 = 61;
+  repeated string resource_details_paths = 62;
+  repeated string resource_details = 63;
 }
 
 message ListAppealsResponse {
@@ -1172,6 +1176,8 @@ message ListGrantsRequest {
   bool exclude_empty_appeal = 64;
   InactiveGrantPolicy inactive_grant_policy = 65;
   repeated string inactive_grant_filter_keys = 66;
+  repeated string resource_details_paths = 67;
+  repeated string resource_details = 68;
 }
 
 message ListGrantsResponse {
@@ -1265,6 +1271,8 @@ message ListUserGrantsRequest {
   // If true, includes label summaries using faceted search: for each label key, available values are computed by applying all other active label filters except that key. Mutually exclusive with summary_labels.
   bool summary_labels_v2 = 58;
   bool exclude_empty_appeal = 59;
+  repeated string resource_details_paths = 60;
+  repeated string resource_details = 61;
 }
 
 message ListUserGrantsResponse {
