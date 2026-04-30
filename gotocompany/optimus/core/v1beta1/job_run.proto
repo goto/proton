@@ -357,7 +357,7 @@ message JobExecutionSummary {
   JobRunSummary job_run_summary = 4;
   string downstream_path_name = 5;
   JobRunDelaySummary delay_summary = 6;
-  HistoricalSummary historical_summary = 7;
+  HistoricalDurationTrend historical_duration_trend = 7;
 }
 
 message JobRunSummary {
@@ -371,9 +371,12 @@ message JobRunSummary {
   google.protobuf.Timestamp task_end_time = 8;
   google.protobuf.Timestamp hook_start_time = 9;
   google.protobuf.Timestamp hook_end_time = 10;
+  string sensor_name = 11;
+  string task_name = 12;
+  string hook_name = 13;
 }
 
-message HistoricalSummary {
+message HistoricalDurationTrend {
   int32 task_duration_seconds = 1;
   int32 hook_duration_seconds = 2;
 }
