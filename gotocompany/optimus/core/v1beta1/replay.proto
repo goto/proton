@@ -136,6 +136,7 @@ message ReplayResponse {
 message CancelReplayRequest {
   string project_name = 1;
   string replay_id    = 2;
+  string canceled_by  = 3;
 }
 
 message CancelReplayResponse {
