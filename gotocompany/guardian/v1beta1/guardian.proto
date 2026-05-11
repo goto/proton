@@ -1465,6 +1465,7 @@ message Policy {
     bool dont_allow_self_approval = 9;
     google.protobuf.Struct details = 10;
     string terms_and_conditions = 11;
+    string stage = 12;
   }
   repeated ApprovalStep steps = 4;
 
@@ -1525,6 +1526,7 @@ message Policy {
     google.protobuf.Value config = 2;
   }
   CustomSteps custom_steps = 11;
+  repeated string stages = 12;
 }
 
 message AppealOptions {
