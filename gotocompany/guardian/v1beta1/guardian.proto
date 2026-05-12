@@ -921,6 +921,8 @@ message ListUserApprovalsRequest {
   bool summary_labels = 61;
   // If true, includes label summaries using faceted search: for each label key, available values are computed by applying all other active label filters except that key. Mutually exclusive with summary_labels.
   bool summary_labels_v2 = 62;
+  optional google.protobuf.Timestamp expiration_start_time = 63;
+  optional google.protobuf.Timestamp expiration_end_time = 64;
 }
 
 message ListUserApprovalsResponse {
@@ -999,6 +1001,8 @@ message ListApprovalsRequest {
   bool summary_labels = 61;
   // If true, includes label summaries using faceted search: for each label key, available values are computed by applying all other active label filters except that key. Mutually exclusive with summary_labels.
   bool summary_labels_v2 = 62;
+  optional google.protobuf.Timestamp expiration_start_time = 63;
+  optional google.protobuf.Timestamp expiration_end_time = 64;
 }
 
 message ListApprovalsResponse {
@@ -1584,6 +1588,7 @@ message Approval {
   bool allow_failed = 15;
   bool dont_allow_self_approval = 16;
   google.protobuf.Struct details = 17;
+  optional google.protobuf.Timestamp expiration_date = 18;
 }
 
 message AppealComment {
