@@ -1063,6 +1063,7 @@ message ApprovalStepInput {
   repeated string approvers = 2;
   google.protobuf.Struct details = 3;
   int32 index = 4; // 0 = append at end
+  string stage = 5; // stage name for parallel-stage appeals; joins the existing parallel group for that stage
 }
 
 message AddApprovalStepRequest {
@@ -1465,6 +1466,7 @@ message Policy {
     bool dont_allow_self_approval = 9;
     google.protobuf.Struct details = 10;
     string terms_and_conditions = 11;
+    string stage = 12;
   }
   repeated ApprovalStep steps = 4;
 
@@ -1525,6 +1527,7 @@ message Policy {
     google.protobuf.Value config = 2;
   }
   CustomSteps custom_steps = 11;
+  repeated string stages = 12;
 }
 
 message AppealOptions {
@@ -1584,6 +1587,7 @@ message Approval {
   bool allow_failed = 15;
   bool dont_allow_self_approval = 16;
   google.protobuf.Struct details = 17;
+  string stage = 18;
 }
 
 message AppealComment {
