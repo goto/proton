@@ -1063,6 +1063,7 @@ message ApprovalStepInput {
   repeated string approvers = 2;
   google.protobuf.Struct details = 3;
   int32 index = 4; // 0 = append at end
+  string stage = 5; // stage name for parallel-stage appeals; joins the existing parallel group for that stage
 }
 
 message AddApprovalStepRequest {
