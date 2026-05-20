@@ -921,6 +921,12 @@ message ListUserApprovalsRequest {
   bool summary_labels = 61;
   // If true, includes label summaries using faceted search: for each label key, available values are computed by applying all other active label filters except that key. Mutually exclusive with summary_labels.
   bool summary_labels_v2 = 62;
+  // If true, populates previous_grant_expiration_date on each returned approval by looking up the latest grant matching the appeal's account_id, resource_id, and role.
+  bool with_previous_grant = 63;
+  // When set together with end_expiration_date, only returns approvals whose previous_grant_expiration_date falls within [start_expiration_date, end_expiration_date]. Requires with_previous_grant=true.
+  optional google.protobuf.Timestamp start_expiration_date = 64;
+  // When set together with start_expiration_date, only returns approvals whose previous_grant_expiration_date falls within [start_expiration_date, end_expiration_date]. Requires with_previous_grant=true.
+  optional google.protobuf.Timestamp end_expiration_date = 65;
 }
 
 message ListUserApprovalsResponse {
@@ -999,6 +1005,12 @@ message ListApprovalsRequest {
   bool summary_labels = 61;
   // If true, includes label summaries using faceted search: for each label key, available values are computed by applying all other active label filters except that key. Mutually exclusive with summary_labels.
   bool summary_labels_v2 = 62;
+  // If true, populates previous_grant_expiration_date on each returned approval by looking up the latest grant matching the appeal's account_id, resource_id, and role.
+  bool with_previous_grant = 63;
+  // When set together with end_expiration_date, only returns approvals whose previous_grant_expiration_date falls within [start_expiration_date, end_expiration_date]. Requires with_previous_grant=true.
+  optional google.protobuf.Timestamp start_expiration_date = 64;
+  // When set together with start_expiration_date, only returns approvals whose previous_grant_expiration_date falls within [start_expiration_date, end_expiration_date]. Requires with_previous_grant=true.
+  optional google.protobuf.Timestamp end_expiration_date = 65;
 }
 
 message ListApprovalsResponse {
@@ -1588,6 +1600,8 @@ message Approval {
   bool dont_allow_self_approval = 16;
   google.protobuf.Struct details = 17;
   string stage = 18;
+  // Populated only when ListApprovals is called with with_previous_grant=true. Expiration date of the most recently created grant matching the appeal's (account_id, resource_id, role).
+  google.protobuf.Timestamp previous_grant_expiration_date = 19;
 }
 
 message AppealComment {
