@@ -921,18 +921,18 @@ message ListUserApprovalsRequest {
   bool summary_labels = 61;
   // If true, includes label summaries using faceted search: for each label key, available values are computed by applying all other active label filters except that key. Mutually exclusive with summary_labels.
   bool summary_labels_v2 = 62;
-  // If true, populates previous_grant_expiration_date on each returned approval by looking up the latest grant matching the appeal's account_id, resource_id, and role.
+  // If true, populates previous_grant_expiration_date on each returned approval by looking up the latest grant matching the appeal's account_id, resource_id, role, group_id, and group_type.
   bool with_previous_grant = 63;
-  // When set together with end_expiration_date, only returns approvals whose previous_grant_expiration_date falls within [start_expiration_date, end_expiration_date]. Requires with_previous_grant=true.
+  // Filters approvals to those whose previous grant expiration date is >= start_expiration_date. Can be used alone or together with end_expiration_date for a range. Requires with_previous_grant=true.
   optional google.protobuf.Timestamp start_expiration_date = 64;
-  // When set together with start_expiration_date, only returns approvals whose previous_grant_expiration_date falls within [start_expiration_date, end_expiration_date]. Requires with_previous_grant=true.
+  // Filters approvals to those whose previous grant expiration date is <= end_expiration_date. Can be used alone or together with start_expiration_date for a range. Requires with_previous_grant=true.
   optional google.protobuf.Timestamp end_expiration_date = 65;
-  // Filter approvals by the state of the previous grant. Valid values: "expired", "expiring", "none".
-  // - expired: the latest grant matching the appeal's (account_id, resource_id, role) has expiration_date < now.
+  // Filter approvals by the state of the previous grant. Multiple values are combined with OR. Valid values: "expired", "expiring", "none".
+  // - expired: the latest grant matching the appeal's (account_id, resource_id, role, group_id, group_type) has expiration_date < now.
   // - expiring: the latest matching grant expires within expiring_within_days days from now (defaults to 7 when omitted).
-  // - none: no previous grant exists for the triple, or the latest grant is permanent (expiration_date IS NULL).
-  string previous_grant_state = 66;
-  // Number of days from now used to define the "expiring" window. Defaults to 7 when previous_grant_state=expiring and this is omitted or 0. Ignored otherwise.
+  // - none: no previous grant exists for the combination, or the latest grant is permanent (expiration_date IS NULL).
+  repeated string previous_grant_states = 66;
+  // Number of days from now used to define the "expiring" window. Defaults to 7 when previous_grant_states contains "expiring" and this is omitted or 0. Ignored otherwise.
   uint32 expiring_within_days = 67;
 }
 
@@ -1012,18 +1012,18 @@ message ListApprovalsRequest {
   bool summary_labels = 61;
   // If true, includes label summaries using faceted search: for each label key, available values are computed by applying all other active label filters except that key. Mutually exclusive with summary_labels.
   bool summary_labels_v2 = 62;
-  // If true, populates previous_grant_expiration_date on each returned approval by looking up the latest grant matching the appeal's account_id, resource_id, and role.
+  // If true, populates previous_grant_expiration_date on each returned approval by looking up the latest grant matching the appeal's account_id, resource_id, role, group_id, and group_type.
   bool with_previous_grant = 63;
-  // When set together with end_expiration_date, only returns approvals whose previous_grant_expiration_date falls within [start_expiration_date, end_expiration_date]. Requires with_previous_grant=true.
+  // Filters approvals to those whose previous grant expiration date is >= start_expiration_date. Can be used alone or together with end_expiration_date for a range. Requires with_previous_grant=true.
   optional google.protobuf.Timestamp start_expiration_date = 64;
-  // When set together with start_expiration_date, only returns approvals whose previous_grant_expiration_date falls within [start_expiration_date, end_expiration_date]. Requires with_previous_grant=true.
+  // Filters approvals to those whose previous grant expiration date is <= end_expiration_date. Can be used alone or together with start_expiration_date for a range. Requires with_previous_grant=true.
   optional google.protobuf.Timestamp end_expiration_date = 65;
-  // Filter approvals by the state of the previous grant. Valid values: "expired", "expiring", "none".
-  // - expired: the latest grant matching the appeal's (account_id, resource_id, role) has expiration_date < now.
+  // Filter approvals by the state of the previous grant. Multiple values are combined with OR. Valid values: "expired", "expiring", "none".
+  // - expired: the latest grant matching the appeal's (account_id, resource_id, role, group_id, group_type) has expiration_date < now.
   // - expiring: the latest matching grant expires within expiring_within_days days from now (defaults to 7 when omitted).
-  // - none: no previous grant exists for the triple, or the latest grant is permanent (expiration_date IS NULL).
-  string previous_grant_state = 66;
-  // Number of days from now used to define the "expiring" window. Defaults to 7 when previous_grant_state=expiring and this is omitted or 0. Ignored otherwise.
+  // - none: no previous grant exists for the combination, or the latest grant is permanent (expiration_date IS NULL).
+  repeated string previous_grant_states = 66;
+  // Number of days from now used to define the "expiring" window. Defaults to 7 when previous_grant_states contains "expiring" and this is omitted or 0. Ignored otherwise.
   uint32 expiring_within_days = 67;
 }
 
