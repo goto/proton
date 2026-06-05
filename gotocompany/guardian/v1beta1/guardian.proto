@@ -545,6 +545,18 @@ message ListResourcesRequest {
   repeated string ids = 18;
   repeated string global_urns = 19;
   repeated string parent_ids = 20;
+  string provider_urn_starts_with = 21;
+  string provider_urn_ends_with = 22;
+  string provider_urn_contains = 23;
+  string provider_urn_not_starts_with = 24;
+  string provider_urn_not_ends_with = 25;
+  string provider_urn_not_contains = 26;
+  string urn_starts_with = 27;
+  string urn_ends_with = 28;
+  string urn_contains = 29;
+  string urn_not_starts_with = 30;
+  string urn_not_ends_with = 31;
+  string urn_not_contains = 32;
 }
 
 message ListResourcesResponse {
