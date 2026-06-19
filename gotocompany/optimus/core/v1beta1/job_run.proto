@@ -192,6 +192,7 @@ message JobRunInputRequest {
   // or set jobrun_id if this is a manual triggered execution
   // and not really registered as a valid job
   string jobrun_id = 7;
+  string dag_run_id = 8;
 }
 
 // get latest 1 runs by schedule time by default when start date and end date is not mentioned
