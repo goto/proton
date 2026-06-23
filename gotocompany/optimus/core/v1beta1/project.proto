@@ -42,6 +42,12 @@ service ProjectService {
       get: "/v1beta1/project/{project_name}"
     };
   }
+  // DeployHeartbeatDag generates and uploads a system heartbeat DAG to the project's scheduler bucket
+  rpc DeployHeartbeatDag(DeployHeartbeatDagRequest) returns (DeployHeartbeatDagResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/project/{project_name}/scheduler/heartbeat-dag"
+    };
+  }
 }
 
 message RegisterProjectRequest {
@@ -87,4 +93,12 @@ message ProjectSpecification {
   map<string, ProjectPreset> presets = 4;
 
   map<string, string> variables = 5;
+}
+
+message DeployHeartbeatDagRequest {
+  string project_name = 1;
+}
+
+message DeployHeartbeatDagResponse {
+  bool success = 1;
 }
