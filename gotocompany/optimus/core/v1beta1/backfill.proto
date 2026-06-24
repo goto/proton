@@ -88,12 +88,13 @@ message BackfillDryRunResponse {
 }
 
 message GetBackfillRequest {
-  string project_name      = 1;
-  string scheduler_run_id  = 2;
+  string project_name       = 1;
+  string scheduler_run_id   = 2;
   repeated string job_names = 3;
-  string status            = 4;
-  string approval_id       = 5;
-  string user_id           = 6;
+  string status             = 4;
+  string approval_id        = 5;
+  string user_id            = 6;
+  string backfill_id        = 7;
 }
 
 message BackfillSpec {
