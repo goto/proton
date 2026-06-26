@@ -109,7 +109,7 @@ message BackfillSpec {
   google.protobuf.Timestamp start_time      = 9;
   google.protobuf.Timestamp end_time        = 10;
 
-  map<string, string> custom_assets    = 11;
+  map<string, string> overridden_assets    = 11;
   string job_config                    = 12;
   string status                        = 13;
   string message                       = 14;
