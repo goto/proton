@@ -25,7 +25,7 @@ service BackfillService {
     };
   }
 
-  rpc GetBackfill(GetBackfillRequest) returns (GetBackfillResponse) {
+  rpc GetBackfills(GetBackfillsRequest) returns (GetBackfillsResponse) {
     option (google.api.http) = {
       get: "/v1beta1/project/{project_name}/backfill"
     };
