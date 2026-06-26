@@ -120,7 +120,7 @@ message BackfillSpec {
   string user_id                       = 19;
 }
 
-message GetBackfillResponse {
+message GetBackfillsResponse {
   repeated BackfillSpec backfills = 1;
 }
 
