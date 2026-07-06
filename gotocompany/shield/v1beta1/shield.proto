@@ -1078,9 +1078,9 @@ message DeleteRelationResponse {
 
 message ListResourcesRequest {
   string group_id = 1;
-  repeated string project_ids = 2;
+  repeated string project_id = 2;
   string organization_id = 3;
-  repeated string namespace_ids = 4;
+  repeated string namespace_id = 4;
   int32 page_size = 5;
   int32 page_num = 6;
   repeated string urns = 7;
