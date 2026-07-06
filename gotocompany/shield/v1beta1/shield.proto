@@ -1087,6 +1087,7 @@ message ListResourcesRequest {
   repeated string names = 8;
   repeated string project_ids = 9;
   repeated string namespace_ids = 10;
+  repeated string group_ids = 11;
 }
 
 message ListResourcesResponse {
