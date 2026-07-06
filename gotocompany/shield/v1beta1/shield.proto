@@ -1083,6 +1083,11 @@ message ListResourcesRequest {
   string namespace_id = 4;
   int32 page_size = 5;
   int32 page_num = 6;
+  repeated string urns = 7;
+  repeated string names = 8;
+  repeated string project_ids = 9;
+  repeated string namespace_ids = 10;
+  repeated string group_ids = 11;
 }
 
 message ListResourcesResponse {
