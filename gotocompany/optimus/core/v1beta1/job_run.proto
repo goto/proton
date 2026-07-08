@@ -411,9 +411,10 @@ message DamperFactor {
   float min_value = 3;
 
   enum ApplyMethod {
-    TYPE_EXPONENTIAL = 0;
-    TYPE_DECREMENT = 1;
-    TYPE_CONSTANT = 2;
+    APPLY_METHOD_UNSPECIFIED = 0;
+    APPLY_METHOD_EXPONENTIAL = 1;
+    APPLY_METHOD_DECREMENT = 2;
+    APPLY_METHOD_CONSTANT = 3;
   }
   ApplyMethod method = 4;
 }
