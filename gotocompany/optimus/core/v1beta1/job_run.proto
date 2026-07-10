@@ -403,6 +403,22 @@ message PotentialSLABreachLabelGroup {
   string name = 2;     // optional; server derives from labels if empty
 }
 
+// DamperFactor configures the dampening factor used to calculate
+// inferredSLA for upstream jobs, applied at each upstream level
+message DamperFactor {
+  float base_value = 1;
+  float alpha = 2;
+  float min_value = 3;
+
+  enum ApplyMethod {
+    APPLY_METHOD_UNSPECIFIED = 0;
+    APPLY_METHOD_EXPONENTIAL = 1;
+    APPLY_METHOD_DECREMENT = 2;
+    APPLY_METHOD_CONSTANT = 3;
+  }
+  ApplyMethod method = 4;
+}
+
 message IdentifyPotentialSLABreachRequest {
   string project_name = 1;
   repeated string job_names = 2;
@@ -413,7 +429,7 @@ message IdentifyPotentialSLABreachRequest {
   google.protobuf.Timestamp reference_time = 7; // RFC3339 format
   int32 scheduled_range_in_hours = 8;
   bool enable_deduplication = 9;
-  float damper_coeff = 10;
+  float damper_coeff = 10 [deprecated = true];  // configure damper factor from the new damper_factor field instead
   repeated string skip_job_names = 11;
 
   // Batch mode. When project_names is non-empty it takes precedence over
@@ -423,6 +439,8 @@ message IdentifyPotentialSLABreachRequest {
   // per team. job_names remains single-project only (path project_name).
   repeated string project_names = 12;
   repeated PotentialSLABreachLabelGroup label_groups = 13;
+
+  DamperFactor damper_factor = 14;
 }
 
 message IdentifyPotentialSLABreachResponse {
