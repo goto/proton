@@ -62,6 +62,13 @@ service ResourceService {
       get: "/v1beta1/resources/{urn}/revisions"
     };
   }
+
+  rpc UpdateResourceLabels(UpdateResourceLabelsRequest) returns (UpdateResourceLabelsResponse) {
+    option (google.api.http) = {
+      patch: "/v1beta1/resources/{urn}/labels"
+      body: "*"
+    };
+  }
 }
 
 message ResourceDependency {
@@ -170,6 +177,15 @@ message UpdateResourceRequest {
 }
 
 message UpdateResourceResponse {
+  Resource resource = 1;
+}
+
+message UpdateResourceLabelsRequest {
+  string urn = 1;
+  map<string, string> labels = 2;
+}
+
+message UpdateResourceLabelsResponse {
   Resource resource = 1;
 }
 
