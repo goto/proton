@@ -73,6 +73,16 @@ service ServiceDataService {
       summary: "Get Group Service Data Key";
     };
   }
+
+  rpc GetServiceDataKeyDistinctValues(GetServiceDataKeyDistinctValuesRequest) returns (GetServiceDataKeyDistinctValuesResponse) {
+    option (google.api.http) = {
+      get: "/v1beta1/servicedata/distinct"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "Service Data";
+      summary: "Get distinct service data values across all entities for a metadata path";
+    };
+  }
 }
 
 message ServiceDataKeyRequestBody {
@@ -134,4 +144,18 @@ message GetUserServiceDataResponse {
 
 message GetGroupServiceDataResponse {
   google.protobuf.Struct data = 1;
+}
+
+message GetServiceDataKeyDistinctValuesRequest {
+  // dot-separated metadata path: first segment is the service data key name,
+  // the rest addresses a location inside its value, e.g. "functional_roles.roles"
+  string path = 1 [(validate.rules).string.min_len = 1];
+  // entity namespace to aggregate over, "user" (default) or "group"
+  string namespace = 2 [(validate.rules).string = {in: "", in: "user", in: "group"}];
+  // project id or slug, required to identify the service data key
+  string project = 3 [(validate.rules).string.min_len = 1];
+}
+
+message GetServiceDataKeyDistinctValuesResponse {
+  repeated google.protobuf.Value values = 1;
 }
