@@ -617,6 +617,22 @@ message ListUsersRequest {
   string keyword = 3;
   string sort = 4;
   string direction = 5;
+  // Filter users by their servicedata metadata. Each path in metadata_paths is
+  // dot-delimited: the first segment is the metadata (servicedata) key and the
+  // remaining segments navigate into that key's JSON value, e.g.
+  // "functional_roles.roles". Positive filters (metadatas, *_starts_with,
+  // *_ends_with, *_contains) are OR-ed together across paths; a matched value
+  // that is a JSON array matches when it contains the value. Negative filters
+  // (not_metadatas, *_not_*) are AND-ed together (user is excluded on a match).
+  repeated string metadata_paths = 6;
+  repeated string metadatas = 7;
+  repeated string not_metadatas = 8;
+  string metadata_starts_with = 9;
+  string metadata_ends_with = 10;
+  string metadata_contains = 11;
+  string metadata_not_starts_with = 12;
+  string metadata_not_ends_with = 13;
+  string metadata_not_contains = 14;
 }
 
 message ListUsersResponse {
