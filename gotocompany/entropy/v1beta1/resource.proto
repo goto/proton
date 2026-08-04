@@ -62,6 +62,13 @@ service ResourceService {
       get: "/v1beta1/resources/{urn}/revisions"
     };
   }
+
+  rpc UpdateResourceLabels(UpdateResourceLabelsRequest) returns (UpdateResourceLabelsResponse) {
+    option (google.api.http) = {
+      patch: "/v1beta1/resources/{urn}/labels"
+      body: "*"
+    };
+  }
 }
 
 message ResourceDependency {
@@ -157,6 +164,7 @@ message GetResourceResponse {
 
 message CreateResourceRequest {
   Resource resource = 1;
+  bool dry_run = 2;
 }
 
 message CreateResourceResponse {
@@ -167,9 +175,19 @@ message UpdateResourceRequest {
   string urn = 1;
   ResourceSpec new_spec = 2;
   map<string, string> labels = 3;
+  bool dry_run = 4;
 }
 
 message UpdateResourceResponse {
+  Resource resource = 1;
+}
+
+message UpdateResourceLabelsRequest {
+  string urn = 1;
+  map<string, string> labels = 2;
+}
+
+message UpdateResourceLabelsResponse {
   Resource resource = 1;
 }
 
@@ -184,6 +202,7 @@ message ApplyActionRequest {
   string action = 2;
   google.protobuf.Value params = 3;
   map<string, string> labels = 4;
+  bool dry_run = 5;
 }
 
 message ApplyActionResponse {
