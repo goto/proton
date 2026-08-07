@@ -98,7 +98,8 @@ message ReplayRun {
 }
 
 message ReplayDryRunResponse {
-  repeated ReplayRun replay_runs = 1;
+  repeated ReplayRun        replay_runs = 1;
+  map<string, string>       job_config  = 2;
 }
 
 message ReplayRequest {
