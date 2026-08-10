@@ -305,7 +305,8 @@ message TaskWindow {
 
 message GetJobRunLineageSummaryRequest {
   repeated TargetJobRunIdentifier target_jobs = 1;
-  int32 number_of_upstream_per_level = 2 [deprecated = true];
+  // limit each level to top N upstreams causing the bottleneck
+  int32 number_of_upstream_per_level = 2;
   // caps the total number of runs returned, keeping those closest to the target. Zero asks
   // for the whole lineage.
   int32 max_nodes = 3;
@@ -328,6 +329,10 @@ message JobRunLineageSummary {
   google.protobuf.Timestamp scheduled_at = 2;
   repeated JobExecutionSummary job_runs = 3;
   LineageExecutionSummary execution_summary = 4;
+  // how many nodes are returned, including downstream
+  int32 total_nodes = 5;
+  // truncated means the returned tree is not the full lineage.
+  bool truncated = 6;
 }
 
 message LineageExecutionSummary {
