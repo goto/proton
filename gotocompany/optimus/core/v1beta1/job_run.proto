@@ -305,7 +305,14 @@ message TaskWindow {
 
 message GetJobRunLineageSummaryRequest {
   repeated TargetJobRunIdentifier target_jobs = 1;
+  // limit each level to top N upstreams causing the bottleneck
   int32 number_of_upstream_per_level = 2;
+  // caps the total number of runs returned, keeping those closest to the target. Zero asks
+  // for the whole lineage.
+  int32 max_nodes = 3;
+  // leaves out any upstream run scheduled more than this many hours before the target's own
+  // schedule, along with everything above it on that branch. Zero uses the server default.
+  int32 lineage_window_hours = 4;
 }
 
 message TargetJobRunIdentifier {
@@ -322,6 +329,10 @@ message JobRunLineageSummary {
   google.protobuf.Timestamp scheduled_at = 2;
   repeated JobExecutionSummary job_runs = 3;
   LineageExecutionSummary execution_summary = 4;
+  // how many nodes are returned, including downstream
+  int32 total_nodes = 5;
+  // truncated means the returned tree is not the full lineage.
+  bool truncated = 6;
 }
 
 message LineageExecutionSummary {
@@ -355,14 +366,39 @@ message LineageDelaySummary {
   int32 delay_duration = 5;
 }
 
+// JobRunState is the position a run is currently in. Derived from the scheduler status
+// together with which operator timestamps are populated, so it stays meaningful for a run
+// that is still executing.
+enum JobRunState {
+  JOB_RUN_STATE_UNSPECIFIED = 0;
+  JOB_RUN_STATE_NOT_SCHEDULED = 1;
+  JOB_RUN_STATE_WAIT_UPSTREAM = 2;
+  JOB_RUN_STATE_RUNNING = 3;
+  JOB_RUN_STATE_SUCCESS = 4;
+  JOB_RUN_STATE_FAILED = 5;
+}
+
+message JobRunRef {
+  string job_name = 1;
+  google.protobuf.Timestamp scheduled_at = 2;
+}
+
 message JobExecutionSummary {
   string job_name = 1;
   SLAConfig sla = 2;
   int32 level = 3;
   JobRunSummary job_run_summary = 4;
-  string downstream_path_name = 5;
+
+  // deprecated in favor of downstream_refs
+  string downstream_path_name = 5 [deprecated = true];
   JobRunDelaySummary delay_summary = 6;
   HistoricalDurationTrend historical_duration_trend = 7;
+
+  JobRunState run_state = 8;
+  // true when the lineage is actively waiting on this run: it has not finished, and its own
+  bool is_blocking = 9;
+  // the runs that depend on this one
+  repeated JobRunRef downstream_refs = 10;
 }
 
 message JobRunSummary {
