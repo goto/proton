@@ -500,14 +500,17 @@ message SLAMissAlertConfig {
 message RetryAlertConfig {
   int32 count_threshold = 1;
   string severity = 2;
+  string team = 3;
 }
 
 message SuccessAlertConfig {
   string severity = 1;
+  string team = 2;
 }
 
 message FailureAlertConfig {
   string severity = 1;
+  string team = 2;
 }
 
 message OperatorAlertConfig {
