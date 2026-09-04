@@ -69,6 +69,8 @@ message ManagedTable {
   string job_name = 4;
   // run is absent only if the job has never run.
   CompletenessJobRun run = 5;
+  // is_active is false if the job is currently disabled/paused.
+  bool is_active = 6;
 }
 
 // CompletenessJobRun is distinct from the JobRun message in job_spec.proto (which only
@@ -78,4 +80,8 @@ message CompletenessJobRun {
   google.protobuf.Timestamp scheduled_at = 2;
   google.protobuf.Timestamp start_time = 3;
   google.protobuf.Timestamp end_time = 4;
+  // is_expected_schedule is false when no run exists at the schedule this job's
+  // cadence expected (e.g. the job was paused for a while), so this is a fallback to
+  // the latest run actually found instead.
+  bool is_expected_schedule = 5;
 }
