@@ -121,7 +121,7 @@ service JobRunService {
 
   // GetJobExpectedCompletionTimeReport will provide a report on the selected jobs' completion time (actual & expected)
   // on a given point of time, and get the mean delay between those times
-  rpc GetJobExpectedCompletionTimeReport(JobExpectedCompletionTimeReportRequest) returns (JobExpectedCompletionTimeReportResponse) {
+  rpc JobExpectedCompletionTimeReport(JobExpectedCompletionTimeReportRequest) returns (JobExpectedCompletionTimeReportResponse) {
     option (google.api.http) = {
       post: "/v1beta1/job_expected_completion_time_report"
       body: "*"
