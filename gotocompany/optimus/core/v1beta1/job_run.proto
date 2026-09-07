@@ -118,6 +118,15 @@ service JobRunService {
       body: "*"
     };
   }
+
+  // GetJobExpectedCompletionTimeReport will provide a report on the selected jobs' completion time (actual & expected)
+  // on a given point of time, and get the mean delay between those times
+  rpc JobExpectedCompletionTimeReport(JobExpectedCompletionTimeReportRequest) returns (JobExpectedCompletionTimeReportResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/job_expected_completion_time_report"
+      body: "*"
+    };
+  }
 }
 
 message DexSensorRequest {
@@ -519,4 +528,37 @@ message FinishTimeDetailResponse {
     google.protobuf.Timestamp expected_finish_time = 2;
     google.protobuf.Timestamp actual_finish_time = 3;
   }
+}
+
+message LabelValues {
+  repeated string values = 1;
+}
+
+message JobExpectedCompletionTimeReportRequest {
+  repeated string project_names = 1;
+  map<string, LabelValues> job_labels = 2;
+  int32 scheduled_range_in_hours = 3;
+  google.protobuf.Timestamp reference_time = 4;
+  repeated string job_names = 5;
+}
+
+message JobCompletionTimeDetail {
+  string project_name = 1;
+  string job_name = 2;
+  google.protobuf.Timestamp scheduled_at = 3;
+  google.protobuf.Timestamp expected_finish_time = 4;
+  google.protobuf.Timestamp actual_finish_time = 5;
+  google.protobuf.Duration delay = 6;
+}
+
+message JobCompletionTimeSummary {
+  google.protobuf.Duration mean_delay = 1;
+  google.protobuf.Duration max_delay = 2;
+  google.protobuf.Timestamp max_expected_completion_time = 3;
+  google.protobuf.Timestamp max_actual_completion_time = 4;
+}
+
+message JobExpectedCompletionTimeReportResponse {
+  repeated JobCompletionTimeDetail details = 1;
+  JobCompletionTimeSummary summary = 2;
 }
