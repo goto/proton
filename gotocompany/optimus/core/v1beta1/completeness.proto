@@ -45,7 +45,7 @@ message CheckQueryCompletenessRequest {
   // query is the raw SQL text to resolve upstream tables/views from.
   string query = 1;
   // datastore_name selects the SQL dialect and view-resolution backend.
-  // Optional, defaults to "maxcompute" when empty. Also accepts "bigquery".
+  // Accepts "maxcompute" or "bigquery".
   string datastore_name = 2;
 }
 
