@@ -519,6 +519,9 @@ message RootCauseEvidence {
   repeated string blocked_on_sensors = 4;
   // The upstream_resolvers type behind a THIRD_PARTY_DELAY, e.g. "dex".
   string source_type = 5;
+  // How far this cause overran its baseline. Set when identification scored
+  // induced delay (RUNNING_LONG, STARTED_LATE, THIRD_PARTY_DELAY).
+  google.protobuf.Duration induced_delay = 6;
 }
 
 message UpstreamJobsStatus {
