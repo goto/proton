@@ -473,7 +473,9 @@ message IdentifyPotentialSLABreachRequest {
   string severity = 6;
   google.protobuf.Timestamp reference_time = 7; // RFC3339 format
   int32 scheduled_range_in_hours = 8;
-  bool enable_deduplication = 9;
+  // Ignored. Deduplication is now server-side, configured per alert type under
+  // alerting.deduplication, and is no longer selectable per request.
+  bool enable_deduplication = 9 [deprecated = true];
   float damper_coeff = 10 [deprecated = true];  // configure damper factor from the new damper_factor field instead
   repeated string skip_job_names = 11;
 
@@ -501,6 +503,25 @@ message UpstreamJobStatus {
   int32 relative_level = 4;
   string status = 5;
   google.protobuf.Timestamp scheduled_at = 6;
+
+  // status says whether this job is past its deadline; reason says what put it there:
+  // RUNNING_LONG, STARTED_LATE, THIRD_PARTY_DELAY or UNKNOWN.
+  string reason = 7;
+  RootCauseEvidence evidence = 8;
+}
+
+message RootCauseEvidence {
+  google.protobuf.Timestamp started_at = 1;
+  google.protobuf.Timestamp expected_finish_at = 2;
+  // Latest start that would still have met the deadline; set for STARTED_LATE.
+  google.protobuf.Timestamp latest_safe_start_at = 3;
+  // Sensor task names still waiting; set for THIRD_PARTY_DELAY.
+  repeated string blocked_on_sensors = 4;
+  // The upstream_resolvers type behind a THIRD_PARTY_DELAY, e.g. "dex".
+  string source_type = 5;
+  // How far this cause overran its baseline. Set when identification scored
+  // induced delay (RUNNING_LONG, STARTED_LATE, THIRD_PARTY_DELAY).
+  google.protobuf.Duration induced_delay = 6;
 }
 
 message UpstreamJobsStatus {
