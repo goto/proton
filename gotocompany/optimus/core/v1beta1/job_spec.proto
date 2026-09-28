@@ -582,6 +582,7 @@ message JobSpecMetadataResource {
 message JobSpecMetadataResourceConfig {
   string cpu = 1;
   string memory = 2;
+  string ephemeral_storage = 3;
 }
 
 message JobSpecMetadataAirflow {
