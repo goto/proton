@@ -663,6 +663,12 @@ message ListUserAppealsRequest {
   bool summary_labels_v2 = 59;
   repeated string resource_details_paths = 60;
   repeated string resource_details = 61;
+  string resource_urn_starts_with = 62;
+  string resource_urn_ends_with = 63;
+  string resource_urn_contains = 64;
+  string resource_urn_not_starts_with = 65;
+  string resource_urn_not_ends_with = 66;
+  string resource_urn_not_contains = 67;
 }
 
 message ListUserAppealsResponse {
@@ -742,6 +748,12 @@ message ListAppealsRequest {
   bool summary_labels_v2 = 61;
   repeated string resource_details_paths = 62;
   repeated string resource_details = 63;
+  string resource_urn_starts_with = 64;
+  string resource_urn_ends_with = 65;
+  string resource_urn_contains = 66;
+  string resource_urn_not_starts_with = 67;
+  string resource_urn_not_ends_with = 68;
+  string resource_urn_not_contains = 69;
 }
 
 message ListAppealsResponse {
@@ -1224,6 +1236,12 @@ message ListGrantsRequest {
   repeated string inactive_grant_filter_keys = 66;
   repeated string resource_details_paths = 67;
   repeated string resource_details = 68;
+  string resource_urn_starts_with = 69;
+  string resource_urn_ends_with = 70;
+  string resource_urn_contains = 71;
+  string resource_urn_not_starts_with = 72;
+  string resource_urn_not_ends_with = 73;
+  string resource_urn_not_contains = 74;
 }
 
 message ListGrantsResponse {
@@ -1319,6 +1337,12 @@ message ListUserGrantsRequest {
   bool exclude_empty_appeal = 59;
   repeated string resource_details_paths = 60;
   repeated string resource_details = 61;
+  string resource_urn_starts_with = 62;
+  string resource_urn_ends_with = 63;
+  string resource_urn_contains = 64;
+  string resource_urn_not_starts_with = 65;
+  string resource_urn_not_ends_with = 66;
+  string resource_urn_not_contains = 67;
 }
 
 message ListUserGrantsResponse {
