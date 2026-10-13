@@ -424,6 +424,9 @@ message JobRunSummary {
   string sensor_name = 11;
   string task_name = 12;
   string hook_name = 13;
+  string project_name = 14;
+  int32 task_attempts = 15;
+  int32 hook_attempts = 16;
 }
 
 message HistoricalDurationTrend {
