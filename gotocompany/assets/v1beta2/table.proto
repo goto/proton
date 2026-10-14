@@ -35,6 +35,9 @@ message Table {
   //Optional. List of labels.
   map<string, string> labels = 20;
 
+  //Optional. Partition detail information.
+  map<string, string> partition_detail = 21;
+
   // The timestamp of the table's creation.
   google.protobuf.Timestamp create_time = 101;
 
