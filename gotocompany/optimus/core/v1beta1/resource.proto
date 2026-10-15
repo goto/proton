@@ -31,7 +31,13 @@ service ResourceService {
   // ListResourceSpecification lists all resource specifications of a datastore in project
   rpc ListResourceSpecification(ListResourceSpecificationRequest) returns (ListResourceSpecificationResponse) {
     option (google.api.http) = {
+      // Original path (strict)
       get: "/v1beta1/project/{project_name}/namespace/{namespace_name}/datastore/{datastore_name}/resource"
+
+      // Allow omitting both project and namespace (they become optional query params)
+      additional_bindings {
+        get: "/v1beta1/datastore/{datastore_name}/resource"
+      }
     };
   }
 
@@ -115,11 +121,15 @@ message DeployResourceSpecificationResponse {
   Log log_status = 5;
 }
 
-// ListResourceSpecificationRequest lists all resource specifications of a datastore in project
+// Request message for listing resource specifications of a datastore.
+// Note: At least one filter (project_name, namespace_name, or resource_filter) must be provided.
 message ListResourceSpecificationRequest {
   string project_name = 1;
   string datastore_name = 2;
   string namespace_name = 3;
+
+  // Filters resources by an exact full name match, or by a prefix match if a wildcard (*) is appended (e.g., "projectA.schemaA.*").
+  string resource_filter = 4;
 }
 
 message SyncExternalTablesRequest {
