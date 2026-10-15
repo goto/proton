@@ -342,6 +342,7 @@ message JobRunLineageSummary {
   int32 total_nodes = 5;
   // truncated means the returned tree is not the full lineage.
   bool truncated = 6;
+  string project_name = 7;
 }
 
 message LineageExecutionSummary {
@@ -408,6 +409,7 @@ message JobExecutionSummary {
   bool is_blocking = 9;
   // the runs that depend on this one
   repeated JobRunRef downstream_refs = 10;
+  string project_name = 11;
 }
 
 message JobRunSummary {
@@ -424,6 +426,8 @@ message JobRunSummary {
   string sensor_name = 11;
   string task_name = 12;
   string hook_name = 13;
+  int32 task_attempts = 14;
+  int32 hook_attempts = 15;
 }
 
 message HistoricalDurationTrend {
