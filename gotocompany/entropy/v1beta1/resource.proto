@@ -147,6 +147,10 @@ message ListResourcesRequest {
   bool with_spec_configs = 4;
   int32 page_size = 5;
   int32 page_num = 6;
+
+  // case-insensitive substring match on resource urn and name.
+  // if empty, no search filter is applied.
+  string query = 7;
 }
 
 message ListResourcesResponse {
