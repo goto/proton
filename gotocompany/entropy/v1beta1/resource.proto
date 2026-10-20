@@ -150,7 +150,7 @@ message ListResourcesRequest {
 
   // case-insensitive substring match on resource urn and name.
   // if empty, no search filter is applied.
-  string query = 7;
+  string q = 7;
 }
 
 message ListResourcesResponse {
