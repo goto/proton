@@ -557,7 +557,7 @@ message ListResourcesRequest {
   string provider_urn_contains = 23;
   string provider_urn_not_starts_with = 24;
   string provider_urn_not_ends_with = 25;
-  string provider_urn_not_contains = 26;
+  repeated string provider_urn_not_contains = 26;
   string urn_starts_with = 27;
   string urn_ends_with = 28;
   string urn_contains = 29;
@@ -631,7 +631,7 @@ message ListUserAppealsRequest {
   string provider_urn_contains = 28;
   string provider_urn_not_starts_with = 29;
   string provider_urn_not_ends_with = 30;
-  string provider_urn_not_contains = 31;
+  repeated string provider_urn_not_contains = 31;
   repeated string durations = 32;
   repeated string not_durations = 33;
   repeated string details_paths = 34;
@@ -710,7 +710,7 @@ message ListAppealsRequest {
   string provider_urn_contains = 30;
   string provider_urn_not_starts_with = 31;
   string provider_urn_not_ends_with = 32;
-  string provider_urn_not_contains = 33;
+  repeated string provider_urn_not_contains = 33;
   repeated string durations = 34;
   repeated string not_durations = 35;
   repeated string details_paths = 36;
@@ -909,7 +909,7 @@ message ListUserApprovalsRequest {
   string provider_urn_contains = 30;
   string provider_urn_not_starts_with = 31;
   string provider_urn_not_ends_with = 32;
-  string provider_urn_not_contains = 33;
+  repeated string provider_urn_not_contains = 33;
   repeated string appeal_durations = 34;
   repeated string not_appeal_durations = 35;
   repeated string appeal_details_paths = 36;
@@ -1000,7 +1000,7 @@ message ListApprovalsRequest {
   string provider_urn_contains = 30;
   string provider_urn_not_starts_with = 31;
   string provider_urn_not_ends_with = 32;
-  string provider_urn_not_contains = 33;
+  repeated string provider_urn_not_contains = 33;
   repeated string appeal_durations = 34;
   repeated string not_appeal_durations = 35;
   repeated string appeal_details_paths = 36;
@@ -1191,7 +1191,7 @@ message ListGrantsRequest {
   string provider_urn_contains = 34;
   string provider_urn_not_starts_with = 35;
   string provider_urn_not_ends_with = 36;
-  string provider_urn_not_contains = 37;
+  repeated string provider_urn_not_contains = 37;
   repeated string appeal_durations = 38;
   repeated string not_appeal_durations = 39;
   repeated string appeal_details_paths = 40;
@@ -1288,7 +1288,7 @@ message ListUserGrantsRequest {
   string provider_urn_contains = 29;
   string provider_urn_not_starts_with = 30;
   string provider_urn_not_ends_with = 31;
-  string provider_urn_not_contains = 32;
+  repeated string provider_urn_not_contains = 32;
   repeated string appeal_durations = 33;
   repeated string not_appeal_durations = 34;
   repeated string appeal_details_paths = 35;
