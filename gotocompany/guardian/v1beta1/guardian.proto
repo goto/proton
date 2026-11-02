@@ -564,6 +564,7 @@ message ListResourcesRequest {
   string urn_not_starts_with = 30;
   string urn_not_ends_with = 31;
   string urn_not_contains = 32;
+  repeated string not_provider_urns = 33;
 }
 
 message ListResourcesResponse {
@@ -663,6 +664,7 @@ message ListUserAppealsRequest {
   bool summary_labels_v2 = 59;
   repeated string resource_details_paths = 60;
   repeated string resource_details = 61;
+  repeated string not_provider_urns = 62;
 }
 
 message ListUserAppealsResponse {
@@ -742,6 +744,7 @@ message ListAppealsRequest {
   bool summary_labels_v2 = 61;
   repeated string resource_details_paths = 62;
   repeated string resource_details = 63;
+  repeated string not_provider_urns = 64;
 }
 
 message ListAppealsResponse {
@@ -953,6 +956,7 @@ message ListUserApprovalsRequest {
   repeated string previous_grant_states = 66;
   // Number of days from now used to define the "expiring" window. Defaults to 7 when previous_grant_states contains "expiring" and this is omitted or 0. Ignored otherwise.
   uint32 expiring_within_days = 67;
+  repeated string not_provider_urns = 68;
 }
 
 message ListUserApprovalsResponse {
@@ -1044,6 +1048,7 @@ message ListApprovalsRequest {
   repeated string previous_grant_states = 66;
   // Number of days from now used to define the "expiring" window. Defaults to 7 when previous_grant_states contains "expiring" and this is omitted or 0. Ignored otherwise.
   uint32 expiring_within_days = 67;
+  repeated string not_provider_urns = 68;
 }
 
 message ListApprovalsResponse {
@@ -1224,6 +1229,7 @@ message ListGrantsRequest {
   repeated string inactive_grant_filter_keys = 66;
   repeated string resource_details_paths = 67;
   repeated string resource_details = 68;
+  repeated string not_provider_urns = 69;
 }
 
 message ListGrantsResponse {
@@ -1319,6 +1325,7 @@ message ListUserGrantsRequest {
   bool exclude_empty_appeal = 59;
   repeated string resource_details_paths = 60;
   repeated string resource_details = 61;
+  repeated string not_provider_urns = 62;
 }
 
 message ListUserGrantsResponse {
