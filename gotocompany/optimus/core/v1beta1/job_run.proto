@@ -127,6 +127,15 @@ service JobRunService {
       body: "*"
     };
   }
+
+  // ListJobRunOperatorRuns lists every sensor, task and hook run (including all
+  // retry attempts) belonging to a single job run, identified by project, job
+  // name and scheduled_at, sorted by start time descending (newest first).
+  rpc ListJobRunOperatorRuns(ListJobRunOperatorRunsRequest) returns (ListJobRunOperatorRunsResponse) {
+    option (google.api.http) = {
+      get: "/v1beta1/project/{project_name}/job/{job_name}/operator_runs"
+    };
+  }
 }
 
 message DexSensorRequest {
@@ -586,4 +595,29 @@ message JobCompletionTimeSummary {
 message JobExpectedCompletionTimeReportResponse {
   repeated JobCompletionTimeDetail details = 1;
   JobCompletionTimeSummary summary = 2;
+}
+
+message ListJobRunOperatorRunsRequest {
+  string project_name = 1;
+  string job_name = 2;
+  google.protobuf.Timestamp scheduled_at = 3;
+}
+
+message OperatorRunDetail {
+  string name = 1;
+  OperatorType operator_type = 2;
+  string state = 3;
+  google.protobuf.Timestamp start_time = 4;
+  google.protobuf.Timestamp end_time = 5;
+}
+
+message ListJobRunOperatorRunsResponse {
+  repeated OperatorRunDetail operator_runs = 1;
+}
+
+enum OperatorType {
+  OPERATOR_TYPE_UNSPECIFIED = 0;
+  OPERATOR_TYPE_TASK = 1;
+  OPERATOR_TYPE_SENSOR = 2;
+  OPERATOR_TYPE_HOOK = 3;
 }
