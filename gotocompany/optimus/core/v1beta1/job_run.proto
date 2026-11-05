@@ -353,6 +353,10 @@ message JobRunLineageSummary {
   // truncated means the returned tree is not the full lineage.
   bool truncated = 6;
   string project_name = 7;
+  // true when the prediction says this run is heading for an SLA miss: at least one
+  // wait-chain node endangers its inferred deadline while the target's own deadline has
+  // not passed yet. Present only when the potential-breach prediction is enabled.
+  bool is_potentially_breaching = 8;
 }
 
 message LineageExecutionSummary {
@@ -420,6 +424,13 @@ message JobExecutionSummary {
   // the runs that depend on this one
   repeated JobRunRef downstream_refs = 10;
   string project_name = 11;
+  // InferredSLA is the latest this run may finish for the TARGET run to still make its
+  // SLA (the target's SLA minus damped estimated durations down the chain). Present only
+  // when the potential-breach prediction is enabled in the server config.
+  google.protobuf.Timestamp inferred_sla_time = 12;
+  // true when this run's current state endangers its inferred deadline: finished after
+  // it, still running past it, or not started by the latest start its estimate allows.
+  bool is_potential_breach_cause = 13;
 }
 
 message JobRunSummary {
