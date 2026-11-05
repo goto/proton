@@ -127,6 +127,16 @@ service JobRunService {
       body: "*"
     };
   }
+
+  // IdentifySLABreachRootCause evaluates the lineage of the given projects' jobs, identifies
+  // why each SLA breach is (or is about to be) happening using tiered root-cause detection,
+  // and groups the findings by the offending root-cause entity (project).
+  rpc IdentifySLABreachRootCause(IdentifySLABreachRootCauseRequest) returns (IdentifySLABreachRootCauseResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/sla_breach_root_cause/identify"
+      body: "*"
+    };
+  }
 }
 
 message DexSensorRequest {
@@ -586,4 +596,69 @@ message JobCompletionTimeSummary {
 message JobExpectedCompletionTimeReportResponse {
   repeated JobCompletionTimeDetail details = 1;
   JobCompletionTimeSummary summary = 2;
+}
+
+enum RootCauseReason {
+  ROOT_CAUSE_REASON_UNSPECIFIED = 0;
+  ROOT_CAUSE_REASON_RUNTIME_DELAY = 1;
+  ROOT_CAUSE_REASON_SCHEDULER_DELAY = 2;
+  ROOT_CAUSE_REASON_THIRD_PARTY_DELAY = 3;
+  ROOT_CAUSE_REASON_FAILED_UPSTREAM = 4;
+  // The run is stuck waiting although every resolved upstream is successful or missing
+  // entirely (e.g. uncreated runs, depends_on_past self-waits).
+  ROOT_CAUSE_REASON_WAITING_UPSTREAM = 5;
+  // The downstream job breached its SLA with no upstream cause detected; the SLA is
+  // configured too aggressively.
+  ROOT_CAUSE_REASON_AGGRESSIVE_SLA = 6;
+}
+
+enum RootCauseStatus {
+  ROOT_CAUSE_STATUS_UNSPECIFIED = 0;
+  ROOT_CAUSE_STATUS_ACTIVE = 1;
+  ROOT_CAUSE_STATUS_RESOLVED = 2;
+}
+
+message IdentifySLABreachRootCauseRequest {
+  // Projects whose jobs are evaluated as potential SLA breach targets.
+  repeated string project_names = 1;
+  // Optional; restricts evaluation to these jobs
+  repeated string job_names = 2;
+  // Optional; multi-value label filter. Values within a key are OR'd, keys are AND'd.
+  map<string, LabelValues> job_labels = 3;
+  // Point in time to evaluate from; the server uses "now" when unset.
+  google.protobuf.Timestamp reference_time = 4;
+  // When false, the engine runs in observe mode: findings are returned but nothing is
+  // persisted to the incident tables and no alerts are sent.
+  bool enable_alert = 5;
+  // How far from reference_time to look for the targets' next/previous runs.
+  int32 scheduled_range_in_hours = 6;
+}
+
+message IdentifySLABreachRootCauseResponse {
+  repeated RootCause root_causes = 1;
+}
+
+message RootCause {
+  string project_name = 1;
+  string job_name = 2;
+  google.protobuf.Timestamp scheduled_at = 3;
+  repeated RootCauseReasonDetail reasons = 4;
+  google.protobuf.Duration max_induced_delay = 5;
+  repeated ImpactedJob impacted_jobs = 6;
+}
+
+message RootCauseReasonDetail {
+  RootCauseReason reason = 1;
+  RootCauseStatus status = 2;
+  google.protobuf.Duration induced_delay = 3;
+  // Sensor task names the run is blocked on; set for THIRD_PARTY_DELAY.
+  repeated string blocked_on_sensors = 4;
+  // The third-party type behind a THIRD_PARTY_DELAY, e.g. "dex".
+  string source_type = 5;
+}
+
+message ImpactedJob {
+  string project_name = 1;
+  string job_name = 2;
+  google.protobuf.Timestamp scheduled_at = 3;
 }
