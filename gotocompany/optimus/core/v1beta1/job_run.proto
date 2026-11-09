@@ -632,6 +632,7 @@ message IdentifySLABreachRootCauseRequest {
   bool enable_alert = 5;
   // How far from reference_time to look for the targets' next/previous runs.
   int32 scheduled_range_in_hours = 6;
+  DamperFactor damper_factor = 7;
 }
 
 message IdentifySLABreachRootCauseResponse {
